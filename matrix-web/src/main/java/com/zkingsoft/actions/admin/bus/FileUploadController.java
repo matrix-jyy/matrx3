@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,7 +22,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.zkingsoft.constraint.BaseController;
 import com.zkingsoft.pojo.AjaxResult;
-import com.zkingsoft.util.ImageUtil;
 import com.zkingsoft.util.StringUtils;
 
 /**
@@ -150,7 +147,7 @@ public class FileUploadController extends BaseController {
 	@RequestMapping(value = "/base64Image2Png")
 	public @ResponseBody AjaxResult base64Image2Png(String base64Image) {
 		// 判断文件是否存在
-		String url = ImageUtil.base64Image2Png(base64Image, fileStoragePath, nginxUrl);
+		String url = null;
 		log.info(url);
 		AjaxResult result = new AjaxResult(AjaxResult.STATUS_OK, null, url);
 		return result;

@@ -5,6 +5,8 @@
 		<groupId>com.zkingsoft</groupId>
 		<artifactId>matrix-base</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../matrix-base/pom.xml</relativePath>
+				
 	</parent>
 	<artifactId>matrix-service</artifactId>
 	<name>matrix-service</name>
