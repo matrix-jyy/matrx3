@@ -7,9 +7,8 @@
 		<version>3.0</version>
 		<relativePath>../matrix-base/pom.xml</relativePath>
 	</parent>
+	
 	<artifactId>matrix-service</artifactId>
-	<name>matrix-service</name>
-	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -157,14 +156,9 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
+				<artifactId>maven-dependency-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>matrix-web</finalName>
 	</build>
+
 </project>

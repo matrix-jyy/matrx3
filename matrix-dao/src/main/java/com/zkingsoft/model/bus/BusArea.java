@@ -1,5 +1,6 @@
 package com.zkingsoft.model.bus;
 
+
 public class BusArea {
 	private Long areaId;
 	private String areaName;
@@ -14,6 +15,7 @@ public class BusArea {
 	}
 
 	public String getAreaName() {
+		
 		return areaName;
 	}
 

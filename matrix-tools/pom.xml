@@ -8,12 +8,8 @@
 		<version>3.0</version>
 		<relativePath>../matrix-base/pom.xml</relativePath>
 	</parent>
-
 	
 	<artifactId>matrix-tools</artifactId>
-	<packaging>jar</packaging>
-
-	<name>matrix-tools</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
