@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysPlatDao">
+	<!-- 定义SysPlat 的复杂关联map -->
+	<resultMap type="SysPlat" id="SysPlatMap">
+			<id property="platId" column="plat_id" />
+			<result property="platName" column="plat_name" />
+			<result property="platCode" column="plat_code" />
+			<result property="platUrl" column="plat_url" />
+			<result property="companyId" column="company_id" />
+	</resultMap>
+	
+	
+	<!-- 定义SysPlat 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysPlat" id="SysPlatSimpleMap">
+			<id property="platId" column="plat_id" />
+			<result property="platName" column="plat_name" />
+			<result property="platCode" column="plat_code" />
+			<result property="platUrl" column="plat_url" />
+			<result property="companyId" column="company_id" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO sys_plat (
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		)
+	VALUES (
+			#{platId},
+			#{platName},
+			#{platCode},
+			#{platUrl},
+			#{companyId}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="SysPlat"
+		useGeneratedKeys="true" keyProperty="platId">
+		INSERT INTO sys_plat (
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.platId},
+			#{item.platName},
+			#{item.platCode},
+			#{item.platUrl},
+			#{item.companyId}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_plat
+		<set>
+			<if test="_parameter.containsKey('platName')">
+					plat_name = #{platName},
+				</if>		
+			<if test="_parameter.containsKey('platCode')">
+					plat_code = #{platCode},
+				</if>		
+			<if test="_parameter.containsKey('platUrl')">
+					plat_url = #{platUrl},
+				</if>		
+			<if test="_parameter.containsKey('companyId')">
+					company_id = #{companyId},
+				</if>		
+		</set>
+		WHERE plat_id=#{platId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_plat
+		<set>
+				<if test="(platName!=null and platName!='') or (platName!='' and platName==0)">
+					plat_name = #{platName},
+				</if>		
+				<if test="(platCode!=null and platCode!='') or (platCode!='' and platCode==0)">
+					plat_code = #{platCode},
+				</if>		
+				<if test="(platUrl!=null and platUrl!='') or (platUrl!='' and platUrl==0)">
+					plat_url = #{platUrl},
+				</if>		
+				<if test="(companyId!=null and companyId!='') or (companyId!='' and companyId==0)">
+					company_id = #{companyId},
+				</if>		
+		</set>
+		WHERE plat_id=#{platId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_plat where  plat_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_plat
+		where  plat_id=#{platId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_plat
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.platId!=null and record.platId!='') or (record.platId!='' and record.platId==0)">
+				and plat_id = #{record.platId} 
+			</if>
+			<if test="(record.platName!=null and record.platName!='') or (record.platName!='' and record.platName==0)">
+				and plat_name = #{record.platName} 
+			</if>
+			<if test="(record.platCode!=null and record.platCode!='') or (record.platCode!='' and record.platCode==0)">
+				and plat_code = #{record.platCode} 
+			</if>
+			<if test="(record.platUrl!=null and record.platUrl!='') or (record.platUrl!='' and record.platUrl==0)">
+				and plat_url = #{record.platUrl} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysPlatMap">
+		select 
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		from sys_plat
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.platId!=null and record.platId!='') or (record.platId!='' and record.platId==0)">
+				and plat_id  = #{record.platId} 
+			</if>
+			<if test="(record.platName!=null and record.platName!='') or (record.platName!='' and record.platName==0)">
+				and plat_name  like concat("%", #{record.platName} ,"%")  
+			</if>
+			<if test="(record.platCode!=null and record.platCode!='') or (record.platCode!='' and record.platCode==0)">
+				and plat_code  = #{record.platCode} 
+			</if>
+			<if test="(record.platUrl!=null and record.platUrl!='') or (record.platUrl!='' and record.platUrl==0)">
+				and plat_url  = #{record.platUrl} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id  = #{record.companyId} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_plat
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.platId!=null and record.platId!='') or (record.platId!='' and record.platId==0)">
+			and plat_id = #{record.platId} 
+			</if>
+			<if test="(record.platName!=null and record.platName!='') or (record.platName!='' and record.platName==0)">
+			and plat_name like concat("%", #{record.platName} ,"%")  
+			</if>
+			<if test="(record.platCode!=null and record.platCode!='') or (record.platCode!='' and record.platCode==0)">
+			and plat_code = #{record.platCode} 
+			</if>
+			<if test="(record.platUrl!=null and record.platUrl!='') or (record.platUrl!='' and record.platUrl==0)">
+			and plat_url = #{record.platUrl} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+			and company_id = #{record.companyId} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysPlatMap">
+		select 
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		from sys_plat
+		where  plat_id=#{platId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysPlatMap">
+		select 
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		from sys_plat
+		where  plat_id=#{plat_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysPlatMap">
+		select 
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		from sys_plat
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.platId!=null and record.platId!='') or (record.platId!='' and record.platId==0)">
+				and plat_id = #{record.platId} 
+			</if>
+			<if test="(record.platName!=null and record.platName!='') or (record.platName!='' and record.platName==0)">
+				and plat_name like concat("%", #{record.platName} ,"%")  
+			</if>
+			<if test="(record.platCode!=null and record.platCode!='') or (record.platCode!='' and record.platCode==0)">
+				and plat_code = #{record.platCode} 
+			</if>
+			<if test="(record.platUrl!=null and record.platUrl!='') or (record.platUrl!='' and record.platUrl==0)">
+				and plat_url = #{record.platUrl} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+		</if>
+	</select>
+	
+	
+	<!-- 根据公司查询-->
+	<select id="selectByCompany" resultMap="SysPlatMap">
+		select 
+			plat_id,
+			plat_name,
+			plat_code,
+			plat_url,
+			company_id
+		from sys_plat
+		where FIND_IN_SET(plat_id, #{company.comPlats})>0
+	</select>
+</mapper>

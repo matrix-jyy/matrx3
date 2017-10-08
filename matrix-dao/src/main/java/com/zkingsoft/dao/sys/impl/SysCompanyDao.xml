@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysCompanyDao">
+	<!-- 定义SysCompany 的复杂关联map -->
+	<resultMap type="SysCompany" id="SysCompanyMap">
+			<id property="comId" column="com_id" />
+			<result property="comName" column="com_name" />
+			<result property="comBoss" column="com_boss" />
+			<result property="comBusinessScope" column="com_business_scope" />
+			<result property="comAddress" column="com_address" />
+			<result property="comBossTel" column="com_boss_tel" />
+			<result property="comTel" column="com_tel" />
+			<result property="comWebUrl" column="com_web_url" />
+			<result property="comEmail" column="com_email" />
+			<result property="comIntroduction" column="com_introduction" />
+			<result property="comRegisterTime" column="com_register_time" />
+			<result property="comBankAccount" column="com_bank_account" />
+			<result property="comOrganizationCode" column="com_organization_code" />
+			<result property="comType" column="com_type" />
+			<result property="comRegisterCapotal" column="com_register_capotal" />
+			<result property="comAge" column="com_age" />
+			<result property="comCreateTime" column="com_create_time" />
+			<result property="comRegisterCode" column="com_register_code" />
+			<result property="comLogo" column="com_logo" />
+			<result property="comValid" column="com_valid" />
+			<result property="comFunctions" column="com_functions" />
+			<result property="comPlats" column="com_plats" />
+	</resultMap>
+	
+	
+	<!-- 定义SysCompany 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysCompany" id="SysCompanySimpleMap">
+			<id property="comId" column="com_id" />
+			<result property="comName" column="com_name" />
+			<result property="comBoss" column="com_boss" />
+			<result property="comBusinessScope" column="com_business_scope" />
+			<result property="comAddress" column="com_address" />
+			<result property="comBossTel" column="com_boss_tel" />
+			<result property="comTel" column="com_tel" />
+			<result property="comWebUrl" column="com_web_url" />
+			<result property="comEmail" column="com_email" />
+			<result property="comIntroduction" column="com_introduction" />
+			<result property="comRegisterTime" column="com_register_time" />
+			<result property="comBankAccount" column="com_bank_account" />
+			<result property="comOrganizationCode" column="com_organization_code" />
+			<result property="comType" column="com_type" />
+			<result property="comRegisterCapotal" column="com_register_capotal" />
+			<result property="comAge" column="com_age" />
+			<result property="comCreateTime" column="com_create_time" />
+			<result property="comRegisterCode" column="com_register_code" />
+			<result property="comLogo" column="com_logo" />
+			<result property="comValid" column="com_valid" />
+			<result property="comFunctions" column="com_functions" />
+			<result property="comPlats" column="com_plats" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysCompany"
+		useGeneratedKeys="true" keyProperty="comId">
+		INSERT INTO sys_company (
+			com_id,
+			com_name,
+			com_boss,
+			com_business_scope,
+			com_address,
+			com_boss_tel,
+			com_tel,
+			com_web_url,
+			com_email,
+			com_introduction,
+			com_register_time,
+			com_bank_account,
+			com_organization_code,
+			com_type,
+			com_register_capotal,
+			com_age,
+			com_create_time,
+			com_register_code,
+			com_logo,
+			com_valid,
+			com_functions,
+			com_plats
+		)
+	VALUES (
+			#{comId},
+			#{comName},
+			#{comBoss},
+			#{comBusinessScope},
+			#{comAddress},
+			#{comBossTel},
+			#{comTel},
+			#{comWebUrl},
+			#{comEmail},
+			#{comIntroduction},
+			#{comRegisterTime},
+			#{comBankAccount},
+			#{comOrganizationCode},
+			#{comType},
+			#{comRegisterCapotal},
+			#{comAge},
+			#{comCreateTime},
+			#{comRegisterCode},
+			#{comLogo},
+			#{comValid},
+			#{comFunctions},
+			#{comPlats}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_company (
+			com_id,
+			com_name,
+			com_boss,
+			com_business_scope,
+			com_address,
+			com_boss_tel,
+			com_tel,
+			com_web_url,
+			com_email,
+			com_introduction,
+			com_register_time,
+			com_bank_account,
+			com_organization_code,
+			com_type,
+			com_register_capotal,
+			com_age,
+			com_create_time,
+			com_register_code,
+			com_logo,
+			com_valid,
+			com_functions,
+			com_plats
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.comId},
+			#{item.comName},
+			#{item.comBoss},
+			#{item.comBusinessScope},
+			#{item.comAddress},
+			#{item.comBossTel},
+			#{item.comTel},
+			#{item.comWebUrl},
+			#{item.comEmail},
+			#{item.comIntroduction},
+			#{item.comRegisterTime},
+			#{item.comBankAccount},
+			#{item.comOrganizationCode},
+			#{item.comType},
+			#{item.comRegisterCapotal},
+			#{item.comAge},
+			#{item.comCreateTime},
+			#{item.comRegisterCode},
+			#{item.comLogo},
+			#{item.comValid},
+			#{item.comFunctions},
+			#{item.comPlats}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_company
+		<set>
+			<if test="_parameter.containsKey('comName')">
+					com_name = #{comName},
+				</if>		
+			<if test="_parameter.containsKey('comBoss')">
+					com_boss = #{comBoss},
+				</if>		
+			<if test="_parameter.containsKey('comBusinessScope')">
+					com_business_scope = #{comBusinessScope},
+				</if>		
+			<if test="_parameter.containsKey('comAddress')">
+					com_address = #{comAddress},
+				</if>		
+			<if test="_parameter.containsKey('comBossTel')">
+					com_boss_tel = #{comBossTel},
+				</if>		
+			<if test="_parameter.containsKey('comTel')">
+					com_tel = #{comTel},
+				</if>		
+			<if test="_parameter.containsKey('comWebUrl')">
+					com_web_url = #{comWebUrl},
+				</if>		
+			<if test="_parameter.containsKey('comEmail')">
+					com_email = #{comEmail},
+				</if>		
+			<if test="_parameter.containsKey('comIntroduction')">
+					com_introduction = #{comIntroduction},
+				</if>		
+			<if test="_parameter.containsKey('comRegisterTime')">
+					com_register_time = #{comRegisterTime},
+				</if>		
+			<if test="_parameter.containsKey('comBankAccount')">
+					com_bank_account = #{comBankAccount},
+				</if>		
+			<if test="_parameter.containsKey('comOrganizationCode')">
+					com_organization_code = #{comOrganizationCode},
+				</if>		
+			<if test="_parameter.containsKey('comType')">
+					com_type = #{comType},
+				</if>		
+			<if test="_parameter.containsKey('comRegisterCapotal')">
+					com_register_capotal = #{comRegisterCapotal},
+				</if>		
+			<if test="_parameter.containsKey('comAge')">
+					com_age = #{comAge},
+				</if>		
+			<if test="_parameter.containsKey('comCreateTime')">
+					com_create_time = #{comCreateTime},
+				</if>		
+			<if test="_parameter.containsKey('comRegisterCode')">
+					com_register_code = #{comRegisterCode},
+				</if>		
+			<if test="_parameter.containsKey('comLogo')">
+					com_logo = #{comLogo},
+				</if>		
+			<if test="_parameter.containsKey('comValid')">
+					com_valid = #{comValid},
+				</if>		
+			<if test="_parameter.containsKey('comFunctions')">
+					com_functions = #{comFunctions},
+				</if>		
+			<if test="_parameter.containsKey('comPlats')">
+					com_plats = #{comPlats},
+				</if>		
+		</set>
+		WHERE com_id=#{comId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_company
+		<set>
+				<if test="(comName!=null and comName!='') or (comName!='' and comName==0)">
+					com_name = #{comName},
+				</if>		
+				<if test="(comBoss!=null and comBoss!='') or (comBoss!='' and comBoss==0)">
+					com_boss = #{comBoss},
+				</if>		
+				<if test="(comBusinessScope!=null and comBusinessScope!='') or (comBusinessScope!='' and comBusinessScope==0)">
+					com_business_scope = #{comBusinessScope},
+				</if>		
+				<if test="(comAddress!=null and comAddress!='') or (comAddress!='' and comAddress==0)">
+					com_address = #{comAddress},
+				</if>		
+				<if test="(comBossTel!=null and comBossTel!='') or (comBossTel!='' and comBossTel==0)">
+					com_boss_tel = #{comBossTel},
+				</if>		
+				<if test="(comTel!=null and comTel!='') or (comTel!='' and comTel==0)">
+					com_tel = #{comTel},
+				</if>		
+				<if test="(comWebUrl!=null and comWebUrl!='') or (comWebUrl!='' and comWebUrl==0)">
+					com_web_url = #{comWebUrl},
+				</if>		
+				<if test="(comEmail!=null and comEmail!='') or (comEmail!='' and comEmail==0)">
+					com_email = #{comEmail},
+				</if>		
+				<if test="(comIntroduction!=null and comIntroduction!='') or (comIntroduction!='' and comIntroduction==0)">
+					com_introduction = #{comIntroduction},
+				</if>		
+				<if test="(comRegisterTime!=null and comRegisterTime!='') or (comRegisterTime!='' and comRegisterTime==0)">
+					com_register_time = #{comRegisterTime},
+				</if>		
+				<if test="(comBankAccount!=null and comBankAccount!='') or (comBankAccount!='' and comBankAccount==0)">
+					com_bank_account = #{comBankAccount},
+				</if>		
+				<if test="(comOrganizationCode!=null and comOrganizationCode!='') or (comOrganizationCode!='' and comOrganizationCode==0)">
+					com_organization_code = #{comOrganizationCode},
+				</if>		
+				<if test="(comType!=null and comType!='') or (comType!='' and comType==0)">
+					com_type = #{comType},
+				</if>		
+				<if test="(comRegisterCapotal!=null and comRegisterCapotal!='') or (comRegisterCapotal!='' and comRegisterCapotal==0)">
+					com_register_capotal = #{comRegisterCapotal},
+				</if>		
+				<if test="(comAge!=null and comAge!='') or (comAge!='' and comAge==0)">
+					com_age = #{comAge},
+				</if>		
+				<if test="(comCreateTime!=null and comCreateTime!='') or (comCreateTime!='' and comCreateTime==0)">
+					com_create_time = #{comCreateTime},
+				</if>		
+				<if test="(comRegisterCode!=null and comRegisterCode!='') or (comRegisterCode!='' and comRegisterCode==0)">
+					com_register_code = #{comRegisterCode},
+				</if>		
+				<if test="(comLogo!=null and comLogo!='') or (comLogo!='' and comLogo==0)">
+					com_logo = #{comLogo},
+				</if>		
+				<if test="(comValid!=null and comValid!='') or (comValid!='' and comValid==0)">
+					com_valid = #{comValid},
+				</if>		
+				<if test="(comFunctions!=null and comFunctions!='') or (comFunctions!='' and comFunctions==0)">
+					com_functions = #{comFunctions},
+				</if>		
+				<if test="(comPlats!=null and comPlats!='') or (comPlats!='' and comPlats==0)">
+					com_plats = #{comPlats},
+				</if>		
+		</set>
+		WHERE com_id=#{comId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_company where  com_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_company
+		where  com_id=#{comId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_company
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.comId!=null and record.comId!='') or (record.comId!='' and record.comId==0)">
+				and com_id = #{record.comId} 
+			</if>
+			<if test="(record.comName!=null and record.comName!='') or (record.comName!='' and record.comName==0)">
+				and com_name = #{record.comName} 
+			</if>
+			<if test="(record.comBoss!=null and record.comBoss!='') or (record.comBoss!='' and record.comBoss==0)">
+				and com_boss = #{record.comBoss} 
+			</if>
+			<if test="(record.comBusinessScope!=null and record.comBusinessScope!='') or (record.comBusinessScope!='' and record.comBusinessScope==0)">
+				and com_business_scope = #{record.comBusinessScope} 
+			</if>
+			<if test="(record.comAddress!=null and record.comAddress!='') or (record.comAddress!='' and record.comAddress==0)">
+				and com_address = #{record.comAddress} 
+			</if>
+			<if test="(record.comBossTel!=null and record.comBossTel!='') or (record.comBossTel!='' and record.comBossTel==0)">
+				and com_boss_tel = #{record.comBossTel} 
+			</if>
+			<if test="(record.comTel!=null and record.comTel!='') or (record.comTel!='' and record.comTel==0)">
+				and com_tel = #{record.comTel} 
+			</if>
+			<if test="(record.comWebUrl!=null and record.comWebUrl!='') or (record.comWebUrl!='' and record.comWebUrl==0)">
+				and com_web_url = #{record.comWebUrl} 
+			</if>
+			<if test="(record.comEmail!=null and record.comEmail!='') or (record.comEmail!='' and record.comEmail==0)">
+				and com_email = #{record.comEmail} 
+			</if>
+			<if test="(record.comIntroduction!=null and record.comIntroduction!='') or (record.comIntroduction!='' and record.comIntroduction==0)">
+				and com_introduction = #{record.comIntroduction} 
+			</if>
+			<if test="(record.comRegisterTime!=null and record.comRegisterTime!='') or (record.comRegisterTime!='' and record.comRegisterTime==0)">
+				and com_register_time = #{record.comRegisterTime} 
+			</if>
+			<if test="(record.comBankAccount!=null and record.comBankAccount!='') or (record.comBankAccount!='' and record.comBankAccount==0)">
+				and com_bank_account = #{record.comBankAccount} 
+			</if>
+			<if test="(record.comOrganizationCode!=null and record.comOrganizationCode!='') or (record.comOrganizationCode!='' and record.comOrganizationCode==0)">
+				and com_organization_code = #{record.comOrganizationCode} 
+			</if>
+			<if test="(record.comType!=null and record.comType!='') or (record.comType!='' and record.comType==0)">
+				and com_type = #{record.comType} 
+			</if>
+			<if test="(record.comRegisterCapotal!=null and record.comRegisterCapotal!='') or (record.comRegisterCapotal!='' and record.comRegisterCapotal==0)">
+				and com_register_capotal = #{record.comRegisterCapotal} 
+			</if>
+			<if test="(record.comAge!=null and record.comAge!='') or (record.comAge!='' and record.comAge==0)">
+				and com_age = #{record.comAge} 
+			</if>
+			<if test="(record.comCreateTime!=null and record.comCreateTime!='') or (record.comCreateTime!='' and record.comCreateTime==0)">
+				and com_create_time = #{record.comCreateTime} 
+			</if>
+			<if test="(record.comRegisterCode!=null and record.comRegisterCode!='') or (record.comRegisterCode!='' and record.comRegisterCode==0)">
+				and com_register_code = #{record.comRegisterCode} 
+			</if>
+			<if test="(record.comLogo!=null and record.comLogo!='') or (record.comLogo!='' and record.comLogo==0)">
+				and com_logo = #{record.comLogo} 
+			</if>
+			<if test="(record.comValid!=null and record.comValid!='') or (record.comValid!='' and record.comValid==0)">
+				and com_valid = #{record.comValid} 
+			</if>
+			<if test="(record.comFunctions!=null and record.comFunctions!='') or (record.comFunctions!='' and record.comFunctions==0)">
+				and com_functions = #{record.comFunctions} 
+			</if>
+			<if test="(record.comPlats!=null and record.comPlats!='') or (record.comPlats!='' and record.comPlats==0)">
+				and com_plats = #{record.comPlats} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysCompanyMap">
+		select 
+			com_id,
+			com_name,
+			com_boss,
+			com_business_scope,
+			com_address,
+			com_boss_tel,
+			com_tel,
+			com_web_url,
+			com_email,
+			com_introduction,
+			com_register_time,
+			com_bank_account,
+			com_organization_code,
+			com_type,
+			com_register_capotal,
+			com_age,
+			com_create_time,
+			com_register_code,
+			com_logo,
+			com_valid,
+			com_functions,
+			com_plats
+		from sys_company
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.comId!=null and record.comId!='') or (record.comId!='' and record.comId==0)">
+				and com_id  = #{record.comId} 
+			</if>
+			<if test="(record.comName!=null and record.comName!='') or (record.comName!='' and record.comName==0)">
+				and com_name  like concat("%",#{record.comName},"%")  
+			</if>
+			<if test="(record.comBoss!=null and record.comBoss!='') or (record.comBoss!='' and record.comBoss==0)">
+				and com_boss  = #{record.comBoss} 
+			</if>
+			<if test="(record.comBusinessScope!=null and record.comBusinessScope!='') or (record.comBusinessScope!='' and record.comBusinessScope==0)">
+				and com_business_scope  = #{record.comBusinessScope} 
+			</if>
+			<if test="(record.comAddress!=null and record.comAddress!='') or (record.comAddress!='' and record.comAddress==0)">
+				and com_address  = #{record.comAddress} 
+			</if>
+			<if test="(record.comBossTel!=null and record.comBossTel!='') or (record.comBossTel!='' and record.comBossTel==0)">
+				and com_boss_tel  = #{record.comBossTel} 
+			</if>
+			<if test="(record.comTel!=null and record.comTel!='') or (record.comTel!='' and record.comTel==0)">
+				and com_tel  = #{record.comTel} 
+			</if>
+			<if test="(record.comWebUrl!=null and record.comWebUrl!='') or (record.comWebUrl!='' and record.comWebUrl==0)">
+				and com_web_url  = #{record.comWebUrl} 
+			</if>
+			<if test="(record.comEmail!=null and record.comEmail!='') or (record.comEmail!='' and record.comEmail==0)">
+				and com_email  = #{record.comEmail} 
+			</if>
+			<if test="(record.comIntroduction!=null and record.comIntroduction!='') or (record.comIntroduction!='' and record.comIntroduction==0)">
+				and com_introduction  = #{record.comIntroduction} 
+			</if>
+			<if test="(record.comRegisterTime!=null and record.comRegisterTime!='') or (record.comRegisterTime!='' and record.comRegisterTime==0)">
+				and com_register_time  = #{record.comRegisterTime} 
+			</if>
+			<if test="(record.comBankAccount!=null and record.comBankAccount!='') or (record.comBankAccount!='' and record.comBankAccount==0)">
+				and com_bank_account  = #{record.comBankAccount} 
+			</if>
+			<if test="(record.comOrganizationCode!=null and record.comOrganizationCode!='') or (record.comOrganizationCode!='' and record.comOrganizationCode==0)">
+				and com_organization_code  = #{record.comOrganizationCode} 
+			</if>
+			<if test="(record.comType!=null and record.comType!='') or (record.comType!='' and record.comType==0)">
+				and com_type  = #{record.comType} 
+			</if>
+			<if test="(record.comRegisterCapotal!=null and record.comRegisterCapotal!='') or (record.comRegisterCapotal!='' and record.comRegisterCapotal==0)">
+				and com_register_capotal  = #{record.comRegisterCapotal} 
+			</if>
+			<if test="(record.comAge!=null and record.comAge!='') or (record.comAge!='' and record.comAge==0)">
+				and com_age  = #{record.comAge} 
+			</if>
+			<if test="(record.comCreateTime!=null and record.comCreateTime!='') or (record.comCreateTime!='' and record.comCreateTime==0)">
+				and com_create_time  = #{record.comCreateTime} 
+			</if>
+			<if test="(record.comRegisterCode!=null and record.comRegisterCode!='') or (record.comRegisterCode!='' and record.comRegisterCode==0)">
+				and com_register_code  = #{record.comRegisterCode} 
+			</if>
+			<if test="(record.comLogo!=null and record.comLogo!='') or (record.comLogo!='' and record.comLogo==0)">
+				and com_logo  = #{record.comLogo} 
+			</if>
+			<if test="(record.comValid!=null and record.comValid!='') or (record.comValid!='' and record.comValid==0)">
+				and com_valid  = #{record.comValid} 
+			</if>
+			<if test="(record.comFunctions!=null and record.comFunctions!='') or (record.comFunctions!='' and record.comFunctions==0)">
+				and com_functions  = #{record.comFunctions} 
+			</if>
+			<if test="(record.comPlats!=null and record.comPlats!='') or (record.comPlats!='' and record.comPlats==0)">
+				and com_plats  = #{record.comPlats} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_company
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.comId!=null and record.comId!='') or (record.comId!='' and record.comId==0)">
+			and com_id = #{record.comId} 
+			</if>
+				<if test="(record.comName!=null and record.comName!='') or (record.comName!='' and record.comName==0)">
+				and com_name  like concat("%",#{record.comName},"%")  
+			</if>
+			<if test="(record.comBoss!=null and record.comBoss!='') or (record.comBoss!='' and record.comBoss==0)">
+			and com_boss = #{record.comBoss} 
+			</if>
+			<if test="(record.comBusinessScope!=null and record.comBusinessScope!='') or (record.comBusinessScope!='' and record.comBusinessScope==0)">
+			and com_business_scope = #{record.comBusinessScope} 
+			</if>
+			<if test="(record.comAddress!=null and record.comAddress!='') or (record.comAddress!='' and record.comAddress==0)">
+			and com_address = #{record.comAddress} 
+			</if>
+			<if test="(record.comBossTel!=null and record.comBossTel!='') or (record.comBossTel!='' and record.comBossTel==0)">
+			and com_boss_tel = #{record.comBossTel} 
+			</if>
+			<if test="(record.comTel!=null and record.comTel!='') or (record.comTel!='' and record.comTel==0)">
+			and com_tel = #{record.comTel} 
+			</if>
+			<if test="(record.comWebUrl!=null and record.comWebUrl!='') or (record.comWebUrl!='' and record.comWebUrl==0)">
+			and com_web_url = #{record.comWebUrl} 
+			</if>
+			<if test="(record.comEmail!=null and record.comEmail!='') or (record.comEmail!='' and record.comEmail==0)">
+			and com_email = #{record.comEmail} 
+			</if>
+			<if test="(record.comIntroduction!=null and record.comIntroduction!='') or (record.comIntroduction!='' and record.comIntroduction==0)">
+			and com_introduction = #{record.comIntroduction} 
+			</if>
+			<if test="(record.comRegisterTime!=null and record.comRegisterTime!='') or (record.comRegisterTime!='' and record.comRegisterTime==0)">
+			and com_register_time = #{record.comRegisterTime} 
+			</if>
+			<if test="(record.comBankAccount!=null and record.comBankAccount!='') or (record.comBankAccount!='' and record.comBankAccount==0)">
+			and com_bank_account = #{record.comBankAccount} 
+			</if>
+			<if test="(record.comOrganizationCode!=null and record.comOrganizationCode!='') or (record.comOrganizationCode!='' and record.comOrganizationCode==0)">
+			and com_organization_code = #{record.comOrganizationCode} 
+			</if>
+			<if test="(record.comType!=null and record.comType!='') or (record.comType!='' and record.comType==0)">
+			and com_type = #{record.comType} 
+			</if>
+			<if test="(record.comRegisterCapotal!=null and record.comRegisterCapotal!='') or (record.comRegisterCapotal!='' and record.comRegisterCapotal==0)">
+			and com_register_capotal = #{record.comRegisterCapotal} 
+			</if>
+			<if test="(record.comAge!=null and record.comAge!='') or (record.comAge!='' and record.comAge==0)">
+			and com_age = #{record.comAge} 
+			</if>
+			<if test="(record.comCreateTime!=null and record.comCreateTime!='') or (record.comCreateTime!='' and record.comCreateTime==0)">
+			and com_create_time = #{record.comCreateTime} 
+			</if>
+			<if test="(record.comRegisterCode!=null and record.comRegisterCode!='') or (record.comRegisterCode!='' and record.comRegisterCode==0)">
+			and com_register_code = #{record.comRegisterCode} 
+			</if>
+			<if test="(record.comLogo!=null and record.comLogo!='') or (record.comLogo!='' and record.comLogo==0)">
+			and com_logo = #{record.comLogo} 
+			</if>
+			<if test="(record.comValid!=null and record.comValid!='') or (record.comValid!='' and record.comValid==0)">
+			and com_valid = #{record.comValid} 
+			</if>
+			<if test="(record.comFunctions!=null and record.comFunctions!='') or (record.comFunctions!='' and record.comFunctions==0)">
+			and com_functions = #{record.comFunctions} 
+			</if>
+			<if test="(record.comPlats!=null and record.comPlats!='') or (record.comPlats!='' and record.comPlats==0)">
+			and com_plats = #{record.comPlats} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysCompanyMap">
+		select 
+			com_id,
+			com_name,
+			com_boss,
+			com_business_scope,
+			com_address,
+			com_boss_tel,
+			com_tel,
+			com_web_url,
+			com_email,
+			com_introduction,
+			com_register_time,
+			com_bank_account,
+			com_organization_code,
+			com_type,
+			com_register_capotal,
+			com_age,
+			com_create_time,
+			com_register_code,
+			com_logo,
+			com_valid,
+			com_functions,
+			com_plats
+		from sys_company
+		where  com_id=#{comId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysCompanyMap">
+		select 
+			com_id,
+			com_name,
+			com_boss,
+			com_business_scope,
+			com_address,
+			com_boss_tel,
+			com_tel,
+			com_web_url,
+			com_email,
+			com_introduction,
+			com_register_time,
+			com_bank_account,
+			com_organization_code,
+			com_type,
+			com_register_capotal,
+			com_age,
+			com_create_time,
+			com_register_code,
+			com_logo,
+			com_valid,
+			com_functions,
+			com_plats
+		from sys_company
+		where  com_id=#{com_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysCompanyMap">
+		select 
+			com_id,
+			com_name,
+			com_boss,
+			com_business_scope,
+			com_address,
+			com_boss_tel,
+			com_tel,
+			com_web_url,
+			com_email,
+			com_introduction,
+			com_register_time,
+			com_bank_account,
+			com_organization_code,
+			com_type,
+			com_register_capotal,
+			com_age,
+			com_create_time,
+			com_register_code,
+			com_logo,
+			com_valid,
+			com_functions,
+			com_plats
+		from sys_company
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.comId!=null and record.comId!='') or (record.comId!='' and record.comId==0)">
+				and com_id = #{record.comId} 
+			</if>
+				<if test="(record.comName!=null and record.comName!='') or (record.comName!='' and record.comName==0)">
+				and com_name  like concat("%",#{record.comName},"%")  
+			</if>
+			<if test="(record.comBoss!=null and record.comBoss!='') or (record.comBoss!='' and record.comBoss==0)">
+				and com_boss = #{record.comBoss} 
+			</if>
+			<if test="(record.comBusinessScope!=null and record.comBusinessScope!='') or (record.comBusinessScope!='' and record.comBusinessScope==0)">
+				and com_business_scope = #{record.comBusinessScope} 
+			</if>
+			<if test="(record.comAddress!=null and record.comAddress!='') or (record.comAddress!='' and record.comAddress==0)">
+				and com_address = #{record.comAddress} 
+			</if>
+			<if test="(record.comBossTel!=null and record.comBossTel!='') or (record.comBossTel!='' and record.comBossTel==0)">
+				and com_boss_tel = #{record.comBossTel} 
+			</if>
+			<if test="(record.comTel!=null and record.comTel!='') or (record.comTel!='' and record.comTel==0)">
+				and com_tel = #{record.comTel} 
+			</if>
+			<if test="(record.comWebUrl!=null and record.comWebUrl!='') or (record.comWebUrl!='' and record.comWebUrl==0)">
+				and com_web_url = #{record.comWebUrl} 
+			</if>
+			<if test="(record.comEmail!=null and record.comEmail!='') or (record.comEmail!='' and record.comEmail==0)">
+				and com_email = #{record.comEmail} 
+			</if>
+			<if test="(record.comIntroduction!=null and record.comIntroduction!='') or (record.comIntroduction!='' and record.comIntroduction==0)">
+				and com_introduction = #{record.comIntroduction} 
+			</if>
+			<if test="(record.comRegisterTime!=null and record.comRegisterTime!='') or (record.comRegisterTime!='' and record.comRegisterTime==0)">
+				and com_register_time = #{record.comRegisterTime} 
+			</if>
+			<if test="(record.comBankAccount!=null and record.comBankAccount!='') or (record.comBankAccount!='' and record.comBankAccount==0)">
+				and com_bank_account = #{record.comBankAccount} 
+			</if>
+			<if test="(record.comOrganizationCode!=null and record.comOrganizationCode!='') or (record.comOrganizationCode!='' and record.comOrganizationCode==0)">
+				and com_organization_code = #{record.comOrganizationCode} 
+			</if>
+			<if test="(record.comType!=null and record.comType!='') or (record.comType!='' and record.comType==0)">
+				and com_type = #{record.comType} 
+			</if>
+			<if test="(record.comRegisterCapotal!=null and record.comRegisterCapotal!='') or (record.comRegisterCapotal!='' and record.comRegisterCapotal==0)">
+				and com_register_capotal = #{record.comRegisterCapotal} 
+			</if>
+			<if test="(record.comAge!=null and record.comAge!='') or (record.comAge!='' and record.comAge==0)">
+				and com_age = #{record.comAge} 
+			</if>
+			<if test="(record.comCreateTime!=null and record.comCreateTime!='') or (record.comCreateTime!='' and record.comCreateTime==0)">
+				and com_create_time = #{record.comCreateTime} 
+			</if>
+			<if test="(record.comRegisterCode!=null and record.comRegisterCode!='') or (record.comRegisterCode!='' and record.comRegisterCode==0)">
+				and com_register_code = #{record.comRegisterCode} 
+			</if>
+			<if test="(record.comLogo!=null and record.comLogo!='') or (record.comLogo!='' and record.comLogo==0)">
+				and com_logo = #{record.comLogo} 
+			</if>
+			<if test="(record.comValid!=null and record.comValid!='') or (record.comValid!='' and record.comValid==0)">
+				and com_valid = #{record.comValid} 
+			</if>
+			<if test="(record.comFunctions!=null and record.comFunctions!='') or (record.comFunctions!='' and record.comFunctions==0)">
+				and com_functions = #{record.comFunctions} 
+			</if>
+			<if test="(record.comPlats!=null and record.comPlats!='') or (record.comPlats!='' and record.comPlats==0)">
+				and com_plats = #{record.comPlats} 
+			</if>
+		</if>
+	</select>
+</mapper>

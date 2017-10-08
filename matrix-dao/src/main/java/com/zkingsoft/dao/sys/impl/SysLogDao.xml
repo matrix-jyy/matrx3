@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.syslog.SysLogDao">
+	<!-- 定义SysLog 的复杂关联map -->
+	<resultMap type="SysLog" id="SysLogMap">
+			<id property="logId" column="log_id" />
+			<result property="userId" column="user_id" />
+			<result property="logCreatedate" column="log_createdate" />
+			<result property="logContent" column="log_content" />
+			<result property="logOperation" column="log_operation" />
+			<result property="logUserName" column="log_user_name" />
+			<result property="logIp" column="log_ip" />
+	</resultMap>
+	
+	
+	<!-- 定义SysLog 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysLog" id="SysLogSimpleMap">
+			<id property="logId" column="log_id" />
+			<result property="userId" column="user_id" />
+			<result property="logCreatedate" column="log_createdate" />
+			<result property="logContent" column="log_content" />
+			<result property="logOperation" column="log_operation" />
+			<result property="logUserName" column="log_user_name" />
+			<result property="logIp" column="log_ip" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysLog"
+		useGeneratedKeys="true" keyProperty="logId">
+		INSERT INTO sys_log (
+			log_id,
+			user_id,
+			log_createdate,
+			log_content,
+			log_operation,
+			log_user_name,
+			log_ip
+		)
+	VALUES (
+			#{logId},
+			#{userId},
+			#{logCreatedate},
+			#{logContent},
+			#{logOperation},
+			#{logUserName},
+			#{logIp}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_log (
+			log_id,
+			user_id,
+			log_createdate,
+			log_content,
+			log_operation,
+			log_user_name,
+			log_ip
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.logId},
+			#{item.userId},
+			#{item.logCreatedate},
+			#{item.logContent},
+			#{item.logOperation},
+			#{item.logUserName},
+			#{item.logIp}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_log
+		<set>
+			<if test="_parameter.containsKey('userId')">
+					user_id = #{userId},
+				</if>		
+			<if test="_parameter.containsKey('logCreatedate')">
+					log_createdate = #{logCreatedate},
+				</if>		
+			<if test="_parameter.containsKey('logContent')">
+					log_content = #{logContent},
+				</if>		
+			<if test="_parameter.containsKey('logOperation')">
+					log_operation = #{logOperation},
+				</if>		
+			<if test="_parameter.containsKey('logUserName')">
+					log_user_name = #{logUserName},
+				</if>		
+			<if test="_parameter.containsKey('logIp')">
+					log_ip = #{logIp},
+				</if>		
+		</set>
+		WHERE log_id=#{logId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_log
+		<set>
+				<if test="(userId!=null and userId!='') or (userId!='' and userId==0)">
+					user_id = #{userId},
+				</if>		
+				<if test="(logCreatedate!=null and logCreatedate!='') or (logCreatedate!='' and logCreatedate==0)">
+					log_createdate = #{logCreatedate},
+				</if>		
+				<if test="(logContent!=null and logContent!='') or (logContent!='' and logContent==0)">
+					log_content = #{logContent},
+				</if>		
+				<if test="(logOperation!=null and logOperation!='') or (logOperation!='' and logOperation==0)">
+					log_operation = #{logOperation},
+				</if>		
+				<if test="(logUserName!=null and logUserName!='') or (logUserName!='' and logUserName==0)">
+					log_user_name = #{logUserName},
+				</if>		
+				<if test="(logIp!=null and logIp!='') or (logIp!='' and logIp==0)">
+					log_ip = #{logIp},
+				</if>		
+		</set>
+		WHERE log_id=#{logId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_log where  log_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_log
+		where  log_id=#{logId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_log
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.logId!=null and record.logId!='') or (record.logId!='' and record.logId==0)">
+				and log_id = #{record.logId} 
+			</if>
+			<if test="(record.userId!=null and record.userId!='') or (record.userId!='' and record.userId==0)">
+				and user_id = #{record.userId} 
+			</if>
+			<if test="(record.logCreatedate!=null and record.logCreatedate!='') or (record.logCreatedate!='' and record.logCreatedate==0)">
+				and log_createdate = #{record.logCreatedate} 
+			</if>
+			<if test="(record.logContent!=null and record.logContent!='') or (record.logContent!='' and record.logContent==0)">
+				and log_content = #{record.logContent} 
+			</if>
+			<if test="(record.logOperation!=null and record.logOperation!='') or (record.logOperation!='' and record.logOperation==0)">
+				and log_operation = #{record.logOperation} 
+			</if>
+			<if test="(record.logUserName!=null and record.logUserName!='') or (record.logUserName!='' and record.logUserName==0)">
+				and log_user_name = #{record.logUserName} 
+			</if>
+			<if test="(record.logIp!=null and record.logIp!='') or (record.logIp!='' and record.logIp==0)">
+				and log_ip = #{record.logIp} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysLogMap">
+		select 
+			log_id,
+			user_id,
+			log_createdate,
+			log_content,
+			log_operation,
+			log_user_name,
+			log_ip
+		from sys_log
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.logId!=null and record.logId!='') or (record.logId!='' and record.logId==0)">
+				and log_id  = #{record.logId} 
+			</if>
+			<if test="(record.userId!=null and record.userId!='') or (record.userId!='' and record.userId==0)">
+				and user_id  = #{record.userId} 
+			</if>
+			<if test="(record.logCreatedate!=null and record.logCreatedate!='') or (record.logCreatedate!='' and record.logCreatedate==0)">
+				and log_createdate  = #{record.logCreatedate} 
+			</if>
+			<if test="(record.logContent!=null and record.logContent!='') or (record.logContent!='' and record.logContent==0)">
+				and log_content  = #{record.logContent} 
+			</if>
+			<if test="(record.logOperation!=null and record.logOperation!='') or (record.logOperation!='' and record.logOperation==0)">
+				and log_operation  = #{record.logOperation} 
+			</if>
+			<if test="(record.logUserName!=null and record.logUserName!='') or (record.logUserName!='' and record.logUserName==0)">
+				and log_user_name  = #{record.logUserName} 
+			</if>
+			<if test="(record.logIp!=null and record.logIp!='') or (record.logIp!='' and record.logIp==0)">
+				and log_ip  = #{record.logIp} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_log
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.logId!=null and record.logId!='') or (record.logId!='' and record.logId==0)">
+			and log_id = #{record.logId} 
+			</if>
+			<if test="(record.userId!=null and record.userId!='') or (record.userId!='' and record.userId==0)">
+			and user_id = #{record.userId} 
+			</if>
+			<if test="(record.logCreatedate!=null and record.logCreatedate!='') or (record.logCreatedate!='' and record.logCreatedate==0)">
+			and log_createdate = #{record.logCreatedate} 
+			</if>
+			<if test="(record.logContent!=null and record.logContent!='') or (record.logContent!='' and record.logContent==0)">
+			and log_content = #{record.logContent} 
+			</if>
+			<if test="(record.logOperation!=null and record.logOperation!='') or (record.logOperation!='' and record.logOperation==0)">
+			and log_operation = #{record.logOperation} 
+			</if>
+			<if test="(record.logUserName!=null and record.logUserName!='') or (record.logUserName!='' and record.logUserName==0)">
+			and log_user_name = #{record.logUserName} 
+			</if>
+			<if test="(record.logIp!=null and record.logIp!='') or (record.logIp!='' and record.logIp==0)">
+			and log_ip = #{record.logIp} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysLogMap">
+		select 
+			log_id,
+			user_id,
+			log_createdate,
+			log_content,
+			log_operation,
+			log_user_name,
+			log_ip
+		from sys_log
+		where  log_id=#{logId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysLogMap">
+		select 
+			log_id,
+			user_id,
+			log_createdate,
+			log_content,
+			log_operation,
+			log_user_name,
+			log_ip
+		from sys_log
+		where  log_id=#{log_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysLogMap">
+		select 
+			log_id,
+			user_id,
+			log_createdate,
+			log_content,
+			log_operation,
+			log_user_name,
+			log_ip
+		from sys_log
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.logId!=null and record.logId!='') or (record.logId!='' and record.logId==0)">
+				and log_id = #{record.logId} 
+			</if>
+			<if test="(record.userId!=null and record.userId!='') or (record.userId!='' and record.userId==0)">
+				and user_id = #{record.userId} 
+			</if>
+			<if test="(record.logCreatedate!=null and record.logCreatedate!='') or (record.logCreatedate!='' and record.logCreatedate==0)">
+				and log_createdate = #{record.logCreatedate} 
+			</if>
+			<if test="(record.logContent!=null and record.logContent!='') or (record.logContent!='' and record.logContent==0)">
+				and log_content = #{record.logContent} 
+			</if>
+			<if test="(record.logOperation!=null and record.logOperation!='') or (record.logOperation!='' and record.logOperation==0)">
+				and log_operation = #{record.logOperation} 
+			</if>
+			<if test="(record.logUserName!=null and record.logUserName!='') or (record.logUserName!='' and record.logUserName==0)">
+				and log_user_name = #{record.logUserName} 
+			</if>
+			<if test="(record.logIp!=null and record.logIp!='') or (record.logIp!='' and record.logIp==0)">
+				and log_ip = #{record.logIp} 
+			</if>
+		</if>
+	</select>
+</mapper>

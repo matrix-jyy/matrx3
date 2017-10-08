@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysBtnDao">
+	<!-- 定义SysBtn 的复杂关联map -->
+	<resultMap type="SysBtn" id="SysBtnMap">
+			<id property="btnId" column="btn_id" />
+			<result property="btnKey" column="btn_key" />
+			<result property="btnValue" column="btn_value" />
+	</resultMap>
+	
+	
+	<!-- 定义SysBtn 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysBtn" id="SysBtnSimpleMap">
+			<id property="btnId" column="btn_id" />
+			<result property="btnKey" column="btn_key" />
+			<result property="btnValue" column="btn_value" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysBtn"
+		useGeneratedKeys="true" keyProperty="btnId">
+		INSERT INTO sys_btn (
+			btn_id,
+			btn_key,
+			btn_value
+		)
+	VALUES (
+			#{btnId},
+			#{btnKey},
+			#{btnValue}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_btn (
+			btn_id,
+			btn_key,
+			btn_value
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.btnId},
+			#{item.btnKey},
+			#{item.btnValue}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_btn
+		<set>
+			<if test="_parameter.containsKey('btnKey')">
+					btn_key = #{btnKey},
+				</if>		
+			<if test="_parameter.containsKey('btnValue')">
+					btn_value = #{btnValue},
+				</if>		
+		</set>
+		WHERE btn_id=#{btnId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_btn
+		<set>
+				<if test="(btnKey!=null and btnKey!='') or (btnKey!='' and btnKey==0)">
+					btn_key  = #{btnKey},
+				</if>		
+				<if test="(btnValue!=null and btnValue!='') or (btnValue!='' and btnValue==0)">
+					btn_value = #{btnValue},
+				</if>		
+		</set>
+		WHERE btn_id=#{btnId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_btn where  btn_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_btn
+		where  btn_id=#{btnId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_btn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.btnId!=null and record.btnId!='') or (record.btnId!='' and record.btnId==0)">
+				and btn_id = #{record.btnId} 
+			</if>
+			<if test="(record.btnKey!=null and record.btnKey!='') or (record.btnKey!='' and record.btnKey==0)">
+				and btn_key = #{record.btnKey} 
+			</if>
+			<if test="(record.btnValue!=null and record.btnValue!='') or (record.btnValue!='' and record.btnValue==0)">
+				and btn_value = #{record.btnValue} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysBtnMap">
+		select 
+			btn_id,
+			btn_key,
+			btn_value
+		from sys_btn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.btnId!=null and record.btnId!='') or (record.btnId!='' and record.btnId==0)">
+				and btn_id  = #{record.btnId} 
+			</if>
+			<if test="(record.btnKey!=null and record.btnKey!='') or (record.btnKey!='' and record.btnKey==0)">
+				and btn_key like concat("%", #{record.btnKey} ,"%")   
+			</if>
+			<if test="(record.btnValue!=null and record.btnValue!='') or (record.btnValue!='' and record.btnValue==0)">
+				and btn_value  like concat("%",#{record.btnValue} ,"%") 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_btn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.btnId!=null and record.btnId!='') or (record.btnId!='' and record.btnId==0)">
+			and btn_id = #{record.btnId} 
+			</if>
+			<if test="(record.btnKey!=null and record.btnKey!='') or (record.btnKey!='' and record.btnKey==0)">
+				and btn_key like concat("%", #{record.btnKey} ,"%")   
+			</if>
+			<if test="(record.btnValue!=null and record.btnValue!='') or (record.btnValue!='' and record.btnValue==0)">
+				and btn_value  like concat("%",#{record.btnValue} ,"%") 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysBtnMap">
+		select 
+			btn_id,
+			btn_key,
+			btn_value
+		from sys_btn
+		where  btn_id=#{btnId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysBtnMap">
+		select 
+			btn_id,
+			btn_key,
+			btn_value
+		from sys_btn
+		where  btn_id=#{btn_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysBtnMap">
+		select 
+			btn_id,
+			btn_key,
+			btn_value
+		from sys_btn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.btnId!=null and record.btnId!='') or (record.btnId!='' and record.btnId==0)">
+				and btn_id = #{record.btnId} 
+			</if>
+		<if test="(record.btnKey!=null and record.btnKey!='') or (record.btnKey!='' and record.btnKey==0)">
+				and btn_key like concat("%", #{record.btnKey} ,"%")   
+			</if>
+			<if test="(record.btnValue!=null and record.btnValue!='') or (record.btnValue!='' and record.btnValue==0)">
+				and btn_value  like concat("%",#{record.btnValue} ,"%") 
+			</if>
+		</if>
+	</select>
+</mapper>

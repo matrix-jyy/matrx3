@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.web.WebArticleTypeDao">
+	<!-- 定义WebArticleType 的复杂关联map -->
+	<resultMap type="WebArticleType" id="WebArticleTypeMap">
+			<id property="artTypeId" column="art_type_id" />
+			<result property="artTypeName" column="art_type_name" />
+			<result property="artTypeParentId" column="art_type_parentId" />
+			<result property="artTypeSort" column="art_type_sort" />
+			<result property="artTypeDescription" column="art_type_description" />
+			<result property="artTypeUrl" column="art_type_url" />
+			<result property="artTypeIcon" column="art_type_icon" />
+			<result property="artType" column="art_type" />
+	</resultMap>
+	
+	
+	<!-- 定义WebArticleType 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="WebArticleType" id="WebArticleTypeSimpleMap">
+			<id property="artTypeId" column="art_type_id" />
+			<result property="artTypeName" column="art_type_name" />
+			<result property="artTypeParentId" column="art_type_parentId" />
+			<result property="artTypeSort" column="art_type_sort" />
+			<result property="artTypeDescription" column="art_type_description" />
+			<result property="artTypeUrl" column="art_type_url" />
+			<result property="artTypeIcon" column="art_type_icon" />
+			<result property="artType" column="art_type" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="WebArticleType"
+		useGeneratedKeys="true" keyProperty="artTypeId">
+		INSERT INTO web_article_type (
+			art_type_id,
+			art_type_name,
+			art_type_parentId,
+			art_type_sort,
+			art_type_description,
+			art_type_url,
+			art_type_icon,
+			art_type
+		)
+	VALUES (
+			#{artTypeId},
+			#{artTypeName},
+			#{artTypeParentId},
+			#{artTypeSort},
+			#{artTypeDescription},
+			#{artTypeUrl},
+			#{artTypeIcon},
+			#{artType}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO web_article_type (
+			art_type_id,
+			art_type_name,
+			art_type_parentId,
+			art_type_sort,
+			art_type_description,
+			art_type_url,
+			art_type_icon,
+			art_type
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.artTypeId},
+			#{item.artTypeName},
+			#{item.artTypeParentId},
+			#{item.artTypeSort},
+			#{item.artTypeDescription},
+			#{item.artTypeUrl},
+			#{item.artTypeIcon},
+			#{item.artType}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE web_article_type
+		<set>
+			<if test="_parameter.containsKey('artTypeName')">
+					art_type_name = #{artTypeName},
+				</if>		
+			<if test="_parameter.containsKey('artTypeParentId')">
+					art_type_parentId = #{artTypeParentId},
+				</if>		
+			<if test="_parameter.containsKey('artTypeSort')">
+					art_type_sort = #{artTypeSort},
+				</if>		
+			<if test="_parameter.containsKey('artTypeDescription')">
+					art_type_description = #{artTypeDescription},
+				</if>		
+			<if test="_parameter.containsKey('artTypeUrl')">
+					art_type_url = #{artTypeUrl},
+				</if>		
+			<if test="_parameter.containsKey('artTypeIcon')">
+					art_type_icon = #{artTypeIcon},
+				</if>		
+			<if test="_parameter.containsKey('artType')">
+					art_type = #{artType},
+				</if>		
+		</set>
+		WHERE art_type_id=#{artTypeId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE web_article_type
+		<set>
+				<if test="(artTypeName!=null and artTypeName!='') or (artTypeName!='' and artTypeName==0)">
+					art_type_name = #{artTypeName},
+				</if>		
+				<if test="(artTypeParentId!=null and artTypeParentId!='') or (artTypeParentId!='' and artTypeParentId==0)">
+					art_type_parentId = #{artTypeParentId},
+				</if>		
+				<if test="(artTypeSort!=null and artTypeSort!='') or (artTypeSort!='' and artTypeSort==0)">
+					art_type_sort = #{artTypeSort},
+				</if>		
+				<if test="(artTypeDescription!=null and artTypeDescription!='') or (artTypeDescription!='' and artTypeDescription==0)">
+					art_type_description = #{artTypeDescription},
+				</if>		
+				<if test="(artTypeUrl!=null and artTypeUrl!='') or (artTypeUrl!='' and artTypeUrl==0)">
+					art_type_url = #{artTypeUrl},
+				</if>		
+				<if test="(artTypeIcon!=null and artTypeIcon!='') or (artTypeIcon!='' and artTypeIcon==0)">
+					art_type_icon = #{artTypeIcon},
+				</if>		
+				<if test="(artType!=null and artType!='') or (artType!='' and artType==0)">
+					art_type = #{artType},
+				</if>		
+		</set>
+		WHERE art_type_id=#{artTypeId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from web_article_type where  art_type_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM web_article_type
+		where  art_type_id=#{artTypeId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM web_article_type
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+				and art_type_id = #{record.artTypeId} 
+			</if>
+			<if test="(record.artTypeName!=null and record.artTypeName!='') or (record.artTypeName!='' and record.artTypeName==0)">
+				and art_type_name = #{record.artTypeName} 
+			</if>
+			<if test="(record.artTypeParentId!=null and record.artTypeParentId!='') or (record.artTypeParentId!='' and record.artTypeParentId==0)">
+				and art_type_parentId = #{record.artTypeParentId} 
+			</if>
+			<if test="(record.artTypeSort!=null and record.artTypeSort!='') or (record.artTypeSort!='' and record.artTypeSort==0)">
+				and art_type_sort = #{record.artTypeSort} 
+			</if>
+			<if test="(record.artTypeDescription!=null and record.artTypeDescription!='') or (record.artTypeDescription!='' and record.artTypeDescription==0)">
+				and art_type_description = #{record.artTypeDescription} 
+			</if>
+			<if test="(record.artTypeUrl!=null and record.artTypeUrl!='') or (record.artTypeUrl!='' and record.artTypeUrl==0)">
+				and art_type_url = #{record.artTypeUrl} 
+			</if>
+			<if test="(record.artTypeIcon!=null and record.artTypeIcon!='') or (record.artTypeIcon!='' and record.artTypeIcon==0)">
+				and art_type_icon = #{record.artTypeIcon} 
+			</if>
+			<if test="(record.artType!=null and record.artType!='') or (record.artType!='' and record.artType==0)">
+				and art_type = #{record.artType} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="WebArticleTypeMap">
+		select 
+			art_type_id,
+			art_type_name,
+			art_type_parentId,
+			art_type_sort,
+			art_type_description,
+			art_type_url,
+			art_type_icon,
+			art_type
+		from web_article_type
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+				and art_type_id  = #{record.artTypeId} 
+			</if>
+			<if test="(record.artTypeName!=null and record.artTypeName!='') or (record.artTypeName!='' and record.artTypeName==0)">
+				and art_type_name  = #{record.artTypeName} 
+			</if>
+			<if test="(record.artTypeParentId!=null and record.artTypeParentId!='') or (record.artTypeParentId!='' and record.artTypeParentId==0)">
+				and art_type_parentId  = #{record.artTypeParentId} 
+			</if>
+			<if test="(record.artTypeSort!=null and record.artTypeSort!='') or (record.artTypeSort!='' and record.artTypeSort==0)">
+				and art_type_sort  = #{record.artTypeSort} 
+			</if>
+			<if test="(record.artTypeDescription!=null and record.artTypeDescription!='') or (record.artTypeDescription!='' and record.artTypeDescription==0)">
+				and art_type_description  = #{record.artTypeDescription} 
+			</if>
+			<if test="(record.artTypeUrl!=null and record.artTypeUrl!='') or (record.artTypeUrl!='' and record.artTypeUrl==0)">
+				and art_type_url  = #{record.artTypeUrl} 
+			</if>
+			<if test="(record.artTypeIcon!=null and record.artTypeIcon!='') or (record.artTypeIcon!='' and record.artTypeIcon==0)">
+				and art_type_icon  = #{record.artTypeIcon} 
+			</if>
+			<if test="(record.artType!=null and record.artType!='') or (record.artType!='' and record.artType==0)">
+				and art_type  = #{record.artType} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from web_article_type
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+			and art_type_id = #{record.artTypeId} 
+			</if>
+			<if test="(record.artTypeName!=null and record.artTypeName!='') or (record.artTypeName!='' and record.artTypeName==0)">
+			and art_type_name = #{record.artTypeName} 
+			</if>
+			<if test="(record.artTypeParentId!=null and record.artTypeParentId!='') or (record.artTypeParentId!='' and record.artTypeParentId==0)">
+			and art_type_parentId = #{record.artTypeParentId} 
+			</if>
+			<if test="(record.artTypeSort!=null and record.artTypeSort!='') or (record.artTypeSort!='' and record.artTypeSort==0)">
+			and art_type_sort = #{record.artTypeSort} 
+			</if>
+			<if test="(record.artTypeDescription!=null and record.artTypeDescription!='') or (record.artTypeDescription!='' and record.artTypeDescription==0)">
+			and art_type_description = #{record.artTypeDescription} 
+			</if>
+			<if test="(record.artTypeUrl!=null and record.artTypeUrl!='') or (record.artTypeUrl!='' and record.artTypeUrl==0)">
+			and art_type_url = #{record.artTypeUrl} 
+			</if>
+			<if test="(record.artTypeIcon!=null and record.artTypeIcon!='') or (record.artTypeIcon!='' and record.artTypeIcon==0)">
+			and art_type_icon = #{record.artTypeIcon} 
+			</if>
+			<if test="(record.artType!=null and record.artType!='') or (record.artType!='' and record.artType==0)">
+			and art_type = #{record.artType} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="WebArticleTypeMap">
+		select 
+			art_type_id,
+			art_type_name,
+			art_type_parentId,
+			art_type_sort,
+			art_type_description,
+			art_type_url,
+			art_type_icon,
+			art_type
+		from web_article_type
+		where  art_type_id=#{artTypeId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="WebArticleTypeMap">
+		select 
+			art_type_id,
+			art_type_name,
+			art_type_parentId,
+			art_type_sort,
+			art_type_description,
+			art_type_url,
+			art_type_icon,
+			art_type
+		from web_article_type
+		where  art_type_id=#{art_type_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="WebArticleTypeMap">
+		select 
+			art_type_id,
+			art_type_name,
+			art_type_parentId,
+			art_type_sort,
+			art_type_description,
+			art_type_url,
+			art_type_icon,
+			art_type
+		from web_article_type
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+				and art_type_id = #{record.artTypeId} 
+			</if>
+			<if test="(record.artTypeName!=null and record.artTypeName!='') or (record.artTypeName!='' and record.artTypeName==0)">
+				and art_type_name = #{record.artTypeName} 
+			</if>
+			<if test="(record.artTypeParentId!=null and record.artTypeParentId!='') or (record.artTypeParentId!='' and record.artTypeParentId==0)">
+				and art_type_parentId = #{record.artTypeParentId} 
+			</if>
+			<if test="(record.artTypeSort!=null and record.artTypeSort!='') or (record.artTypeSort!='' and record.artTypeSort==0)">
+				and art_type_sort = #{record.artTypeSort} 
+			</if>
+			<if test="(record.artTypeDescription!=null and record.artTypeDescription!='') or (record.artTypeDescription!='' and record.artTypeDescription==0)">
+				and art_type_description = #{record.artTypeDescription} 
+			</if>
+			<if test="(record.artTypeUrl!=null and record.artTypeUrl!='') or (record.artTypeUrl!='' and record.artTypeUrl==0)">
+				and art_type_url = #{record.artTypeUrl} 
+			</if>
+			<if test="(record.artTypeIcon!=null and record.artTypeIcon!='') or (record.artTypeIcon!='' and record.artTypeIcon==0)">
+				and art_type_icon = #{record.artTypeIcon} 
+			</if>
+			<if test="(record.artType!=null and record.artType!='') or (record.artType!='' and record.artType==0)">
+				and art_type = #{record.artType} 
+			</if>
+		</if>
+	</select>
+</mapper>

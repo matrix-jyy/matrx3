@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+
+	<typeAliases>
+		<!-- simple mvc 支持的数据对象 -->
+		<typeAlias type="com.zkingsoft.pojo.PageData" alias="pd" />
+		
+		
+		<typeAlias type="com.zkingsoft.model.sys.SysBtn" alias="SysBtn" />
+
+		<typeAlias type="com.zkingsoft.model.sys.SysCompany" alias="SysCompany" />
+
+		<typeAlias type="com.zkingsoft.model.sys.SysDataDictionary"
+			alias="SysDataDictionary" />
+
+		<typeAlias type="com.zkingsoft.model.sys.SysFunction" alias="SysFunction" />
+
+
+		<typeAlias type="com.zkingsoft.model.sys.SysPlat" alias="SysPlat" />
+
+		<typeAlias type="com.zkingsoft.model.sys.SysRole" alias="SysRole" />
+
+		<typeAlias type="com.zkingsoft.model.sys.SysRolePwoerFn"
+			alias="SysRolePwoerFn" />
+
+		<typeAlias type="com.zkingsoft.model.sys.SysUsers" alias="SysUsers" />
+		<typeAlias type="com.zkingsoft.syslog.SysLog" alias="SysLog" />
+		<typeAlias type="com.zkingsoft.model.bus.BusCatalog" alias="BusCatalog" />
+
+		<typeAlias type="com.zkingsoft.model.bus.BusParameterSettings"
+			alias="BusParameterSettings" />
+
+		<typeAlias alias="SysDbBackup" type="com.zkingsoft.model.sys.SysDbBackup" />
+
+		<typeAlias alias="WebArticle" type="com.zkingsoft.model.web.WebArticle" />
+		<typeAlias alias="WebArticleType" type="com.zkingsoft.model.web.WebArticleType" />
+		<typeAlias type="com.zkingsoft.model.web.WebNav" alias="WebNav" />
+		<typeAlias type="com.zkingsoft.model.bus.BusArea" alias="BusArea" />
+
+
+
+	</typeAliases>
+
+</configuration>

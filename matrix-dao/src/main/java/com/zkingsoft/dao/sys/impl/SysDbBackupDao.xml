@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysDbBackupDao">
+	<!-- 定义SysDbBackup 的复杂关联map -->
+	<resultMap type="SysDbBackup" id="SysDbBackupMap">
+			<id property="buId" column="bu_id" />
+			<result property="buDbIp" column="bu_db_ip" />
+			<result property="buDbPort" column="bu_db_port" />
+			<result property="buDbName" column="bu_db_name" />
+			<result property="buDbUname" column="bu_db_uname" />
+			<result property="buDbPwd" column="bu_db_pwd" />
+			<result property="buStatus" column="bu_status" />
+			<result property="buSize" column="bu_size" />
+			<result property="buPath" column="bu_path" />
+			<result property="buErrMsg" column="bu_err_msg" />
+	</resultMap>
+	
+	
+	<!-- 定义SysDbBackup 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysDbBackup" id="SysDbBackupSimpleMap">
+			<id property="buId" column="bu_id" />
+			<result property="buDbIp" column="bu_db_ip" />
+			<result property="buDbPort" column="bu_db_port" />
+			<result property="buDbName" column="bu_db_name" />
+			<result property="buDbUname" column="bu_db_uname" />
+			<result property="buDbPwd" column="bu_db_pwd" />
+			<result property="buStatus" column="bu_status" />
+			<result property="buSize" column="bu_size" />
+			<result property="buPath" column="bu_path" />
+			<result property="buErrMsg" column="bu_err_msg" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysDbBackup"
+		useGeneratedKeys="true" keyProperty="buId">
+		INSERT INTO sys_db_backup (
+			bu_id,
+			bu_db_ip,
+			bu_db_port,
+			bu_db_name,
+			bu_db_uname,
+			bu_db_pwd,
+			bu_status,
+			bu_size,
+			bu_path,
+			bu_err_msg
+		)
+	VALUES (
+			#{buId},
+			#{buDbIp},
+			#{buDbPort},
+			#{buDbName},
+			#{buDbUname},
+			#{buDbPwd},
+			#{buStatus},
+			#{buSize},
+			#{buPath},
+			#{buErrMsg}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_db_backup (
+			bu_id,
+			bu_db_ip,
+			bu_db_port,
+			bu_db_name,
+			bu_db_uname,
+			bu_db_pwd,
+			bu_status,
+			bu_size,
+			bu_path,
+			bu_err_msg
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.buId},
+			#{item.buDbIp},
+			#{item.buDbPort},
+			#{item.buDbName},
+			#{item.buDbUname},
+			#{item.buDbPwd},
+			#{item.buStatus},
+			#{item.buSize},
+			#{item.buPath},
+			#{item.buErrMsg}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_db_backup
+		<set>
+			<if test="_parameter.containsKey('buDbIp')">
+					bu_db_ip = #{buDbIp},
+				</if>		
+			<if test="_parameter.containsKey('buDbPort')">
+					bu_db_port = #{buDbPort},
+				</if>		
+			<if test="_parameter.containsKey('buDbName')">
+					bu_db_name = #{buDbName},
+				</if>		
+			<if test="_parameter.containsKey('buDbUname')">
+					bu_db_uname = #{buDbUname},
+				</if>		
+			<if test="_parameter.containsKey('buDbPwd')">
+					bu_db_pwd = #{buDbPwd},
+				</if>		
+			<if test="_parameter.containsKey('buStatus')">
+					bu_status = #{buStatus},
+				</if>		
+			<if test="_parameter.containsKey('buSize')">
+					bu_size = #{buSize},
+				</if>		
+			<if test="_parameter.containsKey('buPath')">
+					bu_path = #{buPath},
+				</if>		
+			<if test="_parameter.containsKey('buErrMsg')">
+					bu_err_msg = #{buErrMsg},
+				</if>		
+		</set>
+		WHERE bu_id=#{buId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_db_backup
+		<set>
+				<if test="(buDbIp!=null and buDbIp!='') or (buDbIp!='' and buDbIp==0)">
+					bu_db_ip = #{buDbIp},
+				</if>		
+				<if test="(buDbPort!=null and buDbPort!='') or (buDbPort!='' and buDbPort==0)">
+					bu_db_port = #{buDbPort},
+				</if>		
+				<if test="(buDbName!=null and buDbName!='') or (buDbName!='' and buDbName==0)">
+					bu_db_name = #{buDbName},
+				</if>		
+				<if test="(buDbUname!=null and buDbUname!='') or (buDbUname!='' and buDbUname==0)">
+					bu_db_uname = #{buDbUname},
+				</if>		
+				<if test="(buDbPwd!=null and buDbPwd!='') or (buDbPwd!='' and buDbPwd==0)">
+					bu_db_pwd = #{buDbPwd},
+				</if>		
+				<if test="(buStatus!=null and buStatus!='') or (buStatus!='' and buStatus==0)">
+					bu_status = #{buStatus},
+				</if>		
+				<if test="(buSize!=null and buSize!='') or (buSize!='' and buSize==0)">
+					bu_size = #{buSize},
+				</if>		
+				<if test="(buPath!=null and buPath!='') or (buPath!='' and buPath==0)">
+					bu_path = #{buPath},
+				</if>		
+				<if test="(buErrMsg!=null and buErrMsg!='') or (buErrMsg!='' and buErrMsg==0)">
+					bu_err_msg = #{buErrMsg},
+				</if>		
+		</set>
+		WHERE bu_id=#{buId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_db_backup where  bu_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_db_backup
+		where  bu_id=#{buId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_db_backup
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.buId!=null and record.buId!='') or (record.buId!='' and record.buId==0)">
+				and bu_id = #{record.buId} 
+			</if>
+			<if test="(record.buDbIp!=null and record.buDbIp!='') or (record.buDbIp!='' and record.buDbIp==0)">
+				and bu_db_ip = #{record.buDbIp} 
+			</if>
+			<if test="(record.buDbPort!=null and record.buDbPort!='') or (record.buDbPort!='' and record.buDbPort==0)">
+				and bu_db_port = #{record.buDbPort} 
+			</if>
+			<if test="(record.buDbName!=null and record.buDbName!='') or (record.buDbName!='' and record.buDbName==0)">
+				and bu_db_name = #{record.buDbName} 
+			</if>
+			<if test="(record.buDbUname!=null and record.buDbUname!='') or (record.buDbUname!='' and record.buDbUname==0)">
+				and bu_db_uname = #{record.buDbUname} 
+			</if>
+			<if test="(record.buDbPwd!=null and record.buDbPwd!='') or (record.buDbPwd!='' and record.buDbPwd==0)">
+				and bu_db_pwd = #{record.buDbPwd} 
+			</if>
+			<if test="(record.buStatus!=null and record.buStatus!='') or (record.buStatus!='' and record.buStatus==0)">
+				and bu_status = #{record.buStatus} 
+			</if>
+			<if test="(record.buSize!=null and record.buSize!='') or (record.buSize!='' and record.buSize==0)">
+				and bu_size = #{record.buSize} 
+			</if>
+			<if test="(record.buPath!=null and record.buPath!='') or (record.buPath!='' and record.buPath==0)">
+				and bu_path = #{record.buPath} 
+			</if>
+			<if test="(record.buErrMsg!=null and record.buErrMsg!='') or (record.buErrMsg!='' and record.buErrMsg==0)">
+				and bu_err_msg = #{record.buErrMsg} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysDbBackupMap">
+		select 
+			bu_id,
+			bu_db_ip,
+			bu_db_port,
+			bu_db_name,
+			bu_db_uname,
+			bu_db_pwd,
+			bu_status,
+			bu_size,
+			bu_path,
+			bu_err_msg
+		from sys_db_backup
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.buId!=null and record.buId!='') or (record.buId!='' and record.buId==0)">
+				and bu_id  = #{record.buId} 
+			</if>
+			<if test="(record.buDbIp!=null and record.buDbIp!='') or (record.buDbIp!='' and record.buDbIp==0)">
+				and bu_db_ip  = #{record.buDbIp} 
+			</if>
+			<if test="(record.buDbPort!=null and record.buDbPort!='') or (record.buDbPort!='' and record.buDbPort==0)">
+				and bu_db_port  = #{record.buDbPort} 
+			</if>
+			<if test="(record.buDbName!=null and record.buDbName!='') or (record.buDbName!='' and record.buDbName==0)">
+				and bu_db_name  = #{record.buDbName} 
+			</if>
+			<if test="(record.buDbUname!=null and record.buDbUname!='') or (record.buDbUname!='' and record.buDbUname==0)">
+				and bu_db_uname  = #{record.buDbUname} 
+			</if>
+			<if test="(record.buDbPwd!=null and record.buDbPwd!='') or (record.buDbPwd!='' and record.buDbPwd==0)">
+				and bu_db_pwd  = #{record.buDbPwd} 
+			</if>
+			<if test="(record.buStatus!=null and record.buStatus!='') or (record.buStatus!='' and record.buStatus==0)">
+				and bu_status  = #{record.buStatus} 
+			</if>
+			<if test="(record.buSize!=null and record.buSize!='') or (record.buSize!='' and record.buSize==0)">
+				and bu_size  = #{record.buSize} 
+			</if>
+			<if test="(record.buPath!=null and record.buPath!='') or (record.buPath!='' and record.buPath==0)">
+				and bu_path  = #{record.buPath} 
+			</if>
+			<if test="(record.buErrMsg!=null and record.buErrMsg!='') or (record.buErrMsg!='' and record.buErrMsg==0)">
+				and bu_err_msg  = #{record.buErrMsg} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_db_backup
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.buId!=null and record.buId!='') or (record.buId!='' and record.buId==0)">
+			and bu_id = #{record.buId} 
+			</if>
+			<if test="(record.buDbIp!=null and record.buDbIp!='') or (record.buDbIp!='' and record.buDbIp==0)">
+			and bu_db_ip = #{record.buDbIp} 
+			</if>
+			<if test="(record.buDbPort!=null and record.buDbPort!='') or (record.buDbPort!='' and record.buDbPort==0)">
+			and bu_db_port = #{record.buDbPort} 
+			</if>
+			<if test="(record.buDbName!=null and record.buDbName!='') or (record.buDbName!='' and record.buDbName==0)">
+			and bu_db_name = #{record.buDbName} 
+			</if>
+			<if test="(record.buDbUname!=null and record.buDbUname!='') or (record.buDbUname!='' and record.buDbUname==0)">
+			and bu_db_uname = #{record.buDbUname} 
+			</if>
+			<if test="(record.buDbPwd!=null and record.buDbPwd!='') or (record.buDbPwd!='' and record.buDbPwd==0)">
+			and bu_db_pwd = #{record.buDbPwd} 
+			</if>
+			<if test="(record.buStatus!=null and record.buStatus!='') or (record.buStatus!='' and record.buStatus==0)">
+			and bu_status = #{record.buStatus} 
+			</if>
+			<if test="(record.buSize!=null and record.buSize!='') or (record.buSize!='' and record.buSize==0)">
+			and bu_size = #{record.buSize} 
+			</if>
+			<if test="(record.buPath!=null and record.buPath!='') or (record.buPath!='' and record.buPath==0)">
+			and bu_path = #{record.buPath} 
+			</if>
+			<if test="(record.buErrMsg!=null and record.buErrMsg!='') or (record.buErrMsg!='' and record.buErrMsg==0)">
+			and bu_err_msg = #{record.buErrMsg} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysDbBackupMap">
+		select 
+			bu_id,
+			bu_db_ip,
+			bu_db_port,
+			bu_db_name,
+			bu_db_uname,
+			bu_db_pwd,
+			bu_status,
+			bu_size,
+			bu_path,
+			bu_err_msg
+		from sys_db_backup
+		where  bu_id=#{buId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysDbBackupMap">
+		select 
+			bu_id,
+			bu_db_ip,
+			bu_db_port,
+			bu_db_name,
+			bu_db_uname,
+			bu_db_pwd,
+			bu_status,
+			bu_size,
+			bu_path,
+			bu_err_msg
+		from sys_db_backup
+		where  bu_id=#{bu_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysDbBackupMap">
+		select 
+			bu_id,
+			bu_db_ip,
+			bu_db_port,
+			bu_db_name,
+			bu_db_uname,
+			bu_db_pwd,
+			bu_status,
+			bu_size,
+			bu_path,
+			bu_err_msg
+		from sys_db_backup
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.buId!=null and record.buId!='') or (record.buId!='' and record.buId==0)">
+				and bu_id = #{record.buId} 
+			</if>
+			<if test="(record.buDbIp!=null and record.buDbIp!='') or (record.buDbIp!='' and record.buDbIp==0)">
+				and bu_db_ip = #{record.buDbIp} 
+			</if>
+			<if test="(record.buDbPort!=null and record.buDbPort!='') or (record.buDbPort!='' and record.buDbPort==0)">
+				and bu_db_port = #{record.buDbPort} 
+			</if>
+			<if test="(record.buDbName!=null and record.buDbName!='') or (record.buDbName!='' and record.buDbName==0)">
+				and bu_db_name = #{record.buDbName} 
+			</if>
+			<if test="(record.buDbUname!=null and record.buDbUname!='') or (record.buDbUname!='' and record.buDbUname==0)">
+				and bu_db_uname = #{record.buDbUname} 
+			</if>
+			<if test="(record.buDbPwd!=null and record.buDbPwd!='') or (record.buDbPwd!='' and record.buDbPwd==0)">
+				and bu_db_pwd = #{record.buDbPwd} 
+			</if>
+			<if test="(record.buStatus!=null and record.buStatus!='') or (record.buStatus!='' and record.buStatus==0)">
+				and bu_status = #{record.buStatus} 
+			</if>
+			<if test="(record.buSize!=null and record.buSize!='') or (record.buSize!='' and record.buSize==0)">
+				and bu_size = #{record.buSize} 
+			</if>
+			<if test="(record.buPath!=null and record.buPath!='') or (record.buPath!='' and record.buPath==0)">
+				and bu_path = #{record.buPath} 
+			</if>
+			<if test="(record.buErrMsg!=null and record.buErrMsg!='') or (record.buErrMsg!='' and record.buErrMsg==0)">
+				and bu_err_msg = #{record.buErrMsg} 
+			</if>
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>测试指南</title>
+<style type="text/css">
+body {
+	width: 906px;
+	margin: 5px auto;
+}
+code{
+	color:#881111;
+	background: #eee;
+}
+</style>
+</head>
+<body>
+	<h1>单元测试指南</h1>
+	<p>说明：为保证项目代码的质量，提高自测效率在今后的开发中所有开饭人员必须编写测试用例。</p>
+	<hr>
+	<h2>为了方便单元测试对编码的要求</h2>
+	<ul>
+		<li>action尽量不写或者少些业务代码，业务代码在server层实现</li>
+		<li>Service层不在request或者session获取数据，而从action层传入数据</li>
+	</ul>
+	<h2>单元测试编写说明</h2>
+	<ul>
+		<li><b>要求1：</b>除代码生成器生成的代码不需要写单元测试外，其他自己写的方法或者在代码生成器生成的方法
+			上做了修改的代码都需要些单元测试</li>
+		<li><b>要求2：</b>一个方法的单元测试必须保证能够走遍每一行代码。这意味着你的代码中有多少条件就需要准备多少组数据。
+			一般的原则是数据组的数量= if语句数量+逻辑判断数量</li>
+		<li><b>要求3：</b>根目录：<code>com.zkingfoft.test</code><br>
+			所有测试类继承父类：<code>com.zkingsoft.test.BaseJunit4Test</code>父类会初始化spring基础配置<br>
+			分包：按对应项目的功能模块对测试类进行分包如：<code>com.zkingfoft.test.web,com.zkingfoft.test.bus</code><br>
+		</li>
+		<li><b>要求4：</b>变更代码就需要同步变更单元测试，必须保证单元测试的通过率</li>
+	</ul>
+</body>
+</html>

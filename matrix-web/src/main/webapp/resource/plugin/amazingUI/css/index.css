@@ -1,0 +1,46 @@
+/*head部分*/
+.am-header-default{
+	background-color:#00A0C3;
+}
+/*head结束*/
+/*导航栏部分*/
+.nav{
+	margin-top:0px;
+}
+/*导航栏结束*/
+/*form表单部分*/
+.main{
+	margin:20px 20px 15% 2px;
+}
+
+.am-input-group-primary .am-input-group-label{
+	background-color:#fff;
+	color:#00A0C3;
+	border:none;
+	font-weight: bold;
+}
+.am-form select{
+
+	border:1px solid #00A0C3;
+}
+.am-form textarea{
+	border:1px solid #00A0C3;
+}
+.inputBtn{
+	margin-left:20px;
+	margin-right:5px;
+}
+/*foot部分*/
+.am-navbar-default a{
+	color:#707070;
+}
+.am-navbar-default .am-navbar-nav {
+	background: #fff;
+	border-top:1px solid #aaa;
+}
+.customer{
+	color:#00A0C3;
+}
+
+
+/*foot部分结束*/

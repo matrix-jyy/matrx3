@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.bus.BusCatalogDao">
+	<!-- 定义BusCatalog 的复杂关联map -->
+	<resultMap type="BusCatalog" id="BusCatalogMap">
+			<id property="cataId" column="cata_id" />
+			<result property="cataName" column="cata_name" />
+			<result property="cataType" column="cata_type" />
+			<result property="cataIcon" column="cata_icon" />
+			<result property="cataCompanyId" column="cata_company_id" />
+			<result property="parentId" column="parent_id" />
+			<result property="cataInfo1" column="cata_info1" />
+			<result property="cataInfo2" column="cata_info2" />
+			<result property="cataInfo3" column="cata_info3" />
+			<result property="cataInfo4" column="cata_info4" />
+			<result property="cataSequnce" column="cata_sequnce" />
+			<!-- 扩展字段 -->
+			<result property="parentName" column="parentName" />
+	</resultMap>
+	
+	
+	<!-- 定义BusCatalog 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="BusCatalog" id="BusCatalogSimpleMap">
+			<id property="cataId" column="cata_id" />
+			<result property="cataName" column="cata_name" />
+			<result property="cataType" column="cata_type" />
+			<result property="cataIcon" column="cata_icon" />
+			<result property="cataCompanyId" column="cata_company_id" />
+			<result property="parentId" column="parent_id" />
+			<result property="cataInfo1" column="cata_info1" />
+			<result property="cataInfo2" column="cata_info2" />
+			<result property="cataInfo3" column="cata_info3" />
+			<result property="cataInfo4" column="cata_info4" />
+			<result property="cataSequnce" column="cata_sequnce" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="BusCatalog"
+		useGeneratedKeys="true" keyProperty="cataId">
+		INSERT INTO bus_catalog (
+			cata_id,
+			cata_name,
+			cata_type,
+			cata_icon,
+			cata_company_id,
+			parent_id,
+			cata_info1,
+			cata_info2,
+			cata_info3,
+			cata_info4,
+			cata_sequnce
+		)
+	VALUES (
+			#{cataId},
+			#{cataName},
+			#{cataType},
+			#{cataIcon},
+			#{cataCompanyId},
+			#{parentId},
+			#{cataInfo1},
+			#{cataInfo2},
+			#{cataInfo3},
+			#{cataInfo4},
+			#{cataSequnce}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO bus_catalog (
+			cata_id,
+			cata_name,
+			cata_type,
+			cata_icon,
+			cata_company_id,
+			parent_id,
+			cata_info1,
+			cata_info2,
+			cata_info3,
+			cata_info4,
+			cata_sequnce
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.cataId},
+			#{item.cataName},
+			#{item.cataType},
+			#{item.cataIcon},
+			#{item.cataCompanyId},
+			#{item.parentId},
+			#{item.cataInfo1},
+			#{item.cataInfo2},
+			#{item.cataInfo3},
+			#{item.cataInfo4},
+			#{item.cataSequnce}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE bus_catalog
+		<set>
+			<if test="_parameter.containsKey('cataName')">
+					cata_name = #{cataName},
+				</if>		
+			<if test="_parameter.containsKey('cataType')">
+					cata_type = #{cataType},
+				</if>		
+			<if test="_parameter.containsKey('cataIcon')">
+					cata_icon = #{cataIcon},
+				</if>		
+			<if test="_parameter.containsKey('cataCompanyId')">
+					cata_company_id = #{cataCompanyId},
+				</if>		
+			<if test="_parameter.containsKey('parentId')">
+					parent_id = #{parentId},
+				</if>		
+			<if test="_parameter.containsKey('cataInfo1')">
+					cata_info1 = #{cataInfo1},
+				</if>		
+			<if test="_parameter.containsKey('cataInfo2')">
+					cata_info2 = #{cataInfo2},
+				</if>		
+			<if test="_parameter.containsKey('cataInfo3')">
+					cata_info3 = #{cataInfo3},
+				</if>		
+			<if test="_parameter.containsKey('cataInfo4')">
+					cata_info4 = #{cataInfo4},
+				</if>		
+			<if test="_parameter.containsKey('cataSequnce')">
+					cata_sequnce = #{cataSequnce},
+				</if>		
+		</set>
+		WHERE cata_id=#{cataId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE bus_catalog
+		<set>
+				<if test="(cataName!=null and cataName!='') or (cataName!='' and cataName==0)">
+					cata_name = #{cataName},
+				</if>		
+				<if test="(cataType!=null and cataType!='') or (cataType!='' and cataType==0)">
+					cata_type = #{cataType},
+				</if>		
+				<if test="(cataIcon!=null and cataIcon!='') or (cataIcon!='' and cataIcon==0)">
+					cata_icon = #{cataIcon},
+				</if>		
+				<if test="(cataCompanyId!=null and cataCompanyId!='') or (cataCompanyId!='' and cataCompanyId==0)">
+					cata_company_id = #{cataCompanyId},
+				</if>		
+				<if test="(parentId!=null and parentId!='') or (parentId!='' and parentId==0)">
+					parent_id = #{parentId},
+				</if>		
+				<if test="(cataInfo1!=null and cataInfo1!='') or (cataInfo1!='' and cataInfo1==0)">
+					cata_info1 = #{cataInfo1},
+				</if>		
+				<if test="(cataInfo2!=null and cataInfo2!='') or (cataInfo2!='' and cataInfo2==0)">
+					cata_info2 = #{cataInfo2},
+				</if>		
+				<if test="(cataInfo3!=null and cataInfo3!='') or (cataInfo3!='' and cataInfo3==0)">
+					cata_info3 = #{cataInfo3},
+				</if>		
+				<if test="(cataInfo4!=null and cataInfo4!='') or (cataInfo4!='' and cataInfo4==0)">
+					cata_info4 = #{cataInfo4},
+				</if>		
+				<if test="(cataSequnce!=null and cataSequnce!='') or (cataSequnce!='' and cataSequnce==0)">
+					cata_sequnce = #{cataSequnce},
+				</if>		
+		</set>
+		WHERE cata_id=#{cataId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from bus_catalog where  cata_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM bus_catalog
+		where  cata_id=#{cataId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM bus_catalog
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.cataId!=null and record.cataId!='') or (record.cataId!='' and record.cataId==0)">
+				and cata_id = #{record.cataId} 
+			</if>
+			<if test="(record.cataName!=null and record.cataName!='') or (record.cataName!='' and record.cataName==0)">
+				and cata_name = #{record.cataName} 
+			</if>
+			<if test="(record.cataType!=null and record.cataType!='') or (record.cataType!='' and record.cataType==0)">
+				and cata_type = #{record.cataType} 
+			</if>
+			<if test="(record.cataIcon!=null and record.cataIcon!='') or (record.cataIcon!='' and record.cataIcon==0)">
+				and cata_icon = #{record.cataIcon} 
+			</if>
+			<if test="(record.cataCompanyId!=null and record.cataCompanyId!='') or (record.cataCompanyId!='' and record.cataCompanyId==0)">
+				and cata_company_id = #{record.cataCompanyId} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and parent_id = #{record.parentId} 
+			</if>
+			<if test="(record.cataInfo1!=null and record.cataInfo1!='') or (record.cataInfo1!='' and record.cataInfo1==0)">
+				and cata_info1 = #{record.cataInfo1} 
+			</if>
+			<if test="(record.cataInfo2!=null and record.cataInfo2!='') or (record.cataInfo2!='' and record.cataInfo2==0)">
+				and cata_info2 = #{record.cataInfo2} 
+			</if>
+			<if test="(record.cataInfo3!=null and record.cataInfo3!='') or (record.cataInfo3!='' and record.cataInfo3==0)">
+				and cata_info3 = #{record.cataInfo3} 
+			</if>
+			<if test="(record.cataInfo4!=null and record.cataInfo4!='') or (record.cataInfo4!='' and record.cataInfo4==0)">
+				and cata_info4 = #{record.cataInfo4} 
+			</if>
+			<if test="(record.cataSequnce!=null and record.cataSequnce!='') or (record.cataSequnce!='' and record.cataSequnce==0)">
+				and cata_sequnce = #{record.cataSequnce} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="BusCatalogMap">
+		select 
+			a.cata_id,
+			a.cata_name,
+			a.cata_type,
+			a.cata_icon,
+			a.cata_company_id,
+			a.parent_id,
+			a.cata_info1,
+			a.cata_info2,
+			a.cata_info3,
+			a.cata_info4,
+			a.cata_sequnce,
+			b.cata_name as parentName
+		from bus_catalog a left join bus_catalog b on a.parent_id = b.cata_id
+		where 1=1 
+		<if test="record!=null">
+			<if test="(record.cataId!=null and record.cataId!='') or (record.cataId!='' and record.cataId==0)">
+				and a.cata_id  = #{record.cataId} 
+			</if>
+			<if test="(record.cataName!=null and record.cataName!='') or (record.cataName!='' and record.cataName==0)">
+				and a.cata_name  like CONCAT("%",#{record.cataName},"%")
+			</if>
+			<if test="(record.cataType!=null and record.cataType!='') or (record.cataType!='' and record.cataType==0)">
+				and a.cata_type  = #{record.cataType} 
+			</if>
+			<if test="(record.cataIcon!=null and record.cataIcon!='') or (record.cataIcon!='' and record.cataIcon==0)">
+				and a.cata_icon  = #{record.cataIcon} 
+			</if>
+			<if test="(record.cataCompanyId!=null and record.cataCompanyId!='') or (record.cataCompanyId!='' and record.cataCompanyId==0)">
+				and a.cata_company_id  = #{record.cataCompanyId} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and a.parent_id  = #{record.parentId} 
+			</if>
+			<if test="(record.cataInfo1!=null and record.cataInfo1!='') or (record.cataInfo1!='' and record.cataInfo1==0)">
+				and a.cata_info1  = #{record.cataInfo1} 
+			</if>
+			<if test="(record.cataInfo2!=null and record.cataInfo2!='') or (record.cataInfo2!='' and record.cataInfo2==0)">
+				and a.cata_info2  = #{record.cataInfo2} 
+			</if>
+			<if test="(record.cataInfo3!=null and record.cataInfo3!='') or (record.cataInfo3!='' and record.cataInfo3==0)">
+				and a.cata_info3  = #{record.cataInfo3} 
+			</if>
+			<if test="(record.cataInfo4!=null and record.cataInfo4!='') or (record.cataInfo4!='' and record.cataInfo4==0)">
+				and a.cata_info4  = #{record.cataInfo4} 
+			</if>
+			<if test="(record.cataSequnce!=null and record.cataSequnce!='') or (record.cataSequnce!='' and record.cataSequnce==0)">
+				and a.cata_sequnce  = #{record.cataSequnce} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from bus_catalog a left join bus_catalog b on a.parent_id = b.cata_id
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.cataId!=null and record.cataId!='') or (record.cataId!='' and record.cataId==0)">
+				and a.cata_id  = #{record.cataId} 
+			</if>
+			<if test="(record.cataName!=null and record.cataName!='') or (record.cataName!='' and record.cataName==0)">
+				and a.cata_name  like CONCAT("%",#{record.cataName},"%")
+			</if>
+			<if test="(record.cataType!=null and record.cataType!='') or (record.cataType!='' and record.cataType==0)">
+				and a.cata_type  = #{record.cataType} 
+			</if>
+			<if test="(record.cataIcon!=null and record.cataIcon!='') or (record.cataIcon!='' and record.cataIcon==0)">
+				and a.cata_icon  = #{record.cataIcon} 
+			</if>
+			<if test="(record.cataCompanyId!=null and record.cataCompanyId!='') or (record.cataCompanyId!='' and record.cataCompanyId==0)">
+				and a.cata_company_id  = #{record.cataCompanyId} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and a.parent_id  = #{record.parentId} 
+			</if>
+			<if test="(record.cataInfo1!=null and record.cataInfo1!='') or (record.cataInfo1!='' and record.cataInfo1==0)">
+				and a.cata_info1  = #{record.cataInfo1} 
+			</if>
+			<if test="(record.cataInfo2!=null and record.cataInfo2!='') or (record.cataInfo2!='' and record.cataInfo2==0)">
+				and a.cata_info2  = #{record.cataInfo2} 
+			</if>
+			<if test="(record.cataInfo3!=null and record.cataInfo3!='') or (record.cataInfo3!='' and record.cataInfo3==0)">
+				and a.cata_info3  = #{record.cataInfo3} 
+			</if>
+			<if test="(record.cataInfo4!=null and record.cataInfo4!='') or (record.cataInfo4!='' and record.cataInfo4==0)">
+				and a.cata_info4  = #{record.cataInfo4} 
+			</if>
+			<if test="(record.cataSequnce!=null and record.cataSequnce!='') or (record.cataSequnce!='' and record.cataSequnce==0)">
+				and a.cata_sequnce  = #{record.cataSequnce} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="BusCatalogMap">
+		select 
+			cata_id,
+			cata_name,
+			cata_type,
+			cata_icon,
+			cata_company_id,
+			parent_id,
+			cata_info1,
+			cata_info2,
+			cata_info3,
+			cata_info4,
+			cata_sequnce
+		from bus_catalog
+		where  cata_id=#{cataId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="BusCatalogMap">
+		select 
+			cata_id,
+			cata_name,
+			cata_type,
+			cata_icon,
+			cata_company_id,
+			parent_id,
+			cata_info1,
+			cata_info2,
+			cata_info3,
+			cata_info4,
+			cata_sequnce
+		from bus_catalog
+		where  cata_id=#{cata_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="BusCatalogMap">
+		select 
+			cata_id,
+			cata_name,
+			cata_type,
+			cata_icon,
+			cata_company_id,
+			parent_id,
+			cata_info1,
+			cata_info2,
+			cata_info3,
+			cata_info4,
+			cata_sequnce
+		from bus_catalog
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.cataId!=null and record.cataId!='') or (record.cataId!='' and record.cataId==0)">
+				and cata_id = #{record.cataId} 
+			</if>
+			<if test="(record.cataName!=null and record.cataName!='') or (record.cataName!='' and record.cataName==0)">
+				and cata_name = #{record.cataName} 
+			</if>
+			<if test="(record.cataType!=null and record.cataType!='') or (record.cataType!='' and record.cataType==0)">
+				and cata_type = #{record.cataType} 
+			</if>
+			<if test="(record.cataIcon!=null and record.cataIcon!='') or (record.cataIcon!='' and record.cataIcon==0)">
+				and cata_icon = #{record.cataIcon} 
+			</if>
+			<if test="(record.cataCompanyId!=null and record.cataCompanyId!='') or (record.cataCompanyId!='' and record.cataCompanyId==0)">
+				and cata_company_id = #{record.cataCompanyId} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and parent_id = #{record.parentId} 
+			</if>
+			<if test="(record.cataInfo1!=null and record.cataInfo1!='') or (record.cataInfo1!='' and record.cataInfo1==0)">
+				and cata_info1 = #{record.cataInfo1} 
+			</if>
+			<if test="(record.cataInfo2!=null and record.cataInfo2!='') or (record.cataInfo2!='' and record.cataInfo2==0)">
+				and cata_info2 = #{record.cataInfo2} 
+			</if>
+			<if test="(record.cataInfo3!=null and record.cataInfo3!='') or (record.cataInfo3!='' and record.cataInfo3==0)">
+				and cata_info3 = #{record.cataInfo3} 
+			</if>
+			<if test="(record.cataInfo4!=null and record.cataInfo4!='') or (record.cataInfo4!='' and record.cataInfo4==0)">
+				and cata_info4 = #{record.cataInfo4} 
+			</if>
+			<if test="(record.cataSequnce!=null and record.cataSequnce!='') or (record.cataSequnce!='' and record.cataSequnce==0)">
+				and cata_sequnce = #{record.cataSequnce} 
+			</if>
+		</if>
+	</select>
+</mapper> 

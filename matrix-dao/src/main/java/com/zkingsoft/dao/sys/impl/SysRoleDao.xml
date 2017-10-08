@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysRoleDao">
+	<!-- 定义SysRole 的复杂关联map -->
+	<resultMap type="SysRole" id="SysRoleMap">
+			<id property="roleId" column="role_id" />
+			<result property="roleName" column="role_name" />
+			<result property="roleRemark" column="role_remark" />
+			<result property="companyId" column="company_id" />
+			<result property="plates" column="plates" />
+	</resultMap>
+	
+	
+	<!-- 定义SysRole 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysRole" id="SysRoleSimpleMap">
+			<id property="roleId" column="role_id" />
+			<result property="roleName" column="role_name" />
+			<result property="roleRemark" column="role_remark" />
+			<result property="companyId" column="company_id" />
+			<result property="plates" column="plates" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysRole"
+		useGeneratedKeys="true" keyProperty="roleId">
+		INSERT INTO sys_role (
+			role_id,
+			role_name,
+			role_remark,
+			company_id,
+			plates
+		)
+	VALUES (
+			#{roleId},
+			#{roleName},
+			#{roleRemark},
+			#{companyId},
+			#{plates}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_role (
+			role_id,
+			role_name,
+			role_remark,
+			company_id,
+			plates
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.roleId},
+			#{item.roleName},
+			#{item.roleRemark},
+			#{item.companyId},
+			#{item.plates}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_role
+		<set>
+			<if test="_parameter.containsKey('roleName')">
+					role_name = #{roleName},
+				</if>		
+			<if test="_parameter.containsKey('roleRemark')">
+					role_remark = #{roleRemark},
+				</if>		
+			<if test="_parameter.containsKey('companyId')">
+					company_id = #{companyId},
+				</if>		
+			<if test="_parameter.containsKey('plates')">
+					plates = #{plates},
+				</if>		
+		</set>
+		WHERE role_id=#{roleId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_role
+		<set>
+				<if test="(roleName!=null and roleName!='') or (roleName!='' and roleName==0)">
+					role_name = #{roleName},
+				</if>		
+				<if test="(roleRemark!=null and roleRemark!='') or (roleRemark!='' and roleRemark==0)">
+					role_remark = #{roleRemark},
+				</if>		
+				<if test="(companyId!=null and companyId!='') or (companyId!='' and companyId==0)">
+					company_id = #{companyId},
+				</if>		
+				<if test="(plates!=null and plates!='') or (plates!='' and plates==0)">
+					plates = #{plates},
+				</if>		
+		</set>
+		WHERE role_id=#{roleId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_role where  role_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_role
+		where  role_id=#{roleId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_role
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.roleName!=null and record.roleName!='') or (record.roleName!='' and record.roleName==0)">
+				and role_name = #{record.roleName} 
+			</if>
+			<if test="(record.roleRemark!=null and record.roleRemark!='') or (record.roleRemark!='' and record.roleRemark==0)">
+				and role_remark = #{record.roleRemark} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.plates!=null and record.plates!='') or (record.plates!='' and record.plates==0)">
+				and plates = #{record.plates} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysRoleMap">
+		select 
+			role_id,
+			role_name,
+			role_remark,
+			company_id,
+			plates
+		from sys_role
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id  = #{record.roleId} 
+			</if>
+			<if test="(record.roleName!=null and record.roleName!='') or (record.roleName!='' and record.roleName==0)">
+				and role_name  like concat ("%",#{record.roleName},"%")  
+			</if>
+			<if test="(record.roleRemark!=null and record.roleRemark!='') or (record.roleRemark!='' and record.roleRemark==0)">
+				and role_remark  = #{record.roleRemark} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id  = #{record.companyId} 
+			</if>
+			<if test="(record.plates!=null and record.plates!='') or (record.plates!='' and record.plates==0)">
+				and plates  = #{record.plates} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_role
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+			and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.roleName!=null and record.roleName!='') or (record.roleName!='' and record.roleName==0)">
+				and role_name  like concat ("%",#{record.roleName},"%")  
+			</if>
+			<if test="(record.roleRemark!=null and record.roleRemark!='') or (record.roleRemark!='' and record.roleRemark==0)">
+			and role_remark = #{record.roleRemark} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+			and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.plates!=null and record.plates!='') or (record.plates!='' and record.plates==0)">
+			and plates = #{record.plates} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysRoleMap">
+		select 
+			role_id,
+			role_name,
+			role_remark,
+			company_id,
+			plates
+		from sys_role
+		where  role_id=#{roleId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysRoleMap">
+		select 
+			role_id,
+			role_name,
+			role_remark,
+			company_id,
+			plates
+		from sys_role
+		where  role_id=#{role_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysRoleMap">
+		select 
+			role_id,
+			role_name,
+			role_remark,
+			company_id,
+			plates
+		from sys_role
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.roleName!=null and record.roleName!='') or (record.roleName!='' and record.roleName==0)">
+				and role_name  like concat ("%",#{record.roleName},"%")  
+			</if>
+			<if test="(record.roleRemark!=null and record.roleRemark!='') or (record.roleRemark!='' and record.roleRemark==0)">
+				and role_remark = #{record.roleRemark} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.plates!=null and record.plates!='') or (record.plates!='' and record.plates==0)">
+				and plates = #{record.plates} 
+			</if>
+		</if>
+	</select>
+</mapper>

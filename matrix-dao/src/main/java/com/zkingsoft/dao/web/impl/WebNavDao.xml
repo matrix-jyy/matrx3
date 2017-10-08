@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.web.WebNavDao">
+	<!-- 定义WebNav 的复杂关联map -->
+	<resultMap type="WebNav" id="WebNavMap">
+			<id property="navId" column="nav_id" />
+			<result property="navName" column="nav_name" />
+			<result property="parentId" column="parent_id" />
+			<result property="navGrade" column="nav_grade" />
+			<result property="navUrl" column="nav_url" />
+			<result property="navInco" column="nav_inco" />
+			<result property="navDescription" column="nav_description" />
+			<result property="navType" column="nav_type" />
+			<result property="navPlat" column="nav_plat" />
+			<result property="companyId" column="company_id" />
+			<result property="navOrderby" column="nav_orderby" />
+	</resultMap>
+	
+	
+	<!-- 定义WebNav 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="WebNav" id="WebNavSimpleMap">
+			<id property="navId" column="nav_id" />
+			<result property="navName" column="nav_name" />
+			<result property="parentId" column="parent_id" />
+			<result property="navGrade" column="nav_grade" />
+			<result property="navUrl" column="nav_url" />
+			<result property="navInco" column="nav_inco" />
+			<result property="navDescription" column="nav_description" />
+			<result property="navType" column="nav_type" />
+			<result property="navPlat" column="nav_plat" />
+			<result property="companyId" column="company_id" />
+			<result property="navOrderby" column="nav_orderby" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="WebNav"
+		useGeneratedKeys="true" keyProperty="navId">
+		INSERT INTO web_nav (
+			nav_id,
+			nav_name,
+			parent_id,
+			nav_grade,
+			nav_url,
+			nav_inco,
+			nav_description,
+			nav_type,
+			nav_plat,
+			company_id,
+			nav_orderby
+		)
+	VALUES (
+			#{navId},
+			#{navName},
+			#{parentId},
+			#{navGrade},
+			#{navUrl},
+			#{navInco},
+			#{navDescription},
+			#{navType},
+			#{navPlat},
+			#{companyId},
+			#{navOrderby}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO web_nav (
+			nav_id,
+			nav_name,
+			parent_id,
+			nav_grade,
+			nav_url,
+			nav_inco,
+			nav_description,
+			nav_type,
+			nav_plat,
+			company_id,
+			nav_orderby
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.navId},
+			#{item.navName},
+			#{item.parentId},
+			#{item.navGrade},
+			#{item.navUrl},
+			#{item.navInco},
+			#{item.navDescription},
+			#{item.navType},
+			#{item.navPlat},
+			#{item.companyId},
+			#{item.navOrderby}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE web_nav
+		<set>
+			<if test="_parameter.containsKey('navName')">
+					nav_name = #{navName},
+				</if>		
+			<if test="_parameter.containsKey('parentId')">
+					parent_id = #{parentId},
+				</if>		
+			<if test="_parameter.containsKey('navGrade')">
+					nav_grade = #{navGrade},
+				</if>		
+			<if test="_parameter.containsKey('navUrl')">
+					nav_url = #{navUrl},
+				</if>		
+			<if test="_parameter.containsKey('navInco')">
+					nav_inco = #{navInco},
+				</if>		
+			<if test="_parameter.containsKey('navDescription')">
+					nav_description = #{navDescription},
+				</if>		
+			<if test="_parameter.containsKey('navType')">
+					nav_type = #{navType},
+				</if>		
+			<if test="_parameter.containsKey('navPlat')">
+					nav_plat = #{navPlat},
+				</if>		
+			<if test="_parameter.containsKey('companyId')">
+					company_id = #{companyId},
+				</if>		
+			<if test="_parameter.containsKey('navOrderby')">
+					nav_orderby = #{navOrderby},
+				</if>		
+		</set>
+		WHERE nav_id=#{navId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE web_nav
+		<set>
+				<if test="(navName!=null and navName!='') or (navName!='' and navName==0)">
+					nav_name = #{navName},
+				</if>		
+				<if test="(parentId!=null and parentId!='') or (parentId!='' and parentId==0)">
+					parent_id = #{parentId},
+				</if>		
+				<if test="(navGrade!=null and navGrade!='') or (navGrade!='' and navGrade==0)">
+					nav_grade = #{navGrade},
+				</if>		
+				<if test="(navUrl!=null and navUrl!='') or (navUrl!='' and navUrl==0)">
+					nav_url = #{navUrl},
+				</if>		
+				<if test="(navInco!=null and navInco!='') or (navInco!='' and navInco==0)">
+					nav_inco = #{navInco},
+				</if>		
+				<if test="(navDescription!=null and navDescription!='') or (navDescription!='' and navDescription==0)">
+					nav_description = #{navDescription},
+				</if>		
+				<if test="(navType!=null and navType!='') or (navType!='' and navType==0)">
+					nav_type = #{navType},
+				</if>		
+				<if test="(navPlat!=null and navPlat!='') or (navPlat!='' and navPlat==0)">
+					nav_plat = #{navPlat},
+				</if>		
+				<if test="(companyId!=null and companyId!='') or (companyId!='' and companyId==0)">
+					company_id = #{companyId},
+				</if>		
+				<if test="(navOrderby!=null and navOrderby!='') or (navOrderby!='' and navOrderby==0)">
+					nav_orderby = #{navOrderby},
+				</if>		
+		</set>
+		WHERE nav_id=#{navId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from web_nav where  nav_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM web_nav
+		where  nav_id=#{navId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM web_nav
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.navId!=null and record.navId!='') or (record.navId!='' and record.navId==0)">
+				and nav_id = #{record.navId} 
+			</if>
+			<if test="(record.navName!=null and record.navName!='') or (record.navName!='' and record.navName==0)">
+				and nav_name = #{record.navName} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and parent_id = #{record.parentId} 
+			</if>
+			<if test="(record.navGrade!=null and record.navGrade!='') or (record.navGrade!='' and record.navGrade==0)">
+				and nav_grade = #{record.navGrade} 
+			</if>
+			<if test="(record.navUrl!=null and record.navUrl!='') or (record.navUrl!='' and record.navUrl==0)">
+				and nav_url = #{record.navUrl} 
+			</if>
+			<if test="(record.navInco!=null and record.navInco!='') or (record.navInco!='' and record.navInco==0)">
+				and nav_inco = #{record.navInco} 
+			</if>
+			<if test="(record.navDescription!=null and record.navDescription!='') or (record.navDescription!='' and record.navDescription==0)">
+				and nav_description = #{record.navDescription} 
+			</if>
+			<if test="(record.navType!=null and record.navType!='') or (record.navType!='' and record.navType==0)">
+				and nav_type = #{record.navType} 
+			</if>
+			<if test="(record.navPlat!=null and record.navPlat!='') or (record.navPlat!='' and record.navPlat==0)">
+				and nav_plat = #{record.navPlat} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.navOrderby!=null and record.navOrderby!='') or (record.navOrderby!='' and record.navOrderby==0)">
+				and nav_orderby = #{record.navOrderby} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="WebNavMap">
+		select 
+			nav_id,
+			nav_name,
+			parent_id,
+			nav_grade,
+			nav_url,
+			nav_inco,
+			nav_description,
+			nav_type,
+			nav_plat,
+			company_id,
+			nav_orderby
+		from web_nav
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.navId!=null and record.navId!='') or (record.navId!='' and record.navId==0)">
+				and nav_id  = #{record.navId} 
+			</if>
+			<if test="(record.navName!=null and record.navName!='') or (record.navName!='' and record.navName==0)">
+				and nav_name  = #{record.navName} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and parent_id  = #{record.parentId} 
+			</if>
+			<if test="(record.navGrade!=null and record.navGrade!='') or (record.navGrade!='' and record.navGrade==0)">
+				and nav_grade  = #{record.navGrade} 
+			</if>
+			<if test="(record.navUrl!=null and record.navUrl!='') or (record.navUrl!='' and record.navUrl==0)">
+				and nav_url  = #{record.navUrl} 
+			</if>
+			<if test="(record.navInco!=null and record.navInco!='') or (record.navInco!='' and record.navInco==0)">
+				and nav_inco  = #{record.navInco} 
+			</if>
+			<if test="(record.navDescription!=null and record.navDescription!='') or (record.navDescription!='' and record.navDescription==0)">
+				and nav_description  = #{record.navDescription} 
+			</if>
+			<if test="(record.navType!=null and record.navType!='') or (record.navType!='' and record.navType==0)">
+				and nav_type  = #{record.navType} 
+			</if>
+			<if test="(record.navPlat!=null and record.navPlat!='') or (record.navPlat!='' and record.navPlat==0)">
+				and nav_plat  = #{record.navPlat} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id  = #{record.companyId} 
+			</if>
+			<if test="(record.navOrderby!=null and record.navOrderby!='') or (record.navOrderby!='' and record.navOrderby==0)">
+				and nav_orderby  = #{record.navOrderby} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from web_nav
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.navId!=null and record.navId!='') or (record.navId!='' and record.navId==0)">
+			and nav_id = #{record.navId} 
+			</if>
+			<if test="(record.navName!=null and record.navName!='') or (record.navName!='' and record.navName==0)">
+			and nav_name = #{record.navName} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+			and parent_id = #{record.parentId} 
+			</if>
+			<if test="(record.navGrade!=null and record.navGrade!='') or (record.navGrade!='' and record.navGrade==0)">
+			and nav_grade = #{record.navGrade} 
+			</if>
+			<if test="(record.navUrl!=null and record.navUrl!='') or (record.navUrl!='' and record.navUrl==0)">
+			and nav_url = #{record.navUrl} 
+			</if>
+			<if test="(record.navInco!=null and record.navInco!='') or (record.navInco!='' and record.navInco==0)">
+			and nav_inco = #{record.navInco} 
+			</if>
+			<if test="(record.navDescription!=null and record.navDescription!='') or (record.navDescription!='' and record.navDescription==0)">
+			and nav_description = #{record.navDescription} 
+			</if>
+			<if test="(record.navType!=null and record.navType!='') or (record.navType!='' and record.navType==0)">
+			and nav_type = #{record.navType} 
+			</if>
+			<if test="(record.navPlat!=null and record.navPlat!='') or (record.navPlat!='' and record.navPlat==0)">
+			and nav_plat = #{record.navPlat} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+			and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.navOrderby!=null and record.navOrderby!='') or (record.navOrderby!='' and record.navOrderby==0)">
+			and nav_orderby = #{record.navOrderby} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="WebNavMap">
+		select 
+			nav_id,
+			nav_name,
+			parent_id,
+			nav_grade,
+			nav_url,
+			nav_inco,
+			nav_description,
+			nav_type,
+			nav_plat,
+			company_id,
+			nav_orderby
+		from web_nav
+		where  nav_id=#{navId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="WebNavMap">
+		select 
+			nav_id,
+			nav_name,
+			parent_id,
+			nav_grade,
+			nav_url,
+			nav_inco,
+			nav_description,
+			nav_type,
+			nav_plat,
+			company_id,
+			nav_orderby
+		from web_nav
+		where  nav_id=#{nav_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="WebNavMap">
+		select 
+			nav_id,
+			nav_name,
+			parent_id,
+			nav_grade,
+			nav_url,
+			nav_inco,
+			nav_description,
+			nav_type,
+			nav_plat,
+			company_id,
+			nav_orderby
+		from web_nav
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.navId!=null and record.navId!='') or (record.navId!='' and record.navId==0)">
+				and nav_id = #{record.navId} 
+			</if>
+			<if test="(record.navName!=null and record.navName!='') or (record.navName!='' and record.navName==0)">
+				and nav_name = #{record.navName} 
+			</if>
+			<if test="(record.parentId!=null and record.parentId!='') or (record.parentId!='' and record.parentId==0)">
+				and parent_id = #{record.parentId} 
+			</if>
+			<if test="(record.navGrade!=null and record.navGrade!='') or (record.navGrade!='' and record.navGrade==0)">
+				and nav_grade = #{record.navGrade} 
+			</if>
+			<if test="(record.navUrl!=null and record.navUrl!='') or (record.navUrl!='' and record.navUrl==0)">
+				and nav_url = #{record.navUrl} 
+			</if>
+			<if test="(record.navInco!=null and record.navInco!='') or (record.navInco!='' and record.navInco==0)">
+				and nav_inco = #{record.navInco} 
+			</if>
+			<if test="(record.navDescription!=null and record.navDescription!='') or (record.navDescription!='' and record.navDescription==0)">
+				and nav_description = #{record.navDescription} 
+			</if>
+			<if test="(record.navType!=null and record.navType!='') or (record.navType!='' and record.navType==0)">
+				and nav_type = #{record.navType} 
+			</if>
+			<if test="(record.navPlat!=null and record.navPlat!='') or (record.navPlat!='' and record.navPlat==0)">
+				and nav_plat = #{record.navPlat} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.navOrderby!=null and record.navOrderby!='') or (record.navOrderby!='' and record.navOrderby==0)">
+				and nav_orderby = #{record.navOrderby} 
+			</if>
+		</if>
+	</select>
+</mapper>

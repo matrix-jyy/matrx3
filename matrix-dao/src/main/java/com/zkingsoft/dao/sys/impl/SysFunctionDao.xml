@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysFunctionDao">
+	<!-- 定义SysFunction 的复杂关联map -->
+	<resultMap type="SysFunction" id="SysFunctionMap">
+			<id property="fnId" column="fn_id" />
+			<result property="fnIcon" column="fn_icon" />
+			<result property="fnPath" column="fn_path" />
+			<result property="fnIsDisable" column="fn_is_disable" />
+			<result property="fnGrade" column="fn_grade" />
+			<result property="fnParentId" column="fn_parent_id" />
+			<result property="fnName" column="fn_name" />
+			<result property="fnSequence" column="fn_sequence" />
+			<result property="fnCode" column="fn_code" />
+			<result property="fnBtns" column="fn_btns" />
+			<result property="fnShowMenu" column="fn_show_menu" />
+	</resultMap>
+	
+	
+	<!-- 定义SysFunction 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysFunction" id="SysFunctionSimpleMap">
+			<id property="fnId" column="fn_id" />
+			<result property="fnIcon" column="fn_icon" />
+			<result property="fnPath" column="fn_path" />
+			<result property="fnIsDisable" column="fn_is_disable" />
+			<result property="fnGrade" column="fn_grade" />
+			<result property="fnParentId" column="fn_parent_id" />
+			<result property="fnName" column="fn_name" />
+			<result property="fnSequence" column="fn_sequence" />
+			<result property="fnCode" column="fn_code" />
+			<result property="fnBtns" column="fn_btns" />
+			<result property="fnShowMenu" column="fn_show_menu" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysFunction"
+		useGeneratedKeys="true" keyProperty="fnId">
+		INSERT INTO sys_function (
+			fn_id,
+			fn_icon,
+			fn_path,
+			fn_is_disable,
+			fn_grade,
+			fn_parent_id,
+			fn_name,
+			fn_sequence,
+			fn_code,
+			fn_btns,
+			fn_show_menu
+		)
+	VALUES (
+			#{fnId},
+			#{fnIcon},
+			#{fnPath},
+			#{fnIsDisable},
+			#{fnGrade},
+			#{fnParentId},
+			#{fnName},
+			#{fnSequence},
+			#{fnCode},
+			#{fnBtns},
+			#{fnShowMenu}
+	)
+	</insert>
+	
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_function (
+			fn_id,
+			fn_icon,
+			fn_path,
+			fn_is_disable,
+			fn_grade,
+			fn_parent_id,
+			fn_name,
+			fn_sequence,
+			fn_code,
+			fn_btns,
+			fn_show_menu
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.fnId},
+			#{item.fnIcon},
+			#{item.fnPath},
+			#{item.fnIsDisable},
+			#{item.fnGrade},
+			#{item.fnParentId},
+			#{item.fnName},
+			#{item.fnSequence},
+			#{item.fnCode},
+			#{item.fnBtns},
+			#{item.fnShowMenu}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_function
+		<set>
+			<if test="_parameter.containsKey('fnIcon')">
+					fn_icon = #{fnIcon},
+				</if>		
+			<if test="_parameter.containsKey('fnPath')">
+					fn_path = #{fnPath},
+				</if>		
+			<if test="_parameter.containsKey('fnIsDisable')">
+					fn_is_disable = #{fnIsDisable},
+				</if>		
+			<if test="_parameter.containsKey('fnGrade')">
+					fn_grade = #{fnGrade},
+				</if>		
+			<if test="_parameter.containsKey('fnParentId')">
+					fn_parent_id = #{fnParentId},
+				</if>		
+			<if test="_parameter.containsKey('fnName')">
+					fn_name = #{fnName},
+				</if>		
+			<if test="_parameter.containsKey('fnSequence')">
+					fn_sequence = #{fnSequence},
+				</if>		
+			<if test="_parameter.containsKey('fnCode')">
+					fn_code = #{fnCode},
+				</if>		
+			<if test="_parameter.containsKey('fnBtns')">
+					fn_btns = #{fnBtns},
+				</if>		
+			<if test="_parameter.containsKey('fnShowMenu')">
+					fn_show_menu = #{fnShowMenu},
+				</if>		
+		</set>
+		WHERE fn_id=#{fnId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_function
+		<set>
+				<if test="(fnIcon!=null and fnIcon!='') or (fnIcon!='' and fnIcon==0)">
+					fn_icon = #{fnIcon},
+				</if>		
+				<if test="(fnPath!=null and fnPath!='') or (fnPath!='' and fnPath==0)">
+					fn_path = #{fnPath},
+				</if>		
+				<if test="(fnIsDisable!=null and fnIsDisable!='') or (fnIsDisable!='' and fnIsDisable==0)">
+					fn_is_disable = #{fnIsDisable},
+				</if>		
+				<if test="(fnGrade!=null and fnGrade!='') or (fnGrade!='' and fnGrade==0)">
+					fn_grade = #{fnGrade},
+				</if>		
+				<if test="(fnParentId!=null and fnParentId!='') or (fnParentId!='' and fnParentId==0)">
+					fn_parent_id = #{fnParentId},
+				</if>		
+				<if test="(fnName!=null and fnName!='') or (fnName!='' and fnName==0)">
+					fn_name = #{fnName},
+				</if>		
+				<if test="(fnSequence!=null and fnSequence!='') or (fnSequence!='' and fnSequence==0)">
+					fn_sequence = #{fnSequence},
+				</if>		
+				<if test="(fnCode!=null and fnCode!='') or (fnCode!='' and fnCode==0)">
+					fn_code = #{fnCode},
+				</if>		
+				<if test="(fnBtns!=null and fnBtns!='') or (fnBtns!='' and fnBtns==0)">
+					fn_btns = #{fnBtns},
+				</if>		
+				<if test="(fnShowMenu!=null and fnShowMenu!='') or (fnShowMenu!='' and fnShowMenu==0)">
+					fn_show_menu = #{fnShowMenu},
+				</if>		
+		</set>
+		WHERE fn_id=#{fnId} 
+	</update>
+	<!-- 批量禁用/启用 -->
+	<update id="batchChangeStatu" >
+	update sys_function set fn_is_disable=#{status} where fn_id in
+	<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_function where  fn_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_function
+		where  fn_id=#{fnId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_function
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+				and fn_id = #{record.fnId} 
+			</if>
+			<if test="(record.fnIcon!=null and record.fnIcon!='') or (record.fnIcon!='' and record.fnIcon==0)">
+				and fn_icon = #{record.fnIcon} 
+			</if>
+			<if test="(record.fnPath!=null and record.fnPath!='') or (record.fnPath!='' and record.fnPath==0)">
+				and fn_path = #{record.fnPath} 
+			</if>
+			<if test="(record.fnIsDisable!=null and record.fnIsDisable!='') or (record.fnIsDisable!='' and record.fnIsDisable==0)">
+				and fn_is_disable = #{record.fnIsDisable} 
+			</if>
+			<if test="(record.fnGrade!=null and record.fnGrade!='') or (record.fnGrade!='' and record.fnGrade==0)">
+				and fn_grade = #{record.fnGrade} 
+			</if>
+			<if test="(record.fnParentId!=null and record.fnParentId!='') or (record.fnParentId!='' and record.fnParentId==0)">
+				and fn_parent_id = #{record.fnParentId} 
+			</if>
+			<if test="(record.fnName!=null and record.fnName!='') or (record.fnName!='' and record.fnName==0)">
+				and fn_name = #{record.fnName} 
+			</if>
+			<if test="(record.fnSequence!=null and record.fnSequence!='') or (record.fnSequence!='' and record.fnSequence==0)">
+				and fn_sequence = #{record.fnSequence} 
+			</if>
+			<if test="(record.fnCode!=null and record.fnCode!='') or (record.fnCode!='' and record.fnCode==0)">
+				and fn_code = #{record.fnCode} 
+			</if>
+			<if test="(record.fnBtns!=null and record.fnBtns!='') or (record.fnBtns!='' and record.fnBtns==0)">
+				and fn_btns = #{record.fnBtns} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysFunctionMap">
+		select 
+			fn_id,
+			fn_icon,
+			fn_path,
+			fn_is_disable,
+			fn_grade,
+			fn_parent_id,
+			fn_name,
+			fn_sequence,
+			fn_code,
+			fn_btns,
+			fn_show_menu
+		from sys_function
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+				and fn_id  = #{record.fnId} 
+			</if>
+			<if test="(record.fnIcon!=null and record.fnIcon!='') or (record.fnIcon!='' and record.fnIcon==0)">
+				and fn_icon  = #{record.fnIcon} 
+			</if>
+			<if test="(record.fnPath!=null and record.fnPath!='') or (record.fnPath!='' and record.fnPath==0)">
+				and fn_path  = #{record.fnPath} 
+			</if>
+			<if test="(record.fnIsDisable!=null and record.fnIsDisable!='') or (record.fnIsDisable!='' and record.fnIsDisable==0)">
+				and fn_is_disable  = #{record.fnIsDisable} 
+			</if>
+			<if test="(record.fnGrade!=null and record.fnGrade!='') or (record.fnGrade!='' and record.fnGrade==0)">
+				and fn_grade  = #{record.fnGrade} 
+			</if>
+			<if test="(record.fnParentId!=null and record.fnParentId!='') or (record.fnParentId!='' and record.fnParentId==0)">
+				and fn_parent_id  = #{record.fnParentId} 
+			</if>
+			<if test="(record.fnName!=null and record.fnName!='') or (record.fnName!='' and record.fnName==0)">
+				and fn_name  = #{record.fnName} 
+			</if>
+			<if test="(record.fnSequence!=null and record.fnSequence!='') or (record.fnSequence!='' and record.fnSequence==0)">
+				and fn_sequence  = #{record.fnSequence} 
+			</if>
+			<if test="(record.fnCode!=null and record.fnCode!='') or (record.fnCode!='' and record.fnCode==0)">
+				and fn_code  = #{record.fnCode} 
+			</if>
+			<if test="(record.fnBtns!=null and record.fnBtns!='') or (record.fnBtns!='' and record.fnBtns==0)">
+				and fn_btns  = #{record.fnBtns} 
+			</if>
+		</if>
+		order by fn_sequence DESC
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+<!-- 			<if test="pageVo.sort !=null  and pageVo.order !=null"> -->
+<!-- 				order by -->
+<!-- 				${pageVo.sort} ${pageVo.order} -->
+<!-- 			</if> -->
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_function
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+			and fn_id = #{record.fnId} 
+			</if>
+			<if test="(record.fnIcon!=null and record.fnIcon!='') or (record.fnIcon!='' and record.fnIcon==0)">
+			and fn_icon = #{record.fnIcon} 
+			</if>
+			<if test="(record.fnPath!=null and record.fnPath!='') or (record.fnPath!='' and record.fnPath==0)">
+			and fn_path = #{record.fnPath} 
+			</if>
+			<if test="(record.fnIsDisable!=null and record.fnIsDisable!='') or (record.fnIsDisable!='' and record.fnIsDisable==0)">
+			and fn_is_disable = #{record.fnIsDisable} 
+			</if>
+			<if test="(record.fnGrade!=null and record.fnGrade!='') or (record.fnGrade!='' and record.fnGrade==0)">
+			and fn_grade = #{record.fnGrade} 
+			</if>
+			<if test="(record.fnParentId!=null and record.fnParentId!='') or (record.fnParentId!='' and record.fnParentId==0)">
+			and fn_parent_id = #{record.fnParentId} 
+			</if>
+			<if test="(record.fnName!=null and record.fnName!='') or (record.fnName!='' and record.fnName==0)">
+			and fn_name = #{record.fnName} 
+			</if>
+			<if test="(record.fnSequence!=null and record.fnSequence!='') or (record.fnSequence!='' and record.fnSequence==0)">
+			and fn_sequence = #{record.fnSequence} 
+			</if>
+			<if test="(record.fnCode!=null and record.fnCode!='') or (record.fnCode!='' and record.fnCode==0)">
+			and fn_code = #{record.fnCode} 
+			</if>
+			<if test="(record.fnBtns!=null and record.fnBtns!='') or (record.fnBtns!='' and record.fnBtns==0)">
+			and fn_btns = #{record.fnBtns} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysFunctionMap">
+		select 
+			fn_id,
+			fn_icon,
+			fn_path,
+			fn_is_disable,
+			fn_grade,
+			fn_parent_id,
+			fn_name,
+			fn_sequence,
+			fn_code,
+			fn_btns,
+			fn_show_menu
+		from sys_function
+		where  fn_id=#{fnId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysFunctionMap">
+		select 
+			fn_id,
+			fn_icon,
+			fn_path,
+			fn_is_disable,
+			fn_grade,
+			fn_parent_id,
+			fn_name,
+			fn_sequence,
+			fn_code,
+			fn_btns,
+			fn_show_menu
+		from sys_function
+		where  fn_id=#{fn_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysFunctionMap">
+		select 
+			fn_id,
+			fn_icon,
+			fn_path,
+			fn_is_disable,
+			fn_grade,
+			fn_parent_id,
+			fn_name,
+			fn_sequence,
+			fn_code,
+			fn_btns,
+			fn_show_menu
+		from sys_function
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+				and fn_id = #{record.fnId} 
+			</if>
+			<if test="(record.fnIcon!=null and record.fnIcon!='') or (record.fnIcon!='' and record.fnIcon==0)">
+				and fn_icon = #{record.fnIcon} 
+			</if>
+			<if test="(record.fnPath!=null and record.fnPath!='') or (record.fnPath!='' and record.fnPath==0)">
+				and fn_path = #{record.fnPath} 
+			</if>
+			<if test="(record.fnIsDisable!=null and record.fnIsDisable!='') or (record.fnIsDisable!='' and record.fnIsDisable==0)">
+				and fn_is_disable = #{record.fnIsDisable} 
+			</if>
+			<if test="(record.fnGrade!=null and record.fnGrade!='') or (record.fnGrade!='' and record.fnGrade==0)">
+				and fn_grade = #{record.fnGrade} 
+			</if>
+			<if test="(record.fnParentId!=null and record.fnParentId!='') or (record.fnParentId!='' and record.fnParentId==0)">
+				and fn_parent_id = #{record.fnParentId} 
+			</if>
+			<if test="(record.fnName!=null and record.fnName!='') or (record.fnName!='' and record.fnName==0)">
+				and fn_name = #{record.fnName} 
+			</if>
+			<if test="(record.fnSequence!=null and record.fnSequence!='') or (record.fnSequence!='' and record.fnSequence==0)">
+				and fn_sequence = #{record.fnSequence} 
+			</if>
+			<if test="(record.fnCode!=null and record.fnCode!='') or (record.fnCode!='' and record.fnCode==0)">
+				and fn_code = #{record.fnCode} 
+			</if>
+			<if test="(record.fnBtns!=null and record.fnBtns!='') or (record.fnBtns!='' and record.fnBtns==0)">
+				and fn_btns = #{record.fnBtns} 
+			</if>
+		</if>
+		order by fn_sequence desc
+	</select>
+	
+	<!-- 查询公司中所有的权限 -->
+	<select id="selectCompanyFunction" resultMap="SysFunctionMap" >
+		select a.* from sys_function a where 
+ 		FIND_IN_SET (a.fn_id, (SELECT b.com_functions  from sys_company b where b.com_id=#{companyId}))>0
+ 		 and fn_is_disable='否'
+ 		order by a.fn_sequence desc
+	</select>
+	
+	<select id="selectFunctionByRoleIds" resultMap="SysFunctionMap" >
+	select 
+		c.fn_id,
+		c.fn_icon,
+		c.fn_path,
+		c.fn_is_disable,
+		c.fn_grade,
+		c.fn_parent_id,
+		c.fn_name,
+		c.fn_sequence,
+		c.fn_code,
+		c.fn_show_menu,
+		a.rpf_btns as fn_btns
+		from sys_role_pwoer_fn a 
+		left join sys_role b on b.role_id=a.role_id
+		left join sys_function c on a.fn_id=c.fn_id
+		where 
+		FIND_IN_SET(b.role_id ,#{roleIds})>0 
+		and fn_is_disable='否'
+		order by c.fn_sequence desc
+	</select>
+	
+	
+</mapper>

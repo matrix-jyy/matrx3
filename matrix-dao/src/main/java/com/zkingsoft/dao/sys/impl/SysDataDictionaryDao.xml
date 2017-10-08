@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysDataDictionaryDao">
+	<!-- 定义SysDataDictionary 的复杂关联map -->
+	<resultMap type="SysDataDictionary" id="SysDataDictionaryMap">
+			<id property="dicId" column="dic_id" />
+			<result property="dicName" column="dic_name" />
+			<result property="dicCateId" column="dic_cate_id" />
+			<result property="dicCateName" column="dicCateName" />
+	</resultMap>
+	
+	
+	<!-- 定义SysDataDictionary 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysDataDictionary" id="SysDataDictionarySimpleMap">
+			<id property="dicId" column="dic_id" />
+			<result property="dicName" column="dic_name" />
+			<result property="dicCateId" column="dic_cate_id" />
+			<result property="dicCateName" column="dicCateName" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysDataDictionary"
+		useGeneratedKeys="true" keyProperty="dicId">
+		INSERT INTO sys_data_dictionary (
+			dic_id,
+			dic_name,
+			dic_cate_id
+		)
+	VALUES (
+			#{dicId},
+			#{dicName},
+			#{dicCateId}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_data_dictionary (
+			dic_id,
+			dic_name,
+			dic_cate_id
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.dicId},
+			#{item.dicName},
+			#{item.dicCateId}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_data_dictionary
+		<set>
+			<if test="_parameter.containsKey('dicName')">
+					dic_name = #{dicName},
+				</if>		
+			<if test="_parameter.containsKey('dicCateId')">
+					dic_cate_id = #{dicCateId},
+				</if>		
+		</set>
+		WHERE dic_id=#{dicId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_data_dictionary
+		<set>
+				<if test="(dicName!=null and dicName!='') or (dicName!='' and dicName==0)">
+					dic_name = #{dicName},
+				</if>		
+				<if test="(dicCateId!=null and dicCateId!='') or (dicCateId!='' and dicCateId==0)">
+					dic_cate_id = #{dicCateId},
+				</if>		
+		</set>
+		WHERE dic_id=#{dicId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_data_dictionary where  dic_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_data_dictionary
+		where  dic_id=#{dicId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_data_dictionary
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.dicId!=null and record.dicId!='') or (record.dicId!='' and record.dicId==0)">
+				and dic_id = #{record.dicId} 
+			</if>
+			<if test="(record.dicName!=null and record.dicName!='') or (record.dicName!='' and record.dicName==0)">
+				and dic_name = #{record.dicName} 
+			</if>
+			<if test="(record.dicCateId!=null and record.dicCateId!='') or (record.dicCateId!='' and record.dicCateId==0)">
+				and dic_cate_id = #{record.dicCateId} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysDataDictionaryMap">
+		select 
+			dic_id,
+			dic_name,
+			dic_cate_id,
+			(select cata_name from bus_catalog where cata_id= dic_cate_id) dicCateName
+		from sys_data_dictionary 
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.dicId!=null and record.dicId!='') or (record.dicId!='' and record.dicId==0)">
+				and dic_id  = #{record.dicId} 
+			</if>
+			<if test="(record.dicName!=null and record.dicName!='') or (record.dicName!='' and record.dicName==0)">
+				and dic_name like concat("%",#{record.dicName},"%")    
+			</if>
+			<if test="(record.dicCateId!=null and record.dicCateId!='') or (record.dicCateId!='' and record.dicCateId==0)">
+				and dic_cate_id  = #{record.dicCateId} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_data_dictionary
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.dicId!=null and record.dicId!='') or (record.dicId!='' and record.dicId==0)">
+			and dic_id = #{record.dicId} 
+			</if>
+			<if test="(record.dicName!=null and record.dicName!='') or (record.dicName!='' and record.dicName==0)">
+			and dic_name like concat("%",#{record.dicName},"%")
+			</if>
+			<if test="(record.dicCateId!=null and record.dicCateId!='') or (record.dicCateId!='' and record.dicCateId==0)">
+			and dic_cate_id = #{record.dicCateId} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysDataDictionaryMap">
+		select 
+			dic_id,
+			dic_name,
+			dic_cate_id,
+		(select cata_name from bus_catalog where cata_id = dic_cate_id) dicCateName
+		from sys_data_dictionary
+		where  dic_id=#{dicId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysDataDictionaryMap">
+		select 
+			dic_id,
+			dic_name,
+			dic_cate_id
+		from sys_data_dictionary
+		where  dic_id=#{dic_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysDataDictionaryMap">
+		select 
+			dic_id,
+			dic_name,
+			dic_cate_id
+		from sys_data_dictionary
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.dicId!=null and record.dicId!='') or (record.dicId!='' and record.dicId==0)">
+				and dic_id = #{record.dicId} 
+			</if>
+			<if test="(record.dicName!=null and record.dicName!='') or (record.dicName!='' and record.dicName==0)">
+				and dic_name = #{record.dicName} 
+			</if>
+			<if test="(record.dicCateId!=null and record.dicCateId!='') or (record.dicCateId!='' and record.dicCateId==0)">
+				and dic_cate_id = #{record.dicCateId} 
+			</if>
+		</if>
+	</select>
+</mapper>

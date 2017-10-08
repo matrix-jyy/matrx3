@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.web.WebArticleDao">
+	<!-- 定义WebArticle 的复杂关联map -->
+	<resultMap type="WebArticle" id="WebArticleMap">
+			<id property="artId" column="art_id" />
+			<result property="artTypeId" column="art_type_id" />
+			<result property="artAuthor" column="art_author" />
+			<result property="artTitle" column="art_title" />
+			<result property="artIsPublish" column="art_isPublish" />
+			<result property="artAbstract" column="art_abstract" />
+			<result property="artContent" column="art_content" />
+			<result property="artImage" column="art_image" />
+			<result property="artSort" column="art_sort" />
+			<result property="artCreatetiem" column="art_createtiem" />
+			<result property="artUrl" column="art_url" />
+			<!-- 扩展字段  -->
+			<result property="artTypeName" column="artTypeName" />
+	</resultMap>
+	
+	
+	<!-- 定义WebArticle 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="WebArticle" id="WebArticleSimpleMap">
+			<id property="artId" column="art_id" />
+			<result property="artTypeId" column="art_type_id" />
+			<result property="artAuthor" column="art_author" />
+			<result property="artTitle" column="art_title" />
+			<result property="artIsPublish" column="art_isPublish" />
+			<result property="artAbstract" column="art_abstract" />
+			<result property="artContent" column="art_content" />
+			<result property="artImage" column="art_image" />
+			<result property="artSort" column="art_sort" />
+			<result property="artCreatetiem" column="art_createtiem" />
+			<result property="artUrl" column="art_url" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="WebArticle"
+		useGeneratedKeys="true" keyProperty="artId">
+		INSERT INTO web_article (
+			art_id,
+			art_type_id,
+			art_author,
+			art_title,
+			art_isPublish,
+			art_abstract,
+			art_content,
+			art_image,
+			art_sort,
+			art_createtiem,
+			art_url
+		)
+	VALUES (
+			#{artId},
+			#{artTypeId},
+			#{artAuthor},
+			#{artTitle},
+			#{artIsPublish},
+			#{artAbstract},
+			#{artContent},
+			#{artImage},
+			#{artSort},
+			#{artCreatetiem},
+			#{artUrl}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO web_article (
+			art_id,
+			art_type_id,
+			art_author,
+			art_title,
+			art_isPublish,
+			art_abstract,
+			art_content,
+			art_image,
+			art_sort,
+			art_createtiem,
+			art_url
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.artId},
+			#{item.artTypeId},
+			#{item.artAuthor},
+			#{item.artTitle},
+			#{item.artIsPublish},
+			#{item.artAbstract},
+			#{item.artContent},
+			#{item.artImage},
+			#{item.artSort},
+			#{item.artCreatetiem},
+			#{item.artUrl}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE web_article
+		<set>
+			<if test="_parameter.containsKey('artTypeId')">
+					art_type_id = #{artTypeId},
+				</if>		
+			<if test="_parameter.containsKey('artAuthor')">
+					art_author = #{artAuthor},
+				</if>		
+			<if test="_parameter.containsKey('artTitle')">
+					art_title = #{artTitle},
+				</if>		
+			<if test="_parameter.containsKey('artIsPublish')">
+					art_isPublish = #{artIsPublish},
+				</if>		
+			<if test="_parameter.containsKey('artAbstract')">
+					art_abstract = #{artAbstract},
+				</if>		
+			<if test="_parameter.containsKey('artContent')">
+					art_content = #{artContent},
+				</if>		
+			<if test="_parameter.containsKey('artImage')">
+					art_image = #{artImage},
+				</if>		
+			<if test="_parameter.containsKey('artSort')">
+					art_sort = #{artSort},
+				</if>		
+			<if test="_parameter.containsKey('artCreatetiem')">
+					art_createtiem = #{artCreatetiem},
+				</if>		
+			<if test="_parameter.containsKey('artUrl')">
+					art_url = #{artUrl},
+				</if>		
+		</set>
+		WHERE art_id=#{artId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE web_article
+		<set>
+				<if test="(artTypeId!=null and artTypeId!='') or (artTypeId!='' and artTypeId==0)">
+					art_type_id = #{artTypeId},
+				</if>		
+				<if test="(artAuthor!=null and artAuthor!='') or (artAuthor!='' and artAuthor==0)">
+					art_author = #{artAuthor},
+				</if>		
+				<if test="(artTitle!=null and artTitle!='') or (artTitle!='' and artTitle==0)">
+					art_title = #{artTitle},
+				</if>		
+				<if test="(artIsPublish!=null and artIsPublish!='') or (artIsPublish!='' and artIsPublish==0)">
+					art_isPublish = #{artIsPublish},
+				</if>		
+				<if test="(artAbstract!=null and artAbstract!='') or (artAbstract!='' and artAbstract==0)">
+					art_abstract = #{artAbstract},
+				</if>		
+				<if test="(artContent!=null and artContent!='') or (artContent!='' and artContent==0)">
+					art_content = #{artContent},
+				</if>		
+				<if test="(artImage!=null and artImage!='') or (artImage!='' and artImage==0)">
+					art_image = #{artImage},
+				</if>		
+				<if test="(artSort!=null and artSort!='') or (artSort!='' and artSort==0)">
+					art_sort = #{artSort},
+				</if>		
+				<if test="(artCreatetiem!=null and artCreatetiem!='') or (artCreatetiem!='' and artCreatetiem==0)">
+					art_createtiem = #{artCreatetiem},
+				</if>		
+				<if test="(artUrl!=null and artUrl!='') or (artUrl!='' and artUrl==0)">
+					art_url = #{artUrl},
+				</if>		
+		</set>
+		WHERE art_id=#{artId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from web_article where  art_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM web_article
+		where  art_id=#{artId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM web_article
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artId!=null and record.artId!='') or (record.artId!='' and record.artId==0)">
+				and art_id = #{record.artId} 
+			</if>
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+				and art_type_id = #{record.artTypeId} 
+			</if>
+			<if test="(record.artAuthor!=null and record.artAuthor!='') or (record.artAuthor!='' and record.artAuthor==0)">
+				and art_author = #{record.artAuthor} 
+			</if>
+			<if test="(record.artTitle!=null and record.artTitle!='') or (record.artTitle!='' and record.artTitle==0)">
+				and art_title = #{record.artTitle} 
+			</if>
+			<if test="(record.artIsPublish!=null and record.artIsPublish!='') or (record.artIsPublish!='' and record.artIsPublish==0)">
+				and art_isPublish = #{record.artIsPublish} 
+			</if>
+			<if test="(record.artAbstract!=null and record.artAbstract!='') or (record.artAbstract!='' and record.artAbstract==0)">
+				and art_abstract = #{record.artAbstract} 
+			</if>
+			<if test="(record.artContent!=null and record.artContent!='') or (record.artContent!='' and record.artContent==0)">
+				and art_content = #{record.artContent} 
+			</if>
+			<if test="(record.artImage!=null and record.artImage!='') or (record.artImage!='' and record.artImage==0)">
+				and art_image = #{record.artImage} 
+			</if>
+			<if test="(record.artSort!=null and record.artSort!='') or (record.artSort!='' and record.artSort==0)">
+				and art_sort = #{record.artSort} 
+			</if>
+			<if test="(record.artCreatetiem!=null and record.artCreatetiem!='') or (record.artCreatetiem!='' and record.artCreatetiem==0)">
+				and art_createtiem = #{record.artCreatetiem} 
+			</if>
+			<if test="(record.artUrl!=null and record.artUrl!='') or (record.artUrl!='' and record.artUrl==0)">
+				and art_url = #{record.artUrl} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="WebArticleMap">
+		select 
+			art_id,
+			wa.art_type_id,
+			art_author,
+			art_title,
+			art_isPublish,
+			art_abstract,
+			art_content,
+			art_image,
+			art_sort,
+			art_createtiem,
+			art_url,
+			(select art_type_name from web_article_type wat where wa.art_type_id=wat.art_type_id) artTypeName
+		from web_article wa
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artId!=null and record.artId!='') or (record.artId!='' and record.artId==0)">
+				and art_id  = #{record.artId} 
+			</if>
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+				and art_type_id  = #{record.artTypeId} 
+			</if>
+			<if test="(record.artAuthor!=null and record.artAuthor!='') or (record.artAuthor!='' and record.artAuthor==0)">
+				and art_author  = #{record.artAuthor} 
+			</if>
+			<if test="(record.artTitle!=null and record.artTitle!='') or (record.artTitle!='' and record.artTitle==0)">
+				and art_title like CONCAT('%',#{record.artTitle},'%')
+			</if>
+			<if test="(record.artIsPublish!=null and record.artIsPublish!='') or (record.artIsPublish!='' and record.artIsPublish==0)">
+				and art_isPublish  = #{record.artIsPublish} 
+			</if>
+			<if test="(record.artAbstract!=null and record.artAbstract!='') or (record.artAbstract!='' and record.artAbstract==0)">
+				and art_abstract  = #{record.artAbstract} 
+			</if>
+			<if test="(record.artContent!=null and record.artContent!='') or (record.artContent!='' and record.artContent==0)">
+				and art_content  = #{record.artContent} 
+			</if>
+			<if test="(record.artImage!=null and record.artImage!='') or (record.artImage!='' and record.artImage==0)">
+				and art_image  = #{record.artImage} 
+			</if>
+			<if test="(record.artSort!=null and record.artSort!='') or (record.artSort!='' and record.artSort==0)">
+				and art_sort  = #{record.artSort} 
+			</if>
+			<if test="(record.artCreatetiem!=null and record.artCreatetiem!='') or (record.artCreatetiem!='' and record.artCreatetiem==0)">
+				and art_createtiem  = #{record.artCreatetiem} 
+			</if>
+			<if test="(record.artUrl!=null and record.artUrl!='') or (record.artUrl!='' and record.artUrl==0)">
+				and art_url  = #{record.artUrl} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from web_article
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artId!=null and record.artId!='') or (record.artId!='' and record.artId==0)">
+			and art_id = #{record.artId} 
+			</if>
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+			and art_type_id = #{record.artTypeId} 
+			</if>
+			<if test="(record.artAuthor!=null and record.artAuthor!='') or (record.artAuthor!='' and record.artAuthor==0)">
+			and art_author = #{record.artAuthor} 
+			</if>
+			<if test="(record.artTitle!=null and record.artTitle!='') or (record.artTitle!='' and record.artTitle==0)">
+			and art_title = #{record.artTitle} 
+			</if>
+			<if test="(record.artIsPublish!=null and record.artIsPublish!='') or (record.artIsPublish!='' and record.artIsPublish==0)">
+			and art_isPublish = #{record.artIsPublish} 
+			</if>
+			<if test="(record.artAbstract!=null and record.artAbstract!='') or (record.artAbstract!='' and record.artAbstract==0)">
+			and art_abstract = #{record.artAbstract} 
+			</if>
+			<if test="(record.artContent!=null and record.artContent!='') or (record.artContent!='' and record.artContent==0)">
+			and art_content = #{record.artContent} 
+			</if>
+			<if test="(record.artImage!=null and record.artImage!='') or (record.artImage!='' and record.artImage==0)">
+			and art_image = #{record.artImage} 
+			</if>
+			<if test="(record.artSort!=null and record.artSort!='') or (record.artSort!='' and record.artSort==0)">
+			and art_sort = #{record.artSort} 
+			</if>
+			<if test="(record.artCreatetiem!=null and record.artCreatetiem!='') or (record.artCreatetiem!='' and record.artCreatetiem==0)">
+			and art_createtiem = #{record.artCreatetiem} 
+			</if>
+			<if test="(record.artUrl!=null and record.artUrl!='') or (record.artUrl!='' and record.artUrl==0)">
+			and art_url = #{record.artUrl} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="WebArticleMap">
+		select 
+			art_id,
+			art_type_id,
+			art_author,
+			art_title,
+			art_isPublish,
+			art_abstract,
+			art_content,
+			art_image,
+			art_sort,
+			art_createtiem,
+			art_url
+		from web_article
+		where  art_id=#{artId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="WebArticleMap">
+		select 
+			art_id,
+			art_type_id,
+			art_author,
+			art_title,
+			art_isPublish,
+			art_abstract,
+			art_content,
+			art_image,
+			art_sort,
+			art_createtiem,
+			art_url
+		from web_article
+		where  art_id=#{art_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="WebArticleMap">
+		select 
+			art_id,
+			art_type_id,
+			art_author,
+			art_title,
+			art_isPublish,
+			art_abstract,
+			art_content,
+			art_image,
+			art_sort,
+			art_createtiem,
+			art_url
+		from web_article
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.artId!=null and record.artId!='') or (record.artId!='' and record.artId==0)">
+				and art_id = #{record.artId} 
+			</if>
+			<if test="(record.artTypeId!=null and record.artTypeId!='') or (record.artTypeId!='' and record.artTypeId==0)">
+				and art_type_id = #{record.artTypeId} 
+			</if>
+			<if test="(record.artAuthor!=null and record.artAuthor!='') or (record.artAuthor!='' and record.artAuthor==0)">
+				and art_author = #{record.artAuthor} 
+			</if>
+			<if test="(record.artTitle!=null and record.artTitle!='') or (record.artTitle!='' and record.artTitle==0)">
+				and art_title = #{record.artTitle} 
+			</if>
+			<if test="(record.artIsPublish!=null and record.artIsPublish!='') or (record.artIsPublish!='' and record.artIsPublish==0)">
+				and art_isPublish = #{record.artIsPublish} 
+			</if>
+			<if test="(record.artAbstract!=null and record.artAbstract!='') or (record.artAbstract!='' and record.artAbstract==0)">
+				and art_abstract = #{record.artAbstract} 
+			</if>
+			<if test="(record.artContent!=null and record.artContent!='') or (record.artContent!='' and record.artContent==0)">
+				and art_content = #{record.artContent} 
+			</if>
+			<if test="(record.artImage!=null and record.artImage!='') or (record.artImage!='' and record.artImage==0)">
+				and art_image = #{record.artImage} 
+			</if>
+			<if test="(record.artSort!=null and record.artSort!='') or (record.artSort!='' and record.artSort==0)">
+				and art_sort = #{record.artSort} 
+			</if>
+			<if test="(record.artCreatetiem!=null and record.artCreatetiem!='') or (record.artCreatetiem!='' and record.artCreatetiem==0)">
+				and art_createtiem = #{record.artCreatetiem} 
+			</if>
+			<if test="(record.artUrl!=null and record.artUrl!='') or (record.artUrl!='' and record.artUrl==0)">
+				and art_url = #{record.artUrl} 
+			</if>
+		</if>
+	</select>
+</mapper>

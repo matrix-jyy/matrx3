@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysRolePwoerFnDao">
+	<!-- 定义SysRolePwoerFn 的复杂关联map -->
+	<resultMap type="SysRolePwoerFn" id="SysRolePwoerFnMap">
+			<id property="rpfId" column="rpf_id" />
+			<result property="roleId" column="role_id" />
+			<result property="fnId" column="fn_id" />
+			<result property="rpfBtns" column="rpf_btns" />
+	</resultMap>
+	
+	
+	<!-- 定义SysRolePwoerFn 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysRolePwoerFn" id="SysRolePwoerFnSimpleMap">
+			<id property="rpfId" column="rpf_id" />
+			<result property="roleId" column="role_id" />
+			<result property="fnId" column="fn_id" />
+			<result property="rpfBtns" column="rpf_btns" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysRolePwoerFn"
+		useGeneratedKeys="true" keyProperty="rpfId">
+		INSERT INTO sys_role_pwoer_fn (
+			rpf_id,
+			role_id,
+			fn_id,
+			rpf_btns
+		)
+	VALUES (
+			#{rpfId},
+			#{roleId},
+			#{fnId},
+			#{rpfBtns}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_role_pwoer_fn (
+			rpf_id,
+			role_id,
+			fn_id,
+			rpf_btns
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.rpfId},
+			#{item.roleId},
+			#{item.fnId},
+			#{item.rpfBtns}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_role_pwoer_fn
+		<set>
+			<if test="_parameter.containsKey('roleId')">
+					role_id = #{roleId},
+				</if>		
+			<if test="_parameter.containsKey('fnId')">
+					fn_id = #{fnId},
+				</if>		
+			<if test="_parameter.containsKey('rpfBtns')">
+					rpf_btns = #{rpfBtns},
+				</if>		
+		</set>
+		WHERE rpf_id=#{rpfId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_role_pwoer_fn
+		<set>
+				<if test="(roleId!=null and roleId!='') or (roleId!='' and roleId==0)">
+					role_id = #{roleId},
+				</if>		
+				<if test="(fnId!=null and fnId!='') or (fnId!='' and fnId==0)">
+					fn_id = #{fnId},
+				</if>		
+				<if test="(rpfBtns!=null and rpfBtns!='') or (rpfBtns!='' and rpfBtns==0)">
+					rpf_btns = #{rpfBtns},
+				</if>		
+		</set>
+		WHERE rpf_id=#{rpfId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_role_pwoer_fn where  rpf_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_role_pwoer_fn
+		where  rpf_id=#{rpfId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_role_pwoer_fn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.rpfId!=null and record.rpfId!='') or (record.rpfId!='' and record.rpfId==0)">
+				and rpf_id = #{record.rpfId} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+				and fn_id = #{record.fnId} 
+			</if>
+			<if test="(record.rpfBtns!=null and record.rpfBtns!='') or (record.rpfBtns!='' and record.rpfBtns==0)">
+				and rpf_btns = #{record.rpfBtns} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysRolePwoerFnMap">
+		select 
+			rpf_id,
+			role_id,
+			fn_id,
+			rpf_btns
+		from sys_role_pwoer_fn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.rpfId!=null and record.rpfId!='') or (record.rpfId!='' and record.rpfId==0)">
+				and rpf_id  = #{record.rpfId} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id  = #{record.roleId} 
+			</if>
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+				and fn_id  = #{record.fnId} 
+			</if>
+			<if test="(record.rpfBtns!=null and record.rpfBtns!='') or (record.rpfBtns!='' and record.rpfBtns==0)">
+				and rpf_btns  = #{record.rpfBtns} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_role_pwoer_fn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.rpfId!=null and record.rpfId!='') or (record.rpfId!='' and record.rpfId==0)">
+			and rpf_id = #{record.rpfId} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+			and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+			and fn_id = #{record.fnId} 
+			</if>
+			<if test="(record.rpfBtns!=null and record.rpfBtns!='') or (record.rpfBtns!='' and record.rpfBtns==0)">
+			and rpf_btns = #{record.rpfBtns} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysRolePwoerFnMap">
+		select 
+			rpf_id,
+			role_id,
+			fn_id,
+			rpf_btns
+		from sys_role_pwoer_fn
+		where  rpf_id=#{rpfId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysRolePwoerFnMap">
+		select 
+			rpf_id,
+			role_id,
+			fn_id,
+			rpf_btns
+		from sys_role_pwoer_fn
+		where  rpf_id=#{rpf_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysRolePwoerFnMap">
+		select 
+			rpf_id,
+			role_id,
+			fn_id,
+			rpf_btns
+		from sys_role_pwoer_fn
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.rpfId!=null and record.rpfId!='') or (record.rpfId!='' and record.rpfId==0)">
+				and rpf_id = #{record.rpfId} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.fnId!=null and record.fnId!='') or (record.fnId!='' and record.fnId==0)">
+				and fn_id = #{record.fnId} 
+			</if>
+			<if test="(record.rpfBtns!=null and record.rpfBtns!='') or (record.rpfBtns!='' and record.rpfBtns==0)">
+				and rpf_btns = #{record.rpfBtns} 
+			</if>
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,43 @@
+html{
+	height:100%;
+}
+body{
+	height:100%;
+}
+.wrap{
+	height:100%;
+	background: url(../i/login.jpg) center 0 no-repeat ;width:100%;height:100% ;
+	    background-position: 34% 60%;
+    background-size: 177%;
+}
+.main{
+
+	opacity: 0.5;
+	background-color:rgba(255,255,255,0.5);
+	padding:20px 20px 0px 20px;
+	margin-top:25%;
+	border:1px solid #eee;
+	border-radius:10%;
+}
+.remember{
+	color:#888;
+	font-size:12px;
+}
+.checkbox{
+	padding-top:5px;
+}
+.am-input-group-label{
+	background: none;
+}
+/*改变框架默认input text背景*/
+.am-form input[type=text].am-form-field{
+	background-color:rgba(0,0,0,0);
+	border-left:none; 
+}
+/*去掉输入栏边框*/
+.id{
+	background-color:rgba(0,0,0,0);
+	
+}
+
+

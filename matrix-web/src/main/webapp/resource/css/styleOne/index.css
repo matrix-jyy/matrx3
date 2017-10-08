@@ -1,0 +1,85 @@
+/**
+	*首页头部bar样式
+	*/
+.choice {
+	background: #0897A7;
+	border-left: 1px solid white;
+	cursor: pointer;
+	height: 100px;
+	text-align: center;
+}
+
+.choice1 {
+	border: none;
+	background: #2A7C86;
+}
+
+.msg {
+	color: white;
+	font-size: 12px;
+}
+
+.icon {
+	color: white;
+	font-size: 40px;
+	padding: 10%;
+}
+
+.headNav{
+	background:#3BB3C3;margin:0;
+}
+
+.btn {
+	background-color: #0897A7;
+	border: #0897A7;
+	float: right;
+	margin: 1% 5% 0 0;
+}
+/**
+	*左侧导航栏样式
+	*/
+.leftbar {
+	background: #fff;
+}
+
+.img {
+	background: url("../images/meidu.jpg");
+	background-position: 8% 63%;
+	background-size: 518px 108px;
+	height: 100px;
+	width: 300px;
+	display: inline-block;
+}
+
+.la {
+	background: #08C0D4;
+	height: 100px;
+	font-color: black;
+}
+
+.litmsg {
+	position: absolute;
+	left: 15px;
+	top: 30px;
+}
+
+.leftMain {
+	background: black;
+	width: 100px;
+	height: 100px;
+}
+
+.smile {
+	padding-left: 50px;
+	font-size: 50px;
+	width: 60px;
+	word-wrap: break-word;
+	color: #3BB3C3;
+}
+
+.woman {
+	background: url("../images/woman.png");
+	background-position: -29px;
+	height: 420px;
+	width: 300px;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE xml>
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>2.0</jsp-version>
+	<short-name>Example TLD</short-name>
+	<uri>http://www.zkingsoft.com</uri>  
+	<tag>
+		<name>btn</name>
+		<tag-class>com.zkingsoft.authority.MatrixButtonTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+	</tag>
+	<tag>
+		<name>fn</name>
+		<tag-class>com.zkingsoft.authority.MatrixFunctionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+	</tag>
+	<tag>
+		<name>findInSet</name>
+		<tag-class>com.zkingsoft.tagTools.MatrixToolsTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+		<attribute>
+			<name>setStr</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+	</tag>
+</taglib>

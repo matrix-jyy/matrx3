@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.UtilDao">
+	
+	
+	<select id="selectRepeat" resultType="java.util.HashMap" parameterType="java.util.HashMap" >
+		select 
+			*
+		from ${tableName}
+		where  1=1
+		<if test="#{column} != null">
+		 and	${column} = #{value}
+		</if>
+	</select> 
+	
+	
+	<select id="selectRepeatTowColumn" resultType="java.util.HashMap" parameterType="java.util.HashMap" >
+		select 
+			*
+		from ${tableName}
+		where  1=1
+		<if test="#{column1} != null">
+		 and	${column1} = #{value1}
+		</if>
+		<if test="#{column2} != null">
+		 and	${column2} = #{value2}
+		</if>
+	</select>		
+	
+	<!-- 获取一个表中的某个字段的最大值 -->
+	<select id="selectMaxValue" parameterType="java.lang.String" resultType="java.lang.String"  >
+		select 
+		max(${column})	
+		from ${tableName}
+	</select>
+	
+	
+</mapper>

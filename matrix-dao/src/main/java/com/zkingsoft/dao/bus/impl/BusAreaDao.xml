@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.bus.BusAreaDao">
+
+	<resultMap type="BusArea" id="BusAreaMap">
+			<id property="areaId" column="area_id" />
+			<result property="areaName" column="area_name" />
+			<result property="parentId" column="parent_id" />
+	</resultMap>
+	
+	<select id="selectChildrenArea" resultMap="BusAreaMap">
+		select * from bus_area where parent_id = #{parentId};
+	</select>
+	
+	
+</mapper> 

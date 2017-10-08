@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zkingsoft.dao.sys.SysUsersDao">
+	<!-- 定义SysUsers 的复杂关联map -->
+	<resultMap type="SysUsers" id="SysUsersMap">
+			<id property="suId" column="su_id" />
+			<result property="suName" column="su_name" />
+			<result property="suTel" column="su_tel" />
+			<result property="suAddress" column="su_address" />
+			<result property="suPhoto" column="su_photo" />
+			<result property="suSex" column="su_sex" />
+			<result property="roleId" column="role_id" />
+			<result property="suEmail" column="su_email" />
+			<result property="suAccount" column="su_account" />
+			<result property="suPassword" column="su_password" />
+			<result property="suRegisterTime" column="su_register_time" />
+			<result property="suQqId" column="su_qq_id" />
+			<result property="suWeixinId" column="su_weixin_id" />
+			<result property="suGrade" column="su_grade" />
+			<result property="parentUserId" column="parent_user_id" />
+			<result property="suDeptId" column="su_dept_id" />
+			<result property="suUserType" column="su_user_type" />
+			<result property="suWeiboId" column="su_weibo_id" />
+			<result property="suIdcard" column="su_idcard" />
+			<result property="suJobTitle" column="su_job_title" />
+			<result property="suAliases" column="su_aliases" />
+			<result property="suJobNo" column="su_job_no" />
+			<result property="companyId" column="company_id" />
+			<result property="suTel2" column="su_tel2" />
+			<result property="suAccountStatus" column="su_account_status" />
+			<result property="suValidateCode" column="su_validate_code" />
+			<result property="suValidateEndTime" column="su_validate_end_time" />
+			<result property="suValid" column="su_valid" />
+			<result property="suBirthday" column="su_birthday" />
+			<result property="suUuid" column="su_uuid" />
+			<result property="suPostId" column="su_post_id" />
+			<result property="roleIds" column="role_ids" />
+			
+			
+			<result property="companyName" column="company_name" />
+	</resultMap>
+	
+	
+	<!-- 定义SysUsers 的简单map  ，本map不添加其他的关联属性 -->
+	<resultMap type="SysUsers" id="SysUsersSimpleMap">
+			<id property="suId" column="su_id" />
+			<result property="suName" column="su_name" />
+			<result property="suTel" column="su_tel" />
+			<result property="suAddress" column="su_address" />
+			<result property="suPhoto" column="su_photo" />
+			<result property="suSex" column="su_sex" />
+			<result property="roleId" column="role_id" />
+			<result property="suEmail" column="su_email" />
+			<result property="suAccount" column="su_account" />
+			<result property="suPassword" column="su_password" />
+			<result property="suRegisterTime" column="su_register_time" />
+			<result property="suQqId" column="su_qq_id" />
+			<result property="suWeixinId" column="su_weixin_id" />
+			<result property="suGrade" column="su_grade" />
+			<result property="parentUserId" column="parent_user_id" />
+			<result property="suDeptId" column="su_dept_id" />
+			<result property="suUserType" column="su_user_type" />
+			<result property="suWeiboId" column="su_weibo_id" />
+			<result property="suIdcard" column="su_idcard" />
+			<result property="suJobTitle" column="su_job_title" />
+			<result property="suAliases" column="su_aliases" />
+			<result property="suJobNo" column="su_job_no" />
+			<result property="companyId" column="company_id" />
+			<result property="suTel2" column="su_tel2" />
+			<result property="suAccountStatus" column="su_account_status" />
+			<result property="suValidateCode" column="su_validate_code" />
+			<result property="suValidateEndTime" column="su_validate_end_time" />
+			<result property="suValid" column="su_valid" />
+			<result property="suBirthday" column="su_birthday" />
+			<result property="suUuid" column="su_uuid" />
+			<result property="suPostId" column="su_post_id" />
+			<result property="roleIds" column="role_ids" />
+	</resultMap>
+	
+	
+	
+	<!--  插入方法   -->
+	<insert id="insert" parameterType="SysUsers"
+		useGeneratedKeys="true" keyProperty="suId">
+		INSERT INTO sys_users (
+			su_id,
+			su_name,
+			su_tel,
+			su_address,
+			su_photo,
+			su_sex,
+			role_id,
+			su_email,
+			su_account,
+			su_password,
+			su_register_time,
+			su_qq_id,
+			su_weixin_id,
+			su_grade,
+			parent_user_id,
+			su_dept_id,
+			su_user_type,
+			su_weibo_id,
+			su_idcard,
+			su_job_title,
+			su_aliases,
+			su_job_no,
+			company_id,
+			su_tel2,
+			su_account_status,
+			su_validate_code,
+			su_validate_end_time,
+			su_valid,
+			su_birthday,
+			su_uuid,
+			su_post_id,
+			role_ids
+		)
+	VALUES (
+			#{suId},
+			#{suName},
+			#{suTel},
+			#{suAddress},
+			#{suPhoto},
+			#{suSex},
+			#{roleId},
+			#{suEmail},
+			#{suAccount},
+			#{suPassword},
+			#{suRegisterTime},
+			#{suQqId},
+			#{suWeixinId},
+			#{suGrade},
+			#{parentUserId},
+			#{suDeptId},
+			#{suUserType},
+			#{suWeiboId},
+			#{suIdcard},
+			#{suJobTitle},
+			#{suAliases},
+			#{suJobNo},
+			#{companyId},
+			#{suTel2},
+			#{suAccountStatus},
+			#{suValidateCode},
+			#{suValidateEndTime},
+			#{suValid},
+			#{suBirthday},
+			#{suUuid},
+			#{suPostId},
+			#{roleIds}
+	)
+	</insert>
+	
+	
+	
+	<!--  批量插入   -->
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO sys_users (
+			su_id,
+			su_name,
+			su_tel,
+			su_address,
+			su_photo,
+			su_sex,
+			role_id,
+			su_email,
+			su_account,
+			su_password,
+			su_register_time,
+			su_qq_id,
+			su_weixin_id,
+			su_grade,
+			parent_user_id,
+			su_dept_id,
+			su_user_type,
+			su_weibo_id,
+			su_idcard,
+			su_job_title,
+			su_aliases,
+			su_job_no,
+			company_id,
+			su_tel2,
+			su_account_status,
+			su_validate_code,
+			su_validate_end_time,
+			su_valid,
+			su_birthday,
+			su_uuid,
+			su_post_id,
+			role_ids
+		)
+	VALUES 
+	<foreach collection="list" item="item" index="index" separator=",">(
+			#{item.suId},
+			#{item.suName},
+			#{item.suTel},
+			#{item.suAddress},
+			#{item.suPhoto},
+			#{item.suSex},
+			#{item.roleId},
+			#{item.suEmail},
+			#{item.suAccount},
+			#{item.suPassword},
+			#{item.suRegisterTime},
+			#{item.suQqId},
+			#{item.suWeixinId},
+			#{item.suGrade},
+			#{item.parentUserId},
+			#{item.suDeptId},
+			#{item.suUserType},
+			#{item.suWeiboId},
+			#{item.suIdcard},
+			#{item.suJobTitle},
+			#{item.suAliases},
+			#{item.suJobNo},
+			#{item.companyId},
+			#{item.suTel2},
+			#{item.suAccountStatus},
+			#{item.suValidateCode},
+			#{item.suValidateEndTime},
+			#{item.suValid},
+			#{item.suBirthday},
+			#{item.suUuid},
+			#{item.suPostId},
+			#{item.roleIds}
+	)</foreach>
+	</insert>
+	
+	
+	
+	
+	
+	<!--  根据Map更新 部分更新   -->
+	<update id="updateByMap" parameterType="java.util.HashMap" >
+		UPDATE sys_users
+		<set>
+			<if test="_parameter.containsKey('suName')">
+					su_name = #{suName},
+				</if>		
+			<if test="_parameter.containsKey('suTel')">
+					su_tel = #{suTel},
+				</if>		
+			<if test="_parameter.containsKey('suAddress')">
+					su_address = #{suAddress},
+				</if>		
+			<if test="_parameter.containsKey('suPhoto')">
+					su_photo = #{suPhoto},
+				</if>		
+			<if test="_parameter.containsKey('suSex')">
+					su_sex = #{suSex},
+				</if>		
+			<if test="_parameter.containsKey('roleId')">
+					role_id = #{roleId},
+				</if>		
+			<if test="_parameter.containsKey('suEmail')">
+					su_email = #{suEmail},
+				</if>		
+			<if test="_parameter.containsKey('suAccount')">
+					su_account = #{suAccount},
+				</if>		
+			<if test="_parameter.containsKey('suPassword')">
+					su_password = #{suPassword},
+				</if>		
+			<if test="_parameter.containsKey('suRegisterTime')">
+					su_register_time = #{suRegisterTime},
+				</if>		
+			<if test="_parameter.containsKey('suQqId')">
+					su_qq_id = #{suQqId},
+				</if>		
+			<if test="_parameter.containsKey('suWeixinId')">
+					su_weixin_id = #{suWeixinId},
+				</if>		
+			<if test="_parameter.containsKey('suGrade')">
+					su_grade = #{suGrade},
+				</if>		
+			<if test="_parameter.containsKey('parentUserId')">
+					parent_user_id = #{parentUserId},
+				</if>		
+			<if test="_parameter.containsKey('suDeptId')">
+					su_dept_id = #{suDeptId},
+				</if>		
+			<if test="_parameter.containsKey('suUserType')">
+					su_user_type = #{suUserType},
+				</if>		
+			<if test="_parameter.containsKey('suWeiboId')">
+					su_weibo_id = #{suWeiboId},
+				</if>		
+			<if test="_parameter.containsKey('suIdcard')">
+					su_idcard = #{suIdcard},
+				</if>		
+			<if test="_parameter.containsKey('suJobTitle')">
+					su_job_title = #{suJobTitle},
+				</if>		
+			<if test="_parameter.containsKey('suAliases')">
+					su_aliases = #{suAliases},
+				</if>		
+			<if test="_parameter.containsKey('suJobNo')">
+					su_job_no = #{suJobNo},
+				</if>		
+			<if test="_parameter.containsKey('companyId')">
+					company_id = #{companyId},
+				</if>		
+			<if test="_parameter.containsKey('suTel2')">
+					su_tel2 = #{suTel2},
+				</if>		
+			<if test="_parameter.containsKey('suAccountStatus')">
+					su_account_status = #{suAccountStatus},
+				</if>		
+			<if test="_parameter.containsKey('suValidateCode')">
+					su_validate_code = #{suValidateCode},
+				</if>		
+			<if test="_parameter.containsKey('suValidateEndTime')">
+					su_validate_end_time = #{suValidateEndTime},
+				</if>		
+			<if test="_parameter.containsKey('suValid')">
+					su_valid = #{suValid},
+				</if>		
+			<if test="_parameter.containsKey('suBirthday')">
+					su_birthday = #{suBirthday},
+				</if>		
+			<if test="_parameter.containsKey('suUuid')">
+					su_uuid = #{suUuid},
+				</if>		
+			<if test="_parameter.containsKey('suPostId')">
+					su_post_id = #{suPostId},
+				</if>		
+			<if test="_parameter.containsKey('roleIds')">
+					role_ids = #{roleIds},
+				</if>		
+		</set>
+		WHERE su_id=#{suId} 
+	</update>
+	
+	
+	
+	<!--  根据对象更新 部分更新   -->
+	<update id="updateByModel" parameterType="Long">
+		UPDATE sys_users
+		<set>
+				<if test="(suName!=null and suName!='') or (suName!='' and suName==0)">
+					su_name = #{suName},
+				</if>		
+				<if test="(suTel!=null and suTel!='') or (suTel!='' and suTel==0)">
+					su_tel = #{suTel},
+				</if>		
+				<if test="(suAddress!=null and suAddress!='') or (suAddress!='' and suAddress==0)">
+					su_address = #{suAddress},
+				</if>		
+				<if test="(suPhoto!=null and suPhoto!='') or (suPhoto!='' and suPhoto==0)">
+					su_photo = #{suPhoto},
+				</if>		
+				<if test="(suSex!=null and suSex!='') or (suSex!='' and suSex==0)">
+					su_sex = #{suSex},
+				</if>		
+				<if test="(roleId!=null and roleId!='') or (roleId!='' and roleId==0)">
+					role_id = #{roleId},
+				</if>		
+				<if test="(suEmail!=null and suEmail!='') or (suEmail!='' and suEmail==0)">
+					su_email = #{suEmail},
+				</if>		
+				<if test="(suAccount!=null and suAccount!='') or (suAccount!='' and suAccount==0)">
+					su_account = #{suAccount},
+				</if>		
+				<if test="(suPassword!=null and suPassword!='') or (suPassword!='' and suPassword==0)">
+					su_password = #{suPassword},
+				</if>		
+				<if test="(suRegisterTime!=null and suRegisterTime!='') or (suRegisterTime!='' and suRegisterTime==0)">
+					su_register_time = #{suRegisterTime},
+				</if>		
+				<if test="(suQqId!=null and suQqId!='') or (suQqId!='' and suQqId==0)">
+					su_qq_id = #{suQqId},
+				</if>		
+				<if test="(suWeixinId!=null and suWeixinId!='') or (suWeixinId!='' and suWeixinId==0)">
+					su_weixin_id = #{suWeixinId},
+				</if>		
+				<if test="(suGrade!=null and suGrade!='') or (suGrade!='' and suGrade==0)">
+					su_grade = #{suGrade},
+				</if>		
+				<if test="(parentUserId!=null and parentUserId!='') or (parentUserId!='' and parentUserId==0)">
+					parent_user_id = #{parentUserId},
+				</if>		
+				<if test="(suDeptId!=null and suDeptId!='') or (suDeptId!='' and suDeptId==0)">
+					su_dept_id = #{suDeptId},
+				</if>		
+				<if test="(suUserType!=null and suUserType!='') or (suUserType!='' and suUserType==0)">
+					su_user_type = #{suUserType},
+				</if>		
+				<if test="(suWeiboId!=null and suWeiboId!='') or (suWeiboId!='' and suWeiboId==0)">
+					su_weibo_id = #{suWeiboId},
+				</if>		
+				<if test="(suIdcard!=null and suIdcard!='') or (suIdcard!='' and suIdcard==0)">
+					su_idcard = #{suIdcard},
+				</if>		
+				<if test="(suJobTitle!=null and suJobTitle!='') or (suJobTitle!='' and suJobTitle==0)">
+					su_job_title = #{suJobTitle},
+				</if>		
+				<if test="(suAliases!=null and suAliases!='') or (suAliases!='' and suAliases==0)">
+					su_aliases = #{suAliases},
+				</if>		
+				<if test="(suJobNo!=null and suJobNo!='') or (suJobNo!='' and suJobNo==0)">
+					su_job_no = #{suJobNo},
+				</if>		
+				<if test="(companyId!=null and companyId!='') or (companyId!='' and companyId==0)">
+					company_id = #{companyId},
+				</if>		
+				<if test="(suTel2!=null and suTel2!='') or (suTel2!='' and suTel2==0)">
+					su_tel2 = #{suTel2},
+				</if>		
+				<if test="(suAccountStatus!=null and suAccountStatus!='') or (suAccountStatus!='' and suAccountStatus==0)">
+					su_account_status = #{suAccountStatus},
+				</if>		
+				<if test="(suValidateCode!=null and suValidateCode!='') or (suValidateCode!='' and suValidateCode==0)">
+					su_validate_code = #{suValidateCode},
+				</if>		
+				<if test="(suValidateEndTime!=null and suValidateEndTime!='') or (suValidateEndTime!='' and suValidateEndTime==0)">
+					su_validate_end_time = #{suValidateEndTime},
+				</if>		
+				<if test="(suValid!=null and suValid!='') or (suValid!='' and suValid==0)">
+					su_valid = #{suValid},
+				</if>		
+				<if test="(suBirthday!=null and suBirthday!='') or (suBirthday!='' and suBirthday==0)">
+					su_birthday = #{suBirthday},
+				</if>		
+				<if test="(suUuid!=null and suUuid!='') or (suUuid!='' and suUuid==0)">
+					su_uuid = #{suUuid},
+				</if>		
+				<if test="(suPostId!=null and suPostId!='') or (suPostId!='' and suPostId==0)">
+					su_post_id = #{suPostId},
+				</if>		
+				<if test="(roleIds!=null and roleIds!='') or (roleIds!='' and roleIds==0)">
+					role_ids = #{roleIds},
+				</if>		
+		</set>
+		WHERE su_id=#{suId} 
+	</update>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="deleteByIds" parameterType="java.util.List">
+		delete from sys_users where  su_id in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+		
+	<!-- 根据id删除-->
+	<delete id="deleteById" parameterType="Long">
+		DELETE FROM sys_users
+		where  su_id=#{suId} 
+	</delete>
+	
+	<!-- 根据对象删除-->
+	<delete id="deleteByModel" parameterType="Long">
+		DELETE FROM sys_users
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.suId!=null and record.suId!='') or (record.suId!='' and record.suId==0)">
+				and su_id = #{record.suId} 
+			</if>
+			<if test="(record.suName!=null and record.suName!='') or (record.suName!='' and record.suName==0)">
+				and su_name like concat ("%",#{record.suName},"%")  
+			</if>
+			<if test="(record.suTel!=null and record.suTel!='') or (record.suTel!='' and record.suTel==0)">
+				and su_tel = #{record.suTel} 
+			</if>
+			<if test="(record.suAddress!=null and record.suAddress!='') or (record.suAddress!='' and record.suAddress==0)">
+				and su_address = #{record.suAddress} 
+			</if>
+			<if test="(record.suPhoto!=null and record.suPhoto!='') or (record.suPhoto!='' and record.suPhoto==0)">
+				and su_photo = #{record.suPhoto} 
+			</if>
+			<if test="(record.suSex!=null and record.suSex!='') or (record.suSex!='' and record.suSex==0)">
+				and su_sex = #{record.suSex} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.suEmail!=null and record.suEmail!='') or (record.suEmail!='' and record.suEmail==0)">
+				and su_email = #{record.suEmail} 
+			</if>
+			<if test="(record.suAccount!=null and record.suAccount!='') or (record.suAccount!='' and record.suAccount==0)">
+				and su_account = #{record.suAccount} 
+			</if>
+			<if test="(record.suPassword!=null and record.suPassword!='') or (record.suPassword!='' and record.suPassword==0)">
+				and su_password = #{record.suPassword} 
+			</if>
+			<if test="(record.suRegisterTime!=null and record.suRegisterTime!='') or (record.suRegisterTime!='' and record.suRegisterTime==0)">
+				and su_register_time = #{record.suRegisterTime} 
+			</if>
+			<if test="(record.suQqId!=null and record.suQqId!='') or (record.suQqId!='' and record.suQqId==0)">
+				and su_qq_id = #{record.suQqId} 
+			</if>
+			<if test="(record.suWeixinId!=null and record.suWeixinId!='') or (record.suWeixinId!='' and record.suWeixinId==0)">
+				and su_weixin_id = #{record.suWeixinId} 
+			</if>
+			<if test="(record.suGrade!=null and record.suGrade!='') or (record.suGrade!='' and record.suGrade==0)">
+				and su_grade = #{record.suGrade} 
+			</if>
+			<if test="(record.parentUserId!=null and record.parentUserId!='') or (record.parentUserId!='' and record.parentUserId==0)">
+				and parent_user_id = #{record.parentUserId} 
+			</if>
+			<if test="(record.suDeptId!=null and record.suDeptId!='') or (record.suDeptId!='' and record.suDeptId==0)">
+				and su_dept_id = #{record.suDeptId} 
+			</if>
+			<if test="(record.suUserType!=null and record.suUserType!='') or (record.suUserType!='' and record.suUserType==0)">
+				and su_user_type = #{record.suUserType} 
+			</if>
+			<if test="(record.suWeiboId!=null and record.suWeiboId!='') or (record.suWeiboId!='' and record.suWeiboId==0)">
+				and su_weibo_id = #{record.suWeiboId} 
+			</if>
+			<if test="(record.suIdcard!=null and record.suIdcard!='') or (record.suIdcard!='' and record.suIdcard==0)">
+				and su_idcard = #{record.suIdcard} 
+			</if>
+			<if test="(record.suJobTitle!=null and record.suJobTitle!='') or (record.suJobTitle!='' and record.suJobTitle==0)">
+				and su_job_title = #{record.suJobTitle} 
+			</if>
+			<if test="(record.suAliases!=null and record.suAliases!='') or (record.suAliases!='' and record.suAliases==0)">
+				and su_aliases = #{record.suAliases} 
+			</if>
+			<if test="(record.suJobNo!=null and record.suJobNo!='') or (record.suJobNo!='' and record.suJobNo==0)">
+				and su_job_no = #{record.suJobNo} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.suTel2!=null and record.suTel2!='') or (record.suTel2!='' and record.suTel2==0)">
+				and su_tel2 = #{record.suTel2} 
+			</if>
+			<if test="(record.suAccountStatus!=null and record.suAccountStatus!='') or (record.suAccountStatus!='' and record.suAccountStatus==0)">
+				and su_account_status = #{record.suAccountStatus} 
+			</if>
+			<if test="(record.suValidateCode!=null and record.suValidateCode!='') or (record.suValidateCode!='' and record.suValidateCode==0)">
+				and su_validate_code = #{record.suValidateCode} 
+			</if>
+			<if test="(record.suValidateEndTime!=null and record.suValidateEndTime!='') or (record.suValidateEndTime!='' and record.suValidateEndTime==0)">
+				and su_validate_end_time = #{record.suValidateEndTime} 
+			</if>
+			<if test="(record.suValid!=null and record.suValid!='') or (record.suValid!='' and record.suValid==0)">
+				and su_valid = #{record.suValid} 
+			</if>
+			<if test="(record.suBirthday!=null and record.suBirthday!='') or (record.suBirthday!='' and record.suBirthday==0)">
+				and su_birthday = #{record.suBirthday} 
+			</if>
+			<if test="(record.suUuid!=null and record.suUuid!='') or (record.suUuid!='' and record.suUuid==0)">
+				and su_uuid = #{record.suUuid} 
+			</if>
+			<if test="(record.suPostId!=null and record.suPostId!='') or (record.suPostId!='' and record.suPostId==0)">
+				and su_post_id = #{record.suPostId} 
+			</if>
+			<if test="(record.roleIds!=null and record.roleIds!='') or (record.roleIds!='' and record.roleIds==0)">
+				and role_ids = #{record.roleIds} 
+			</if>
+		</if>
+	</delete>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="selectInPage" resultMap="SysUsersMap">
+		select 
+			su_id,
+			su_name,
+			su_tel,
+			su_address,
+			su_photo,
+			su_sex,
+			role_id,
+			su_email,
+			su_account,
+			su_password,
+			su_register_time,
+			su_qq_id,
+			su_weixin_id,
+			su_grade,
+			parent_user_id,
+			su_dept_id,
+			su_user_type,
+			su_weibo_id,
+			su_idcard,
+			su_job_title,
+			su_aliases,
+			su_job_no,
+			company_id,
+			su_tel2,
+			su_account_status,
+			su_validate_code,
+			su_validate_end_time,
+			su_valid,
+			su_birthday,
+			su_uuid,
+			su_post_id,
+			role_ids,
+			(select com_name from sys_company where com_id=company_id) as company_name
+		from sys_users
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.suId!=null and record.suId!='') or (record.suId!='' and record.suId==0)">
+				and su_id  = #{record.suId} 
+			</if>
+			<if test="(record.suName!=null and record.suName!='') or (record.suName!='' and record.suName==0)">
+				and su_name  like concat("%",#{record.suName},"%")  
+			</if>
+			<if test="(record.suTel!=null and record.suTel!='') or (record.suTel!='' and record.suTel==0)">
+				and su_tel  = #{record.suTel} 
+			</if>
+			<if test="(record.suAddress!=null and record.suAddress!='') or (record.suAddress!='' and record.suAddress==0)">
+				and su_address  = #{record.suAddress} 
+			</if>
+			<if test="(record.suPhoto!=null and record.suPhoto!='') or (record.suPhoto!='' and record.suPhoto==0)">
+				and su_photo  = #{record.suPhoto} 
+			</if>
+			<if test="(record.suSex!=null and record.suSex!='') or (record.suSex!='' and record.suSex==0)">
+				and su_sex  = #{record.suSex} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id  = #{record.roleId} 
+			</if>
+			<if test="(record.suEmail!=null and record.suEmail!='') or (record.suEmail!='' and record.suEmail==0)">
+				and su_email  = #{record.suEmail} 
+			</if>
+			<if test="(record.suAccount!=null and record.suAccount!='') or (record.suAccount!='' and record.suAccount==0)">
+				and su_account  = #{record.suAccount} 
+			</if>
+			<if test="(record.suPassword!=null and record.suPassword!='') or (record.suPassword!='' and record.suPassword==0)">
+				and su_password  = #{record.suPassword} 
+			</if>
+			<if test="(record.suRegisterTime!=null and record.suRegisterTime!='') or (record.suRegisterTime!='' and record.suRegisterTime==0)">
+				and su_register_time  = #{record.suRegisterTime} 
+			</if>
+			<if test="(record.suQqId!=null and record.suQqId!='') or (record.suQqId!='' and record.suQqId==0)">
+				and su_qq_id  = #{record.suQqId} 
+			</if>
+			<if test="(record.suWeixinId!=null and record.suWeixinId!='') or (record.suWeixinId!='' and record.suWeixinId==0)">
+				and su_weixin_id  = #{record.suWeixinId} 
+			</if>
+			<if test="(record.suGrade!=null and record.suGrade!='') or (record.suGrade!='' and record.suGrade==0)">
+				and su_grade  = #{record.suGrade} 
+			</if>
+			<if test="(record.parentUserId!=null and record.parentUserId!='') or (record.parentUserId!='' and record.parentUserId==0)">
+				and parent_user_id  = #{record.parentUserId} 
+			</if>
+			<if test="(record.suDeptId!=null and record.suDeptId!='') or (record.suDeptId!='' and record.suDeptId==0)">
+				and su_dept_id  = #{record.suDeptId} 
+			</if>
+			<if test="(record.suUserType!=null and record.suUserType!='') or (record.suUserType!='' and record.suUserType==0)">
+				and su_user_type  = #{record.suUserType} 
+			</if>
+			<if test="(record.suWeiboId!=null and record.suWeiboId!='') or (record.suWeiboId!='' and record.suWeiboId==0)">
+				and su_weibo_id  = #{record.suWeiboId} 
+			</if>
+			<if test="(record.suIdcard!=null and record.suIdcard!='') or (record.suIdcard!='' and record.suIdcard==0)">
+				and su_idcard  = #{record.suIdcard} 
+			</if>
+			<if test="(record.suJobTitle!=null and record.suJobTitle!='') or (record.suJobTitle!='' and record.suJobTitle==0)">
+				and su_job_title  = #{record.suJobTitle} 
+			</if>
+			<if test="(record.suAliases!=null and record.suAliases!='') or (record.suAliases!='' and record.suAliases==0)">
+				and su_aliases  = #{record.suAliases} 
+			</if>
+			<if test="(record.suJobNo!=null and record.suJobNo!='') or (record.suJobNo!='' and record.suJobNo==0)">
+				and su_job_no  = #{record.suJobNo} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id  = #{record.companyId} 
+			</if>
+			<if test="(record.suTel2!=null and record.suTel2!='') or (record.suTel2!='' and record.suTel2==0)">
+				and su_tel2  = #{record.suTel2} 
+			</if>
+			<if test="(record.suAccountStatus!=null and record.suAccountStatus!='') or (record.suAccountStatus!='' and record.suAccountStatus==0)">
+				and su_account_status  = #{record.suAccountStatus} 
+			</if>
+			<if test="(record.suValidateCode!=null and record.suValidateCode!='') or (record.suValidateCode!='' and record.suValidateCode==0)">
+				and su_validate_code  = #{record.suValidateCode} 
+			</if>
+			<if test="(record.suValidateEndTime!=null and record.suValidateEndTime!='') or (record.suValidateEndTime!='' and record.suValidateEndTime==0)">
+				and su_validate_end_time  = #{record.suValidateEndTime} 
+			</if>
+			<if test="(record.suValid!=null and record.suValid!='') or (record.suValid!='' and record.suValid==0)">
+				and su_valid  = #{record.suValid} 
+			</if>
+			<if test="(record.suBirthday!=null and record.suBirthday!='') or (record.suBirthday!='' and record.suBirthday==0)">
+				and su_birthday  = #{record.suBirthday} 
+			</if>
+			<if test="(record.suUuid!=null and record.suUuid!='') or (record.suUuid!='' and record.suUuid==0)">
+				and su_uuid  = #{record.suUuid} 
+			</if>
+			<if test="(record.suPostId!=null and record.suPostId!='') or (record.suPostId!='' and record.suPostId==0)">
+				and su_post_id  = #{record.suPostId} 
+			</if>
+		</if>
+		<if test="pageVo !=null"><!-- 判断pageVo对象是否为空 -->
+			<if test="pageVo.sort !=null  and pageVo.order !=null">
+				order by
+				${pageVo.sort} ${pageVo.order}
+			</if>
+			<if test="pageVo.offset >=0  and pageVo.limit >0">
+				limit
+				#{pageVo.offset},#{pageVo.limit}
+			</if>
+		</if>
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="selectTotalRecord" parameterType="long"   resultType="java.lang.Integer">
+	select count(*)
+	from sys_users
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.suId!=null and record.suId!='') or (record.suId!='' and record.suId==0)">
+			and su_id = #{record.suId} 
+			</if>
+			<if test="(record.suName!=null and record.suName!='') or (record.suName!='' and record.suName==0)">
+			and su_name like concat("%",#{record.suName},"%")  
+			</if>
+			<if test="(record.suTel!=null and record.suTel!='') or (record.suTel!='' and record.suTel==0)">
+			and su_tel = #{record.suTel} 
+			</if>
+			<if test="(record.suAddress!=null and record.suAddress!='') or (record.suAddress!='' and record.suAddress==0)">
+			and su_address = #{record.suAddress} 
+			</if>
+			<if test="(record.suPhoto!=null and record.suPhoto!='') or (record.suPhoto!='' and record.suPhoto==0)">
+			and su_photo = #{record.suPhoto} 
+			</if>
+			<if test="(record.suSex!=null and record.suSex!='') or (record.suSex!='' and record.suSex==0)">
+			and su_sex = #{record.suSex} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+			and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.suEmail!=null and record.suEmail!='') or (record.suEmail!='' and record.suEmail==0)">
+			and su_email = #{record.suEmail} 
+			</if>
+			<if test="(record.suAccount!=null and record.suAccount!='') or (record.suAccount!='' and record.suAccount==0)">
+			and su_account = #{record.suAccount} 
+			</if>
+			<if test="(record.suPassword!=null and record.suPassword!='') or (record.suPassword!='' and record.suPassword==0)">
+			and su_password = #{record.suPassword} 
+			</if>
+			<if test="(record.suRegisterTime!=null and record.suRegisterTime!='') or (record.suRegisterTime!='' and record.suRegisterTime==0)">
+			and su_register_time = #{record.suRegisterTime} 
+			</if>
+			<if test="(record.suQqId!=null and record.suQqId!='') or (record.suQqId!='' and record.suQqId==0)">
+			and su_qq_id = #{record.suQqId} 
+			</if>
+			<if test="(record.suWeixinId!=null and record.suWeixinId!='') or (record.suWeixinId!='' and record.suWeixinId==0)">
+			and su_weixin_id = #{record.suWeixinId} 
+			</if>
+			<if test="(record.suGrade!=null and record.suGrade!='') or (record.suGrade!='' and record.suGrade==0)">
+			and su_grade = #{record.suGrade} 
+			</if>
+			<if test="(record.parentUserId!=null and record.parentUserId!='') or (record.parentUserId!='' and record.parentUserId==0)">
+			and parent_user_id = #{record.parentUserId} 
+			</if>
+			<if test="(record.suDeptId!=null and record.suDeptId!='') or (record.suDeptId!='' and record.suDeptId==0)">
+			and su_dept_id = #{record.suDeptId} 
+			</if>
+			<if test="(record.suUserType!=null and record.suUserType!='') or (record.suUserType!='' and record.suUserType==0)">
+			and su_user_type = #{record.suUserType} 
+			</if>
+			<if test="(record.suWeiboId!=null and record.suWeiboId!='') or (record.suWeiboId!='' and record.suWeiboId==0)">
+			and su_weibo_id = #{record.suWeiboId} 
+			</if>
+			<if test="(record.suIdcard!=null and record.suIdcard!='') or (record.suIdcard!='' and record.suIdcard==0)">
+			and su_idcard = #{record.suIdcard} 
+			</if>
+			<if test="(record.suJobTitle!=null and record.suJobTitle!='') or (record.suJobTitle!='' and record.suJobTitle==0)">
+			and su_job_title = #{record.suJobTitle} 
+			</if>
+			<if test="(record.suAliases!=null and record.suAliases!='') or (record.suAliases!='' and record.suAliases==0)">
+			and su_aliases = #{record.suAliases} 
+			</if>
+			<if test="(record.suJobNo!=null and record.suJobNo!='') or (record.suJobNo!='' and record.suJobNo==0)">
+			and su_job_no = #{record.suJobNo} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+			and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.suTel2!=null and record.suTel2!='') or (record.suTel2!='' and record.suTel2==0)">
+			and su_tel2 = #{record.suTel2} 
+			</if>
+			<if test="(record.suAccountStatus!=null and record.suAccountStatus!='') or (record.suAccountStatus!='' and record.suAccountStatus==0)">
+			and su_account_status = #{record.suAccountStatus} 
+			</if>
+			<if test="(record.suValidateCode!=null and record.suValidateCode!='') or (record.suValidateCode!='' and record.suValidateCode==0)">
+			and su_validate_code = #{record.suValidateCode} 
+			</if>
+			<if test="(record.suValidateEndTime!=null and record.suValidateEndTime!='') or (record.suValidateEndTime!='' and record.suValidateEndTime==0)">
+			and su_validate_end_time = #{record.suValidateEndTime} 
+			</if>
+			<if test="(record.suValid!=null and record.suValid!='') or (record.suValid!='' and record.suValid==0)">
+			and su_valid = #{record.suValid} 
+			</if>
+			<if test="(record.suBirthday!=null and record.suBirthday!='') or (record.suBirthday!='' and record.suBirthday==0)">
+			and su_birthday = #{record.suBirthday} 
+			</if>
+			<if test="(record.suUuid!=null and record.suUuid!='') or (record.suUuid!='' and record.suUuid==0)">
+			and su_uuid = #{record.suUuid} 
+			</if>
+			<if test="(record.suPostId!=null and record.suPostId!='') or (record.suPostId!='' and record.suPostId==0)">
+			and su_post_id = #{record.suPostId} 
+			</if>
+		</if>
+	</select>
+
+	<!-- 根据id查询-->
+	<select id="selectById" resultMap="SysUsersMap">
+		select 
+			su_id,
+			su_name,
+			su_tel,
+			su_address,
+			su_photo,
+			su_sex,
+			role_id,
+			su_email,
+			su_account,
+			su_password,
+			su_register_time,
+			su_qq_id,
+			su_weixin_id,
+			su_grade,
+			parent_user_id,
+			su_dept_id,
+			su_user_type,
+			su_weibo_id,
+			su_idcard,
+			su_job_title,
+			su_aliases,
+			su_job_no,
+			company_id,
+			su_tel2,
+			su_account_status,
+			su_validate_code,
+			su_validate_end_time,
+			su_valid,
+			su_birthday,
+			su_uuid,
+			su_post_id,
+			role_ids
+		from sys_users
+		where  su_id=#{suId} 
+	</select>	
+	
+	
+	<!-- 根据id 锁表查询-->
+	<select id="selectForUpdate" resultMap="SysUsersMap">
+		select 
+			su_id,
+			su_name,
+			su_tel,
+			su_address,
+			su_photo,
+			su_sex,
+			role_id,
+			su_email,
+			su_account,
+			su_password,
+			su_register_time,
+			su_qq_id,
+			su_weixin_id,
+			su_grade,
+			parent_user_id,
+			su_dept_id,
+			su_user_type,
+			su_weibo_id,
+			su_idcard,
+			su_job_title,
+			su_aliases,
+			su_job_no,
+			company_id,
+			su_tel2,
+			su_account_status,
+			su_validate_code,
+			su_validate_end_time,
+			su_valid,
+			su_birthday,
+			su_uuid,
+			su_post_id,
+			role_ids
+		from sys_users
+		where  su_id=#{su_id} 
+		for update
+	</select>	
+	
+	
+	
+	<!-- 根据对象查询-->
+	<select id="selectByModel" resultMap="SysUsersMap">
+		select 
+			su_id,
+			su_name,
+			su_tel,
+			su_address,
+			su_photo,
+			su_sex,
+			role_id,
+			su_email,
+			su_account,
+			su_password,
+			su_register_time,
+			su_qq_id,
+			su_weixin_id,
+			su_grade,
+			parent_user_id,
+			su_dept_id,
+			su_user_type,
+			su_weibo_id,
+			su_idcard,
+			su_job_title,
+			su_aliases,
+			su_job_no,
+			company_id,
+			su_tel2,
+			su_account_status,
+			su_validate_code,
+			su_validate_end_time,
+			su_valid,
+			su_birthday,
+			su_uuid,
+			su_post_id,
+			role_ids
+		from sys_users
+		where 1=1
+		<if test="record!=null">
+			<if test="(record.suId!=null and record.suId!='') or (record.suId!='' and record.suId==0)">
+				and su_id = #{record.suId} 
+			</if>
+			<if test="(record.suName!=null and record.suName!='') or (record.suName!='' and record.suName==0)">
+				and su_name like concat("%",#{record.suName},"%")  
+			</if>
+			<if test="(record.suTel!=null and record.suTel!='') or (record.suTel!='' and record.suTel==0)">
+				and su_tel = #{record.suTel} 
+			</if>
+			<if test="(record.suAddress!=null and record.suAddress!='') or (record.suAddress!='' and record.suAddress==0)">
+				and su_address = #{record.suAddress} 
+			</if>
+			<if test="(record.suPhoto!=null and record.suPhoto!='') or (record.suPhoto!='' and record.suPhoto==0)">
+				and su_photo = #{record.suPhoto} 
+			</if>
+			<if test="(record.suSex!=null and record.suSex!='') or (record.suSex!='' and record.suSex==0)">
+				and su_sex = #{record.suSex} 
+			</if>
+			<if test="(record.roleId!=null and record.roleId!='') or (record.roleId!='' and record.roleId==0)">
+				and role_id = #{record.roleId} 
+			</if>
+			<if test="(record.suEmail!=null and record.suEmail!='') or (record.suEmail!='' and record.suEmail==0)">
+				and su_email = #{record.suEmail} 
+			</if>
+			<if test="(record.suAccount!=null and record.suAccount!='') or (record.suAccount!='' and record.suAccount==0)">
+				and su_account = #{record.suAccount} 
+			</if>
+			<if test="(record.suPassword!=null and record.suPassword!='') or (record.suPassword!='' and record.suPassword==0)">
+				and su_password = #{record.suPassword} 
+			</if>
+			<if test="(record.suRegisterTime!=null and record.suRegisterTime!='') or (record.suRegisterTime!='' and record.suRegisterTime==0)">
+				and su_register_time = #{record.suRegisterTime} 
+			</if>
+			<if test="(record.suQqId!=null and record.suQqId!='') or (record.suQqId!='' and record.suQqId==0)">
+				and su_qq_id = #{record.suQqId} 
+			</if>
+			<if test="(record.suWeixinId!=null and record.suWeixinId!='') or (record.suWeixinId!='' and record.suWeixinId==0)">
+				and su_weixin_id = #{record.suWeixinId} 
+			</if>
+			<if test="(record.suGrade!=null and record.suGrade!='') or (record.suGrade!='' and record.suGrade==0)">
+				and su_grade = #{record.suGrade} 
+			</if>
+			<if test="(record.parentUserId!=null and record.parentUserId!='') or (record.parentUserId!='' and record.parentUserId==0)">
+				and parent_user_id = #{record.parentUserId} 
+			</if>
+			<if test="(record.suDeptId!=null and record.suDeptId!='') or (record.suDeptId!='' and record.suDeptId==0)">
+				and su_dept_id = #{record.suDeptId} 
+			</if>
+			<if test="(record.suUserType!=null and record.suUserType!='') or (record.suUserType!='' and record.suUserType==0)">
+				and su_user_type = #{record.suUserType} 
+			</if>
+			<if test="(record.suWeiboId!=null and record.suWeiboId!='') or (record.suWeiboId!='' and record.suWeiboId==0)">
+				and su_weibo_id = #{record.suWeiboId} 
+			</if>
+			<if test="(record.suIdcard!=null and record.suIdcard!='') or (record.suIdcard!='' and record.suIdcard==0)">
+				and su_idcard = #{record.suIdcard} 
+			</if>
+			<if test="(record.suJobTitle!=null and record.suJobTitle!='') or (record.suJobTitle!='' and record.suJobTitle==0)">
+				and su_job_title = #{record.suJobTitle} 
+			</if>
+			<if test="(record.suAliases!=null and record.suAliases!='') or (record.suAliases!='' and record.suAliases==0)">
+				and su_aliases = #{record.suAliases} 
+			</if>
+			<if test="(record.suJobNo!=null and record.suJobNo!='') or (record.suJobNo!='' and record.suJobNo==0)">
+				and su_job_no = #{record.suJobNo} 
+			</if>
+			<if test="(record.companyId!=null and record.companyId!='') or (record.companyId!='' and record.companyId==0)">
+				and company_id = #{record.companyId} 
+			</if>
+			<if test="(record.suTel2!=null and record.suTel2!='') or (record.suTel2!='' and record.suTel2==0)">
+				and su_tel2 = #{record.suTel2} 
+			</if>
+			<if test="(record.suAccountStatus!=null and record.suAccountStatus!='') or (record.suAccountStatus!='' and record.suAccountStatus==0)">
+				and su_account_status = #{record.suAccountStatus} 
+			</if>
+			<if test="(record.suValidateCode!=null and record.suValidateCode!='') or (record.suValidateCode!='' and record.suValidateCode==0)">
+				and su_validate_code = #{record.suValidateCode} 
+			</if>
+			<if test="(record.suValidateEndTime!=null and record.suValidateEndTime!='') or (record.suValidateEndTime!='' and record.suValidateEndTime==0)">
+				and su_validate_end_time = #{record.suValidateEndTime} 
+			</if>
+			<if test="(record.suValid!=null and record.suValid!='') or (record.suValid!='' and record.suValid==0)">
+				and su_valid = #{record.suValid} 
+			</if>
+			<if test="(record.suBirthday!=null and record.suBirthday!='') or (record.suBirthday!='' and record.suBirthday==0)">
+				and su_birthday = #{record.suBirthday} 
+			</if>
+			<if test="(record.suUuid!=null and record.suUuid!='') or (record.suUuid!='' and record.suUuid==0)">
+				and su_uuid = #{record.suUuid} 
+			</if>
+			<if test="(record.suPostId!=null and record.suPostId!='') or (record.suPostId!='' and record.suPostId==0)">
+				and su_post_id = #{record.suPostId} 
+			</if>
+		</if>
+	</select>
+</mapper>
