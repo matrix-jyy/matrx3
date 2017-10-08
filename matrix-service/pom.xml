@@ -4,13 +4,11 @@
 	<parent>
 		<groupId>com.zkingsoft</groupId>
 		<artifactId>matrix-base</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>3.0</version>
 		<relativePath>../matrix-base/pom.xml</relativePath>
-				
 	</parent>
 	<artifactId>matrix-service</artifactId>
 	<name>matrix-service</name>
-	<url>http://maven.apache.org</url>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,22 +19,20 @@
 		<dependency>
 			<groupId>com.zkingsoft</groupId>
 			<artifactId>matrix-tools</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${matrix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zkingsoft</groupId>
 			<artifactId>matrix-dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${matrix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>4.3.5.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -45,12 +41,10 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.9</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.3</version>
 
 		</dependency>
 		<dependency>
@@ -62,7 +56,6 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.5</version>
 
 		</dependency>
 		<dependency>
@@ -74,13 +67,11 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
-			<version>4.3.2</version>
 
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
-			<version>4.3.5</version>
 
 		</dependency>
 
@@ -88,20 +79,15 @@
 		<dependency>
 			<groupId>xmlpull</groupId>
 			<artifactId>xmlpull</artifactId>
-			<version>1.1.3.1</version>
 
 		</dependency>
 		<dependency>
 			<groupId>xpp3</groupId>
 			<artifactId>xpp3</artifactId>
-			<version>1.1.4c</version>
-
 		</dependency>
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.7</version>
-
 		</dependency>
 
 
@@ -113,34 +99,28 @@
 		<dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
-			<version>1.8.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
-			<version>3.0-rc4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>6.0.44</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.5.RELEASE</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -152,7 +132,6 @@
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib-ext-spring</artifactId>
-			<version>1.0</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>spring-webmvc</artifactId>
@@ -166,7 +145,6 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
 		</dependency>
 
 		<dependency>

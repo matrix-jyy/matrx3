@@ -4,61 +4,18 @@
 	<parent>
 		<groupId>com.zkingsoft</groupId>
 		<artifactId>matrix-base</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>3.0</version>
 		<relativePath>../matrix-base/pom.xml</relativePath>
 	</parent>
 	<artifactId>matrix-web</artifactId>
 	<packaging>war</packaging>
-	<name>matrix-web Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<name>matrix-web</name>
 	<properties>
 		<activiti-version>5.18.0</activiti-version>
 	</properties>
 	<dependencies>
 
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-spring</artifactId>
-			<version>${activiti-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-engine</artifactId>
-			<version>${activiti-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.195</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-bpmn-layout</artifactId>
-			<version>${activiti-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-bpmn-model</artifactId>
-			<version>${activiti-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-common-rest</artifactId>
-			<version>${activiti-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.activiti</groupId>
-			<artifactId>activiti-simple-workflow</artifactId>
-			<version>${activiti-version}</version>
-		</dependency>
+		    
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -81,18 +38,16 @@
 		<dependency>
 			<groupId>com.zkingsoft</groupId>
 			<artifactId>matrix-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${matrix.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>4.3.5.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -105,7 +60,6 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
